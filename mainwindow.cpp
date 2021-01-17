@@ -407,6 +407,10 @@ QString MainWindow::normalizeText(QString text)
     normText.replace("(", " left parenthesis ");
     normText.replace(")", " right parenthesis ");
     normText.replace("^", " power ");
+    normText.replace("+", " plus ");
+    normText.replace("-", " minus ");
+    normText.replace("*", " asterisk ");
+    normText.replace("/", " slash ");
 
     return normText;
 }
