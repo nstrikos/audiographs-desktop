@@ -64,7 +64,7 @@ void GenModThread::run()
 
         if (validValues[i] == false) {
             std::normal_distribution<double> dist(m_mean, m_stddev);
-            modulationValues[i] = dist(m_generator);
+            modulationValues[i] = 0.001 * dist(m_generator);
         }
     }
 }
