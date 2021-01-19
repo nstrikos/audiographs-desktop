@@ -25,6 +25,7 @@ public:
     void previousPoint();
     void sayX();
     void sayY();
+    void sayDerivative();
     void decStep();
     void incStep();
     void previousPointInterest();

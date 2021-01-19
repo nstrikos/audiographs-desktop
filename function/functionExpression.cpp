@@ -144,6 +144,26 @@ void FunctionExpression::sayY()
     }
 }
 
+void FunctionExpression::sayDerivative()
+{
+    if (functionModel.isValid(m_currentPoint->point())) {
+
+        if (m_derivativeMode == 0)
+            functionModel.refreshDerivative();
+
+        double y = functionModel.derivative(m_currentPoint->point());
+
+        double Pow = pow(10.0, m_parameters->precisionDigits());
+        y = round (y * Pow) / Pow;
+
+        char c = 'f';
+        QString value = QString::number(y, c, m_parameters->precisionDigits());
+        m_textToSpeech->speak(value);
+    } else {
+        m_textToSpeech->speak(tr("Not defined"));
+    }
+}
+
 void FunctionExpression::decStep()
 {
     m_currentPoint->decStep();

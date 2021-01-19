@@ -44,7 +44,7 @@
          <x>0</x>
          <y>0</y>
          <width>300</width>
-         <height>1492</height>
+         <height>1531</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -487,6 +487,35 @@
              </property>
              <property name="text">
               <string>Ctrl+Y - Y coordinate</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="derivativePushButton">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="accessibleName">
+              <string>Derivative</string>
+             </property>
+             <property name="text">
+              <string>Ctrl + D - Derivative</string>
              </property>
             </widget>
            </item>
@@ -1585,7 +1614,7 @@ for negative values</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
@@ -1609,6 +1638,7 @@ for negative values</string>
   <tabstop>nextPushButton</tabstop>
   <tabstop>xPushButton</tabstop>
   <tabstop>yPushButton</tabstop>
+  <tabstop>derivativePushButton</tabstop>
   <tabstop>previousPointInterestPushButton</tabstop>
   <tabstop>nextPointInterestPushButton</tabstop>
   <tabstop>previousFastPushButton</tabstop>

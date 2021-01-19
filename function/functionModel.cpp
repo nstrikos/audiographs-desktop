@@ -394,6 +394,10 @@ void FunctionModel::calculateSecondDerivative()
 
         tmpPoint.x = x_init;
         result = (-y0 + 16 * (y1 + y2) - 30 * y - y3) / (12 * h * h);
+
+        double Pow = pow(10.0, 2);
+        result = round (y * Pow) / Pow;
+
         tmpPoint.y = result;
 
         if (result != result)
@@ -407,8 +411,13 @@ void FunctionModel::calculateSecondDerivative()
     for (int i = 0; i < LINE_POINTS; i++) {
         m_x = m_points[i].x;
         double y = exprtk::second_derivative(parser_expression, m_x);
+
+        double Pow = pow(10.0, 2);
+        y = round (y * Pow) / Pow;
+
         tmpPoint.x = m_x;
         tmpPoint.y = y;
+
         if (std::isfinite(y)) {
             tmpPoint.isValid = true;
         }
@@ -433,6 +442,83 @@ void FunctionModel::calculateSecondDerivative()
     }
 
     emit updateDerivative(&m_derivPoints, m_minX, m_maxX, m_minY, m_maxY);
+}
+
+void FunctionModel::refreshDerivative()
+{
+    if (m_points.size() <= 0)
+        return;
+
+    Point tmpPoint;
+
+    m_derivPoints.clear();
+
+#ifdef Q_OS_WIN
+    double vals[] = { 0 };
+    const double h = 0.00000001;
+    const double h2 = 2 * h;
+    double x_init;
+    double x;
+    double result;
+
+    for (int i = 0; i < LINE_POINTS; i++) {
+        x_init = m_points[i].x;
+        x = x_init + h2;
+        vals[0] = x;
+        double y0 = m_fparser.Eval(vals);
+        x = x_init + h;
+        vals[0] = x;
+        double y1 = m_fparser.Eval(vals);
+        x = x_init - h;
+        vals[0] = x;
+        double y2 = m_fparser.Eval(vals);
+        x = x_init - h2;
+        vals[0] = x;
+        double y3 = m_fparser.Eval(vals);
+
+        tmpPoint.x = x_init;
+        result = (-y0 + 8 * (y1 - y2) + y3) / (12 * h);
+
+        tmpPoint.y = result;
+
+        if (result != result)
+            tmpPoint.isValid = false;
+        else
+            tmpPoint.isValid = true;
+
+        m_derivPoints.append(tmpPoint);
+    }
+#else
+
+
+
+    for (int i = 0; i < LINE_POINTS; i++) {
+        m_x = m_points[i].x;
+        double y = exprtk::derivative(parser_expression, m_x);
+        tmpPoint.x = m_x;
+        tmpPoint.y = y;
+        if (std::isfinite(y)) {
+            tmpPoint.isValid = true;
+        }
+        else {
+            tmpPoint.isValid = false;
+        }
+        m_derivPoints.append(tmpPoint);
+    }
+
+#endif
+
+    m_minDerivValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
+    m_maxDerivValue = std::numeric_limits<double>::min();//m_linePoints[0].y;
+
+    for (int i = 1; i < LINE_POINTS; i++) {
+        if (!m_derivPoints[i].isValid)
+            continue;
+        if (m_derivPoints[i].y < m_minDerivValue)
+            m_minDerivValue = m_derivPoints[i].y;
+        if (m_derivPoints[i].y > m_maxDerivValue)
+            m_maxDerivValue = m_derivPoints[i].y;
+    }
 }
 
 double FunctionModel::derivative(int i) const

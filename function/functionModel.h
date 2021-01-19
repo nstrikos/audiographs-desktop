@@ -37,6 +37,7 @@ public:
 
     void calculateDerivative();
     void calculateSecondDerivative();
+    void refreshDerivative();
 
     double derivative(int i) const;
 

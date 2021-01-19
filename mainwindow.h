@@ -46,6 +46,7 @@ signals:
     void previousPoint();
     void sayX();
     void sayY();
+    void sayDerivative();
     void decStep();
     void incStep();
     void previousPointInterest();
@@ -175,6 +176,8 @@ private slots:
 
     void openRecentFile();
 
+    void on_derivativePushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -206,6 +209,7 @@ private:
     QAction *previousAction;
     QAction *sayXAction;
     QAction *sayYAction;
+    QAction *sayDerivativeAction;
     QAction *incStepAction;
     QAction *decStepAction;
     QAction *previousInterestPointAction;

@@ -122,6 +122,7 @@ MainWindow::~MainWindow()
     delete previousAction;
     delete sayXAction;
     delete sayYAction;
+    delete sayDerivativeAction;
     delete decStepAction;
     delete incStepAction;
     delete previousInterestPointAction;
@@ -326,6 +327,8 @@ void MainWindow::enableControls()
     sayXAction->setEnabled(true);
     ui->yPushButton->setEnabled(true);
     sayYAction->setEnabled(true);
+    ui->derivativePushButton->setEnabled(true);
+    sayDerivativeAction->setEnabled(true);
     //    ui->minXLineEdit->setEnabled(true);
     //    ui->maxXLineEdit->setEnabled(true);
     //    ui->minYLineEdit->setEnabled(true);
@@ -366,6 +369,8 @@ void MainWindow::disableControls()
     sayXAction->setEnabled(false);
     ui->yPushButton->setEnabled(false);
     sayYAction->setEnabled(false);
+    ui->derivativePushButton->setEnabled(false);
+    sayDerivativeAction->setEnabled(false);
     //    ui->minXLineEdit->setEnabled(false);
     //    ui->maxXLineEdit->setEnabled(false);
     //    ui->minYLineEdit->setEnabled(false);
@@ -945,10 +950,15 @@ void MainWindow::initActions()
     connect(sayXAction, &QAction::triggered, this, &MainWindow::on_xPushButton_clicked);
     connect(sayXAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
-    sayYAction = new QAction(tr("&Say Y coordinate"), this);
+    sayYAction = new QAction(tr("Say &Y coordinate"), this);
     sayYAction->setShortcut(Qt::CTRL + Qt::Key_Y);
     connect(sayYAction, &QAction::triggered, this, &MainWindow::on_yPushButton_clicked);
     connect(sayYAction, &QAction::hovered, this, &MainWindow::sayWidget);
+
+    sayDerivativeAction = new QAction(tr("Say &derivative"), this);
+    sayDerivativeAction->setShortcut(Qt::CTRL + Qt::Key_D);
+    connect(sayDerivativeAction, &QAction::triggered, this, &MainWindow::on_derivativePushButton_clicked);
+    connect(sayDerivativeAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     decStepAction = new QAction(tr("&Decrease step"), this);
     decStepAction->setShortcut(tr("Ctrl+["));
@@ -1064,6 +1074,7 @@ void MainWindow::initMenu()
     controlMenu->addAction(nextAction);
     controlMenu->addAction(sayXAction);
     controlMenu->addAction(sayYAction);
+    controlMenu->addAction(sayDerivativeAction);
     controlMenu->addAction(decStepAction);
     controlMenu->addAction(incStepAction);
     controlMenu->addAction(previousInterestPointAction);
@@ -1202,6 +1213,9 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             return true;
         } else if ( (key->key() == Qt::Key_Y && key->modifiers()==Qt::ControlModifier) ) {
             on_yPushButton_clicked();
+            return true;
+        } else if ( (key->key() == Qt::Key_D && key->modifiers()==Qt::ControlModifier) ) {
+            on_derivativePushButton_clicked();
             return true;
         } else if ( (key->key() == Qt::Key_Home ) ) {
             on_firstPointPushButton_clicked();
@@ -1454,6 +1468,7 @@ void MainWindow::showShortcuts()
         text += tr("Next point - Shift + Right\n");
         text += tr("X Coordinate - Ctrl + X\n");
         text += tr("Y Coordinate - Ctrl + Y\n");
+        text += tr("Derivative - Ctrl + D\n");
         text += tr("Previous point of interest - Ctrl + Left\n");
         text += tr("Next point of interest - Ctrl + Right\n");
         text += tr("Previous point (fast) - Alt + Left\n");
@@ -1532,5 +1547,8 @@ void MainWindow::sayWidget()
     m_textToSpeech->speak(text);
 }
 
-
-
+void MainWindow::on_derivativePushButton_clicked()
+{
+    if (ui->derivativePushButton->isEnabled())
+        emit sayDerivative();
+}
