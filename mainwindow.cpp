@@ -53,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nextPushButton->installEventFilter(this);
     ui->xPushButton->installEventFilter(this);
     ui->yPushButton->installEventFilter(this);
+    ui->derivativePushButton->installEventFilter(this);
     ui->previousPointInterestPushButton->installEventFilter(this);
     ui->nextPointInterestPushButton->installEventFilter(this);
     ui->previousFastPushButton->installEventFilter(this);
