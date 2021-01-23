@@ -78,8 +78,6 @@ double *GenParameters::cs()
 void GenParameters::setkf(double kf)
 {
     m_kf = kf;
-    if (m_kf > 1000000000000)
-        m_kf = 1000000000000;
 }
 
 double GenParameters::kf()

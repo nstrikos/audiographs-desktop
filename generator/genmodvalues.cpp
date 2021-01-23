@@ -70,7 +70,7 @@ double *GenModValues::modulationValues()
     GenMaxFinder *maxFinder = new GenMaxFinder(params);
     max = maxFinder->max();
 
-    if (max == 0.0) {
+    if (abs(max) < 1e-8) {
         params->setfc((m_fmax + m_fmin) / 2.0);
         params->setkf(0);
     } else {

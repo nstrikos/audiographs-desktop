@@ -121,8 +121,11 @@ void GenFunctionCalculatorThread::run()
             result = parser_expression.value();
         else if (m_params->mode() == 1)
             result = exprtk::derivative(parser_expression, m_x);
-        else if (m_params->mode() == 2)
+        else if (m_params->mode() == 2) {
             result = exprtk::second_derivative(parser_expression, m_x);
+            double Pow = pow(10.0, 2);
+            result = round (result * Pow) / Pow;
+        }
 
         if (std::isfinite(result)) {
             validValues[i] = true;
