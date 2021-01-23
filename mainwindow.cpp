@@ -653,12 +653,20 @@ void MainWindow::zoom(int delta)
     distanceX = distanceX * factor;
     distanceY = distanceY * factor;
 
-    if ( (abs(distanceX) > 100000) ||
-         (abs(distanceX) < 0.0001)  ||
-         (abs(distanceY) > 100000) ||
-         (abs(distanceY) < 0.0001) ) {
+//    if ( (abs(distanceX) > 100000) ||
+//         (abs(distanceX) < 0.0001)  ||
+//         (abs(distanceY) > 100000) ||
+//         (abs(distanceY) < 0.0001) ) {
+//        return;
+//    }
+
+    if ( ((abs(distanceX) > 100000) || (abs(distanceY) > 100000)) &&
+         (delta < 0))
         return;
-    }
+
+    if ( ((abs(distanceX) < 0.0001) || (abs(distanceY) < 0.0001)) &&
+         (delta > 0))
+        return;
 
 
     //newMinX, newMaxX, newMinY, newMaxY are the new values
