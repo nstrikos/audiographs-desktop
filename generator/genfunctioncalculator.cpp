@@ -82,6 +82,10 @@ void GenFunctionCalculatorThread::run()
 
         vals[0] = m_x;
         result = m_fparser.Eval(vals);
+
+        double Pow = pow(10.0, 2);
+        result = round (result * Pow) / Pow;
+
         res = m_fparser.EvalError();
 
         if ( (result != result) || ( res > 0) ) {
