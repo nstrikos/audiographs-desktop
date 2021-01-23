@@ -71,7 +71,7 @@ void AudioNotes::setNoteFromMouse(int mouseX, int width, int fmin, int fmax, boo
     double l;
     double freq;
     bool n = true;
-    if (max != min) {
+    if ( abs(max - min) > 1e-8) {
         m_fmin = 110;
         m_fmax = 880;
         a =  (m_fmax-m_fmin)/(max - min);
@@ -133,7 +133,7 @@ void AudioNotes::setNote(int currentPoint, int fmin, int fmax, bool useNotes, in
     double l;
     double freq;
     bool n = true;
-    if (max != min) {
+    if ( abs(max - min) > 1e-8) {
         m_fmin = 110;
         m_fmax = 880;
         a =  (m_fmax-m_fmin)/(max - min);
@@ -208,7 +208,7 @@ void AudioNotes::timerExpired()
     double l;
     double freq;
     bool n = true;
-    if (max != min) {
+    if ( abs(max - min) > 1e-8) {
         m_fmin = 110;
         m_fmax = 880;
         a =  (m_fmax-m_fmin)/(max - min);
@@ -236,6 +236,6 @@ void AudioNotes::timerExpired()
         else
             m_audioPoints->setFreq(0, true, n, cx);
     } else {
-        m_audioPoints->setFreq((m_fmax - m_fmin) / 2, true, n, cx);
+        m_audioPoints->setFreq((m_fmax + m_fmin) / 2, true, n, cx);
     }
 }
