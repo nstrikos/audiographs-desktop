@@ -83,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->derivativeColorPushButton->installEventFilter(this);
     ui->showGridCheckBox->installEventFilter(this);
     ui->resetGraphSettingsPushButton->installEventFilter(this);
+    ui->scrollArea->installEventFilter(this);
     this->installEventFilter(this);
 
     errorDisplayDialog = nullptr;
