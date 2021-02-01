@@ -248,7 +248,7 @@ private:
     void writeSettings();
 
     void updateRecentFileActions();
-    enum {MaxRecentFiles = 15};
+    enum {MaxRecentFiles = 9};
     QStringList recentFiles;
     QAction *recentFileActions[MaxRecentFiles];
     QAction *separatorAction;
