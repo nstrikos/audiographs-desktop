@@ -384,13 +384,13 @@
               </font>
              </property>
              <property name="accessibleName">
-              <string>Shift plus left Previous pushbutton</string>
+              <string>Page down Previous pushbutton</string>
              </property>
              <property name="accessibleDescription">
               <string>Previous pushbutton</string>
              </property>
              <property name="text">
-              <string>Shift+Left - Previous</string>
+              <string>Page down - Previous</string>
              </property>
             </widget>
            </item>
@@ -416,13 +416,13 @@
               </font>
              </property>
              <property name="accessibleName">
-              <string>Shift plus right Next pushbutton</string>
+              <string>page up Next pushbutton</string>
              </property>
              <property name="accessibleDescription">
               <string>Next pushbutton</string>
              </property>
              <property name="text">
-              <string>Shift+Right - Next</string>
+              <string>Page up - Next</string>
              </property>
             </widget>
            </item>
@@ -515,7 +515,7 @@
               <string>Derivative</string>
              </property>
              <property name="text">
-              <string>Ctrl + D - Derivative</string>
+              <string>Ctrl+D - Derivative</string>
              </property>
             </widget>
            </item>

@@ -945,13 +945,13 @@ void MainWindow::initActions()
     connect(startSoundButtonAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     nextAction = new QAction(tr("&Next point"), this);
-    nextAction->setShortcut(Qt::Key_Right);
+    nextAction->setShortcut(Qt::Key_PageUp);
     connect(nextAction, &QAction::triggered, this, &MainWindow::on_nextPushButton_clicked);
     connect(nextAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
 
     previousAction = new QAction(tr("&Previous point"), this);
-    previousAction->setShortcut(Qt::Key_Left);
+    previousAction->setShortcut(Qt::Key_PageDown);
     connect(previousAction, &QAction::triggered, this, &MainWindow::on_previousPushButton_clicked);
     connect(previousAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
@@ -1212,10 +1212,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         } else if ( (key->key() == Qt::Key_Left && key->modifiers()==Qt::AltModifier) ) {
             on_previousFastPushButton_clicked();
             return true;
-        } else if ( (key->key() == Qt::Key_Right && key->modifiers()==Qt::ShiftModifier ) ) {
+        } else if ( (key->key() == Qt::Key_PageUp) ) {
             on_nextPushButton_clicked();
             return true;
-        } else if ( (key->key() == Qt::Key_Left && key->modifiers()==Qt::ShiftModifier ) ) {
+        } else if ( (key->key() == Qt::Key_PageDown) ) {
             on_previousPushButton_clicked();
             return true;
         } else if ( (key->key() == Qt::Key_X && key->modifiers()==Qt::ControlModifier) ) {
@@ -1474,8 +1474,8 @@ void MainWindow::showShortcuts()
         text += tr("Help dialog - F1\n");
         text += tr("New expression - Ctrl + N\n");
         text += tr("Play sound - Enter\n");
-        text += tr("Previous point - Shift + Left\n");
-        text += tr("Next point - Shift + Right\n");
+        text += tr("Previous point - Page down\n");
+        text += tr("Next point - Page up\n");
         text += tr("X Coordinate - Ctrl + X\n");
         text += tr("Y Coordinate - Ctrl + Y\n");
         text += tr("Derivative - Ctrl + D\n");
