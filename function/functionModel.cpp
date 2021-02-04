@@ -6,14 +6,54 @@
 
 #include <QDebug>
 
+#ifndef Q_OS_WIN
+#include <bits/stdc++.h>
+using namespace std;
+#endif
+
 FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
 {
 #ifndef Q_OS_WIN
+
+    symbol_table.add_function(
+                "power",
+                [](double v0, double v1, double v2) -> double
+    {
+
+        int a = (int) v1;
+        int b = (int) v2;
+
+        int d = __gcd(a, b);
+
+        a = a / d;
+        b = b / d;
+
+        double ratio = (double) a / b;
+
+        int sign;
+        if (v0 > 0) sign = 1;
+        if (v0 < 0) sign = -1;
+        if (v0 == 0) sign = 0;
+
+
+
+        if ((int)b % 2 == 0) {
+            return pow(v0, ratio);
+        } else {
+            if ((int)a % 2 == 0) {
+                return pow(abs(v0), ratio);
+            } else {
+                return sign * pow(abs(v0), ratio);
+            }
+        }
+    });
+
     symbol_table.add_variable("x",m_x);
     symbol_table.add_constant("pi", M_PI);
     symbol_table.add_constant("e", M_E);
     symbol_table.add_constants();
     parser_expression.register_symbol_table(symbol_table);
+
 #endif
 }
 
