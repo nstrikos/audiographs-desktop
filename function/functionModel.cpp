@@ -16,7 +16,7 @@ FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
 #ifndef Q_OS_WIN
 
     symbol_table.add_function(
-                "power",
+                "powerint",
                 [](double v0, double v1, double v2) -> double
     {
 
@@ -30,12 +30,52 @@ FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
 
         double ratio = (double) a / b;
 
-        int sign;
+        int sign = 1;
         if (v0 > 0) sign = 1;
         if (v0 < 0) sign = -1;
         if (v0 == 0) sign = 0;
 
+        if ((int)b % 2 == 0) {
+            return pow(v0, ratio);
+        } else {
+            if ((int)a % 2 == 0) {
+                return pow(abs(v0), ratio);
+            } else {
+                return sign * pow(abs(v0), ratio);
+            }
+        }
+    });
 
+    symbol_table.add_function(
+                "power",
+                [](double v0, double v1) -> double
+    {
+
+        QString n = QString::number(v1);
+        int position = n.indexOf(".");
+        int count;
+
+        if (position == -1)
+            return pow(v0, v1);
+        else
+            n = n.right(n.length() - position - 1);
+
+        count = n.size();
+        int b = pow(10, count);
+
+        int a = (int) (v1 * b);
+
+        int d = __gcd(a, b);
+
+        a = a / d;
+        b = b / d;
+
+        double ratio = (double) a / b;
+
+        int sign;
+        if (v0 > 0) sign = 1;
+        if (v0 < 0) sign = -1;
+        if (v0 == 0) sign = 0;
 
         if ((int)b % 2 == 0) {
             return pow(v0, ratio);
