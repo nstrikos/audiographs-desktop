@@ -418,6 +418,7 @@ QString MainWindow::normalizeText(QString text)
     normText.replace("-", " minus ");
     normText.replace("*", " asterisk ");
     normText.replace("/", " slash ");
+    normText.replace(",", " comma ");
 
     return normText;
 }
