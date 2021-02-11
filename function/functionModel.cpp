@@ -281,7 +281,7 @@ void FunctionModel::calculatePoints()
 #endif
 
     m_minValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
-    m_maxValue = std::numeric_limits<double>::min();//m_linePoints[0].y;
+    m_maxValue = -std::numeric_limits<double>::max();//m_linePoints[0].y;
 
     for (int i = 1; i < LINE_POINTS; i++) {
         if (!m_points[i].isValid)
@@ -423,7 +423,7 @@ void FunctionModel::calculateDerivative()
 #endif
 
     m_minDerivValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
-    m_maxDerivValue = std::numeric_limits<double>::min();//m_linePoints[0].y;
+    m_maxDerivValue = -std::numeric_limits<double>::max();//m_linePoints[0].y;
 
     for (int i = 1; i < LINE_POINTS; i++) {
         if (!m_derivPoints[i].isValid)
@@ -476,14 +476,14 @@ void FunctionModel::calculateSecondDerivative()
         result = (-y0 + 16 * (y1 + y2) - 30 * y - y3) / (12 * h * h);
 
         double Pow = pow(10.0, 2);
-        result = round (y * Pow) / Pow;
+        result = round (result * Pow) / Pow;
 
         tmpPoint.y = result;
 
         if (result != result)
-            tmpPoint.isValid = true;
-        else
             tmpPoint.isValid = false;
+        else
+            tmpPoint.isValid = true;
 
         m_derivPoints.append(tmpPoint);
     }
@@ -510,7 +510,7 @@ void FunctionModel::calculateSecondDerivative()
 #endif
 
     m_minDerivValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
-    m_maxDerivValue = std::numeric_limits<double>::min();//m_linePoints[0].y;
+    m_maxDerivValue = -std::numeric_limits<double>::max();//m_linePoints[0].y;
 
     for (int i = 1; i < LINE_POINTS; i++) {
         if (!m_derivPoints[i].isValid)
@@ -589,7 +589,7 @@ void FunctionModel::refreshDerivative()
 #endif
 
     m_minDerivValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
-    m_maxDerivValue = std::numeric_limits<double>::min();//m_linePoints[0].y;
+    m_maxDerivValue = -std::numeric_limits<double>::max();//m_linePoints[0].y;
 
     for (int i = 1; i < LINE_POINTS; i++) {
         if (!m_derivPoints[i].isValid)

@@ -419,6 +419,8 @@ QString MainWindow::normalizeText(QString text)
     normText.replace("*", " asterisk ");
     normText.replace("/", " slash ");
     normText.replace(",", " comma ");
+    normText.replace(">", " greater than ");
+    normText.replace("<", " less than ");
 
     return normText;
 }
@@ -493,6 +495,8 @@ void MainWindow::evaluateStateActivated()
     qDebug() << "evaluate state";
     disableControls();
     ui->renderArea->disableCurrentPoint();
+    emit derivativeMode(0);
+    ui->renderArea->setDerivativeMode(0);
     emit calculate(ui->functionLineEdit->text(),
                    ui->minXLineEdit->text(),
                    ui->maxXLineEdit->text(),
