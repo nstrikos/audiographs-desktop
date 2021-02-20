@@ -421,6 +421,7 @@ QString MainWindow::normalizeText(QString text)
     normText.replace(",", " comma ");
     normText.replace(">", " greater than ");
     normText.replace("<", " less than ");
+    normText.replace("=", " equals ");
 
     return normText;
 }
