@@ -422,6 +422,7 @@ QString MainWindow::normalizeText(QString text)
     normText.replace(">", " greater than ");
     normText.replace("<", " less than ");
     normText.replace("=", " equals ");
+    normText.replace(".", " period ");
 
     return normText;
 }
