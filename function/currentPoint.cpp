@@ -229,3 +229,13 @@ void CurrentPoint::incStep()
     if (m_step > 100)
         m_step = 100;
 }
+
+double CurrentPoint::X() const
+{
+    return m_X;
+}
+
+double CurrentPoint::Y() const
+{
+    return m_Y;
+}

@@ -18,7 +18,7 @@ public:
     explicit FunctionExpression(QObject *parent = nullptr);
     ~FunctionExpression();
 
-    void calculate(QString expression, QString minX, QString maxX, QString minY, QString maxY);
+    Q_INVOKABLE void calculate(QString expression, QString minX, QString maxX, QString minY, QString maxY);
     void audio();
     void stopAudio();
     void nextPoint();
@@ -38,7 +38,7 @@ public:
 
 signals:
     void error(QString errorString);
-    void newGraph(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void newGraph(Points *points, double minX, double maxX, double minY, double maxY);
     void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
     void audioFinished();
     void newCurrentPoint(double x, double y);

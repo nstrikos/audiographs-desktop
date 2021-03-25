@@ -12,6 +12,7 @@ const int LINE_POINTS = 4000;
 #endif
 
 const int INTERVAL_MILLISECONDS = 40;
+const int POINT_SEGMENTS = 16;
 
 /*
 const int LINE_WIDTH = 10;

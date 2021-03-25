@@ -600,7 +600,7 @@ void MainWindow::errorDisplayStateActivated()
         m_textToSpeech->speak(tr("Error ") + normalizeText(m_errorString));
 }
 
-void MainWindow::updateGraph(QVector<Point> *points, double minX, double maxX, double minY, double maxY)
+void MainWindow::updateGraph(Points *points, double minX, double maxX, double minY, double maxY)
 {
     m_points = points;
     m_minX = minX;

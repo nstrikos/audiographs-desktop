@@ -29,7 +29,7 @@ RenderArea::~RenderArea()
 
 }
 
-void RenderArea::updateGraph(QVector<Point> *points, double xMin, double xMax, double yMin, double yMax)
+void RenderArea::updateGraph(Points *points, double xMin, double xMax, double yMin, double yMax)
 {
     if (points == nullptr)
         return;
@@ -100,10 +100,10 @@ void RenderArea::calcCoordinates()
 
     Point tmpPoint;
 
-    for (int i = 0; i < m_points->size(); i++) {
-        if (m_points->at(i).isValid) {
-            int k = static_cast<int>( round(  w / (m_xMax - m_xMin) * (m_points->at(i).x - m_xMin) ));
-            int l = static_cast<int>( round( (h / (m_yMax - m_yMin) * (m_points->at(i).y - m_yMin) ) ));
+    for (int i = 0; i < 10000; i++) {
+        if (m_points->validAt(i)) {
+            int k = static_cast<int>( round(  w / (m_xMax - m_xMin) * (m_points->xAt(i) - m_xMin) ));
+            int l = static_cast<int>( round( (h / (m_yMax - m_yMin) * (m_points->yAt(i) - m_yMin) )));
             l = h - l;
             tmpPoint.x = k;
             tmpPoint.y = l;
@@ -131,7 +131,7 @@ void RenderArea::calcDerivCoordinates()
     Point tmpPoint;
 
     for (int i = 0; i < m_derivPoints->size(); i++) {
-        if (m_points->at(i).isValid) {
+        if (m_points->validAt(i)) {
             int k = static_cast<int>( round(  w / (m_xMax - m_xMin) * (m_derivPoints->at(i).x - m_xMin) ));
             int l = static_cast<int>( round( (h / (m_yMax - m_yMin) * (m_derivPoints->at(i).y - m_yMin) ) ));
             l = h - l;

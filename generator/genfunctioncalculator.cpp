@@ -46,7 +46,7 @@ GenFunctionCalculatorThread::GenFunctionCalculatorThread(GenParameters *params,
     m_first = first;
     m_last = last;
 
-#ifndef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
     symbol_table.add_function(
                 "powerint",
@@ -139,44 +139,7 @@ void GenFunctionCalculatorThread::run()
     double result;
     unsigned long long int i = 0;
 
-#ifdef Q_OS_WIN
-
-    QString expression = m_params->expression();
-    std::string exp = expression.toStdString();
-    m_fparser.AddConstant("pi", M_PI);
-    m_fparser.AddConstant("e", M_E);
-    m_fparser.Parse(exp, "x");
-
-    double vals[] = { 0 };
-    int res;
-
-    for (i = m_first; i < m_last; i++) {
-        m_x = start + i * step;
-
-        vals[0] = m_x;
-        result = m_fparser.Eval(vals);
-
-        double Pow = pow(10.0, 2);
-        result = round (result * Pow) / Pow;
-
-        res = m_fparser.EvalError();
-
-        if ( (result != result) || ( res > 0) ) {
-            validValues[i] = false;
-            functionValues[i] = 0;
-        }
-        else if (res == 0) {
-            validValues[i] = true;
-
-            if (result > m_params->maxY())
-                result = m_params->maxY();
-            if (result < m_params->minY())
-                result = m_params->minY();
-
-            functionValues[i] = result;
-        }
-    }
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
     QString expression = m_params->expression();
     std::string exp = expression.toStdString();
@@ -219,6 +182,45 @@ void GenFunctionCalculatorThread::run()
             functionValues[i] = 0;
         }
     }
+
+
+#else
+    QString expression = m_params->expression();
+    std::string exp = expression.toStdString();
+    m_fparser.AddConstant("pi", M_PI);
+    m_fparser.AddConstant("e", M_E);
+    m_fparser.Parse(exp, "x");
+
+    double vals[] = { 0 };
+    int res;
+
+    for (i = m_first; i < m_last; i++) {
+        m_x = start + i * step;
+
+        vals[0] = m_x;
+        result = m_fparser.Eval(vals);
+
+        double Pow = pow(10.0, 2);
+        result = round (result * Pow) / Pow;
+
+        res = m_fparser.EvalError();
+
+        if ( (result != result) || ( res > 0) ) {
+            validValues[i] = false;
+            functionValues[i] = 0;
+        }
+        else if (res == 0) {
+            validValues[i] = true;
+
+            if (result > m_params->maxY())
+                result = m_params->maxY();
+            if (result < m_params->minY())
+                result = m_params->minY();
+
+            functionValues[i] = result;
+        }
+    }
+
 #endif
 }
 

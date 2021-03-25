@@ -5,6 +5,9 @@
 #include "function/point.h"
 #include "parameters.h"
 
+#include<array>
+using namespace std;
+
 class RenderArea : public QWidget
 {
     Q_OBJECT
@@ -13,7 +16,7 @@ public:
 
     RenderArea(QWidget *parent = nullptr);
     ~RenderArea() override;
-    void updateGraph(QVector<Point> *points,
+    void updateGraph(Points *points,
                      double xMin,
                      double xMax,
                      double yMin,
@@ -61,7 +64,7 @@ private:
 
     void clearDerivative();
 
-    QVector<Point> *m_points;
+    Points *m_points;
     QVector<Point> m_coordPoints;
 
     QVector<Point> *m_derivPoints;

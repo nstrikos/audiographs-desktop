@@ -6,14 +6,14 @@
 
 #include <QDebug>
 
-#ifndef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include <bits/stdc++.h>
 using namespace std;
 #endif
 
 FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
 {
-#ifndef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
     symbol_table.add_function(
                 "powerint",
@@ -165,19 +165,7 @@ bool FunctionModel::check()
         return false;
     }
 
-#ifdef Q_OS_WIN
-
-    m_fparser.AddConstant("pi", M_PI);
-    m_fparser.AddConstant("e", M_E);
-    int res = m_fparser.Parse(m_expression.toStdString(), "x");
-    if (res >= 0) {
-        const char *s;
-        s = m_fparser.ErrorMsg();
-        m_errorString = QString::fromUtf8(s);
-        return false;
-    }
-
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
     typedef exprtk::parser<double>::settings_t settings_t;
 
@@ -202,6 +190,18 @@ bool FunctionModel::check()
         return false;
     }
 
+#else
+
+    m_fparser.AddConstant("pi", M_PI);
+    m_fparser.AddConstant("e", M_E);
+    int res = m_fparser.Parse(m_expression.toStdString(), "x");
+    if (res >= 0) {
+        const char *s;
+        s = m_fparser.ErrorMsg();
+        m_errorString = QString::fromUtf8(s);
+        return false;
+    }
+
 #endif
     return true;
 }
@@ -219,39 +219,15 @@ void FunctionModel::calculatePoints()
 {
     Point tmpPoint;
 
-    m_points.clear();
+    //m_points.clear();
+    //m_points.fill(0);
     m_derivPoints.clear();
 
     double step;
 
-#ifdef Q_OS_WIN
-
-    double x;
-    double result;
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
 
-    double vals[] = { 0 };
-    int res;
-
-    step = (m_maxX - m_minX) / LINE_POINTS;
-    for (int i = 0; i < LINE_POINTS; i++) {
-        x = m_minX + i * step;
-        vals[0] = x;
-        result = m_fparser.Eval(vals);
-        res = m_fparser.EvalError();
-        tmpPoint.x = x;
-        tmpPoint.y = result;
-        if (result != result)
-            tmpPoint.isValid = false;
-        else if (res > 0)
-            tmpPoint.isValid = false;
-        else if (res == 0)
-            tmpPoint.isValid = true;
-
-        m_points.append(tmpPoint);
-    }
-
-#else
 
     typedef exprtk::parser<double>::settings_t settings_t;
 
@@ -275,7 +251,36 @@ void FunctionModel::calculatePoints()
         else {
             tmpPoint.isValid = false;
         }
-        m_points.append(tmpPoint);
+        //m_points.append(tmpPoint);
+        m_points.setPoint(i, tmpPoint);
+    }
+
+
+
+#else
+    double x;
+    double result;
+
+
+    double vals[] = { 0 };
+    int res;
+
+    step = (m_maxX - m_minX) / LINE_POINTS;
+    for (int i = 0; i < LINE_POINTS; i++) {
+        x = m_minX + i * step;
+        vals[0] = x;
+        result = m_fparser.Eval(vals);
+        res = m_fparser.EvalError();
+        tmpPoint.x = x;
+        tmpPoint.y = result;
+        if (result != result)
+            tmpPoint.isValid = false;
+        else if (res > 0)
+            tmpPoint.isValid = false;
+        else if (res == 0)
+            tmpPoint.isValid = true;
+
+        m_points.setPoint(i, tmpPoint);
     }
 
 #endif
@@ -284,12 +289,12 @@ void FunctionModel::calculatePoints()
     m_maxValue = -std::numeric_limits<double>::max();//m_linePoints[0].y;
 
     for (int i = 1; i < LINE_POINTS; i++) {
-        if (!m_points[i].isValid)
+        if (!m_points.validAt(i))
             continue;
-        if (m_points[i].y < m_minValue)
-            m_minValue = m_points[i].y;
-        if (m_points[i].y > m_maxValue)
-            m_maxValue = m_points[i].y;
+        if (m_points.yAt(i) < m_minValue)
+            m_minValue = m_points.yAt(i);
+        if (m_points.yAt(i) > m_maxValue)
+            m_maxValue = m_points.yAt(i);
     }
 }
 
@@ -338,36 +343,57 @@ QString FunctionModel::expression() const
     return m_expression;
 }
 
-double FunctionModel::x(int i) const
+double FunctionModel::x(int i)
 {
-    return m_points[i].x;
+    return m_points.xAt(i);
 }
 
-double FunctionModel::y(int i) const
+double FunctionModel::y(int i)
 {
-    return m_points[i].y;
+    return m_points.yAt(i);
 }
 
-bool FunctionModel::isValid(int i) const
+bool FunctionModel::isValid(int i)
 {
-    return m_points[i].isValid;
+    return m_points.validAt(i);
 }
 
 int FunctionModel::size()
 {
-    return m_points.size();
+    //return m_points.size();
+    return 10000;
 }
 
 void FunctionModel::calculateDerivative()
 {
-    if (m_points.size() <= 0)
-        return;
+//    if (m_points.size() <= 0)
+//        return;
 
     Point tmpPoint;
 
     m_derivPoints.clear();
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+
+    for (int i = 0; i < LINE_POINTS; i++) {
+        m_x = m_points.xAt(i);
+        double y = exprtk::derivative(parser_expression, m_x);
+        tmpPoint.x = m_x;
+        tmpPoint.y = y;
+        if (std::isfinite(y)) {
+            tmpPoint.isValid = true;
+        }
+        else {
+            tmpPoint.isValid = false;
+        }
+        m_derivPoints.append(tmpPoint);
+    }
+
+
+
+
+#else
+
     double vals[] = { 0 };
     const double h = 0.00000001;
     const double h2 = 2 * h;
@@ -376,7 +402,7 @@ void FunctionModel::calculateDerivative()
     double result;
 
     for (int i = 0; i < LINE_POINTS; i++) {
-        x_init = m_points[i].x;
+        x_init = m_points.xAt(i);
         x = x_init + h2;
         vals[0] = x;
         double y0 = m_fparser.Eval(vals);
@@ -402,23 +428,8 @@ void FunctionModel::calculateDerivative()
 
         m_derivPoints.append(tmpPoint);
     }
-#else
 
 
-
-    for (int i = 0; i < LINE_POINTS; i++) {
-        m_x = m_points[i].x;
-        double y = exprtk::derivative(parser_expression, m_x);
-        tmpPoint.x = m_x;
-        tmpPoint.y = y;
-        if (std::isfinite(y)) {
-            tmpPoint.isValid = true;
-        }
-        else {
-            tmpPoint.isValid = false;
-        }
-        m_derivPoints.append(tmpPoint);
-    }
 
 #endif
 
@@ -439,14 +450,40 @@ void FunctionModel::calculateDerivative()
 
 void FunctionModel::calculateSecondDerivative()
 {
-    if (m_points.size() <= 0)
-        return;
+//    if (m_points.size() <= 0)
+//        return;
 
     Point tmpPoint;
 
     m_derivPoints.clear();
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+
+    for (int i = 0; i < LINE_POINTS; i++) {
+        m_x = m_points.xAt(i);
+        double y = exprtk::second_derivative(parser_expression, m_x);
+
+        double Pow = pow(10.0, 2);
+        y = round (y * Pow) / Pow;
+
+        tmpPoint.x = m_x;
+        tmpPoint.y = y;
+
+        if (std::isfinite(y)) {
+            tmpPoint.isValid = true;
+        }
+        else {
+            tmpPoint.isValid = false;
+        }
+        m_derivPoints.append(tmpPoint);
+    }
+
+
+
+
+
+#else
+
     double vals[] = { 0 };
     const double h = 0.00001;
     const double h2 = 2 * h;
@@ -455,7 +492,7 @@ void FunctionModel::calculateSecondDerivative()
     double result;
 
     for (int i = 0; i < LINE_POINTS; i++) {
-        x_init = m_points[i].x;
+        x_init = m_points.xAt(i);
         x = x_init;
         vals[0] = x;
         double y = m_fparser.Eval(vals);
@@ -487,26 +524,6 @@ void FunctionModel::calculateSecondDerivative()
 
         m_derivPoints.append(tmpPoint);
     }
-#else
-    for (int i = 0; i < LINE_POINTS; i++) {
-        m_x = m_points[i].x;
-        double y = exprtk::second_derivative(parser_expression, m_x);
-
-        double Pow = pow(10.0, 2);
-        y = round (y * Pow) / Pow;
-
-        tmpPoint.x = m_x;
-        tmpPoint.y = y;
-
-        if (std::isfinite(y)) {
-            tmpPoint.isValid = true;
-        }
-        else {
-            tmpPoint.isValid = false;
-        }
-        m_derivPoints.append(tmpPoint);
-    }
-
 #endif
 
     m_minDerivValue = std::numeric_limits<double>::max();//m_linePoints[0].y;
@@ -526,14 +543,34 @@ void FunctionModel::calculateSecondDerivative()
 
 void FunctionModel::refreshDerivative()
 {
-    if (m_points.size() <= 0)
-        return;
+//    if (m_points.size() <= 0)
+//        return;
 
     Point tmpPoint;
 
     m_derivPoints.clear();
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+
+    for (int i = 0; i < LINE_POINTS; i++) {
+        m_x = m_points.xAt(i);
+        double y = exprtk::derivative(parser_expression, m_x);
+        tmpPoint.x = m_x;
+        tmpPoint.y = y;
+        if (std::isfinite(y)) {
+            tmpPoint.isValid = true;
+        }
+        else {
+            tmpPoint.isValid = false;
+        }
+        m_derivPoints.append(tmpPoint);
+    }
+
+
+
+
+#else
+
     double vals[] = { 0 };
     const double h = 0.00000001;
     const double h2 = 2 * h;
@@ -542,7 +579,7 @@ void FunctionModel::refreshDerivative()
     double result;
 
     for (int i = 0; i < LINE_POINTS; i++) {
-        x_init = m_points[i].x;
+        x_init = m_points.xAt(i);
         x = x_init + h2;
         vals[0] = x;
         double y0 = m_fparser.Eval(vals);
@@ -568,23 +605,8 @@ void FunctionModel::refreshDerivative()
 
         m_derivPoints.append(tmpPoint);
     }
-#else
 
 
-
-    for (int i = 0; i < LINE_POINTS; i++) {
-        m_x = m_points[i].x;
-        double y = exprtk::derivative(parser_expression, m_x);
-        tmpPoint.x = m_x;
-        tmpPoint.y = y;
-        if (std::isfinite(y)) {
-            tmpPoint.isValid = true;
-        }
-        else {
-            tmpPoint.isValid = false;
-        }
-        m_derivPoints.append(tmpPoint);
-    }
 
 #endif
 

@@ -2,15 +2,16 @@
 #define FUNCTIONMODEL_H
 
 #include <QObject>
+
 #include "point.h"
 
-#ifdef Q_OS_WIN
-#include "parsers/fparser/fparser.hh"
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include "parsers/exprtk/exprtk.hpp"
 typedef exprtk::symbol_table<double> symbol_table_t;
 typedef exprtk::expression<double>     expression_t;
 typedef exprtk::parser<double>             parser_t;
+#else
+#include "parsers/fparser/fparser.hh"
 #endif
 
 class FunctionModel : public QObject
@@ -25,13 +26,13 @@ public:
     double maxX() const;
     double minY() const;
     double maxY() const;
-    double x(int i) const;
-    double y(int i) const;
+    double x(int i);
+    double y(int i);
 
     double minValue() const;
     double maxValue() const;
 
-    bool isValid(int i) const;
+    bool isValid(int i);
 
     int size();
 
@@ -47,7 +48,7 @@ public:
 
 signals:
     void error(QString);
-    void newGraph(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void newGraph(Points *points, double minX, double maxX, double minY, double maxY);
     void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
 
 private:
@@ -74,15 +75,17 @@ private:
     double m_minDerivValue;
     double m_maxDerivValue;
 
-#ifdef Q_OS_WIN
-    FunctionParser m_fparser;
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
     symbol_table_t symbol_table;
     double m_x;
     expression_t parser_expression;
+#else
+    FunctionParser m_fparser;
 #endif
 
-    QVector<Point> m_points;
+    //QVector<Point> m_points;
+    //array<Point,10000>m_points;
+    Points m_points;
     QVector<Point> m_derivPoints;
 };
 

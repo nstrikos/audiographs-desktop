@@ -30,6 +30,9 @@ public:
 
     void setDerivativeMode(int mode);
 
+    double X() const;
+    double Y() const;
+
 signals:
     void newCurrentPoint(double x, double y);
 

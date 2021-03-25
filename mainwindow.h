@@ -15,6 +15,9 @@
 #include "aboutDialog.h"
 #include "texttospeech.h"
 
+#include<array>
+using namespace std;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -65,7 +68,7 @@ signals:
     void derivativeMode(int mode);
 
 public slots:
-    void updateGraph(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void updateGraph(Points *points, double minX, double maxX, double minY, double maxY);
     void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
 
     void error(QString errorString);
@@ -193,7 +196,7 @@ private:
     QState initialState, errorDisplayState, evaluateState, graphReadyState,
     playSoundState, exploreState, interestingPointState, interestingPointStoppedState;
 
-    QVector<Point> *m_points;
+    Points *m_points;
     QVector<Point> *m_derivPoints;
     double m_minX, m_maxX, m_minY, m_maxY;
 

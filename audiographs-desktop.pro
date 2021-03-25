@@ -1,6 +1,6 @@
 TARGET = audiographs-desktop
 
-QT       += core gui multimedia texttospeech
+QT       += core gui multimedia texttospeech quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,8 +20,11 @@ SOURCES += \
     function/currentPoint.cpp \
     function/functionConnector.cpp \
     function/functionDescription.cpp \
+    function/functionDisplayView.cpp \
+    function/functionDisplayViewInterface.cpp \
     function/functionExpression.cpp \
     function/functionModel.cpp \
+    function/functionPointView.cpp \
     function/point.cpp \
     function/pointInterest.cpp \
     generator/audio.cpp \
@@ -52,8 +55,11 @@ HEADERS += \
     function/currentPoint.h \
     function/functionConnector.h \
     function/functionDescription.h \
+    function/functionDisplayView.h \
+    function/functionDisplayViewInterface.h \
     function/functionExpression.h \
     function/functionModel.h \
+    function/functionPointView.h \
     function/point.h \
     function/pointInterest.h \
     generator/audio.h \
@@ -74,7 +80,9 @@ HEADERS += \
     renderArea.h \
     texttospeech.h
 
-win32: {
+linux:!android: {
+   HEADERS += parsers/exprtk/exprtk.hpp
+} else: {
 SOURCES += parsers/fparser/fparser.cc \
     parsers/fparser/fpoptimizer.cc \
 
@@ -84,10 +92,6 @@ HEADERS +=   parsers/fparser/extrasrc/fpaux.hh \
    parsers/fparser/fparser_gmpint.hh \
    parsers/fparser/fparser_mpfr.hh \
    parsers/fparser/fpconfig.hh \
-}
-
-!win32: {
-   HEADERS += parsers/exprtk/exprtk.hpp
 }
 
 FORMS += \
@@ -108,4 +112,7 @@ DISTFILES += \
 }
 
 RESOURCES += \
-    help.qrc
+    help.qrc \
+    qml.qrc
+
+DISTFILES +=

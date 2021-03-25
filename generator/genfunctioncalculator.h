@@ -6,10 +6,10 @@
 #include <vector>
 using namespace std;
 
-#ifdef Q_OS_WIN
-#include "parsers/fparser/fparser.hh"
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include "parsers/exprtk/exprtk.hpp"
+#else
+#include "parsers/fparser/fparser.hh"
 #endif
 
 class GenFunctionCalculatorThread : public QThread
@@ -28,15 +28,15 @@ private:
     bool is_nan( const double &value );
     bool is_valid( const double &value );
 
-#ifdef Q_OS_WIN
-    FunctionParser m_fparser;
-#else
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double>     expression_t;
     typedef exprtk::parser<double>             parser_t;
 
     symbol_table_t symbol_table;
     expression_t parser_expression;
+#else
+    FunctionParser m_fparser;
 #endif
     double m_x;
 };
