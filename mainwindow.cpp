@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     initStateMachine();
 
-    connect(ui->renderArea, &RenderArea::zoom, this, &MainWindow::zoom);
+    connect(ui->renderArea, &RenderArea::zoom, this, &MainWindow::performZoom);
     connect(ui->renderArea, &RenderArea::mousePressed, this, &MainWindow::mousePressed);
     connect(ui->renderArea, &RenderArea::mouseMove, this, &MainWindow::mouseMove);
     connect(ui->renderArea, &RenderArea::mouseReleased, this, &MainWindow::mouseReleased);
@@ -610,6 +610,15 @@ void MainWindow::updateGraph(Points *points, double minX, double maxX, double mi
     emit newgraph();
 }
 
+void MainWindow::newInputValues(double minX, double maxX, double minY, double maxY)
+{
+    //we update with the rounded values
+    ui->minXLineEdit->setText(QString::number(minX));
+    ui->maxXLineEdit->setText(QString::number(maxX));
+    ui->minYLineEdit->setText(QString::number(minY));
+    ui->maxYLineEdit->setText(QString::number(maxY));
+}
+
 void MainWindow::updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY)
 {
     m_derivPoints = points;
@@ -633,99 +642,12 @@ void MainWindow::error(QString errorString)
     emit functionError();
 }
 
-void MainWindow::zoom(int delta)
+void MainWindow::performZoom(int delta)
 {
     if (!canZoomDrag)
         return;
 
-    double factor;
-
-    if (delta < 0)
-        factor = 1.1;
-    else
-        factor = 0.9;
-
-    double minX = ui->minXLineEdit->text().toDouble();
-    double maxX = ui->maxXLineEdit->text().toDouble();
-    double minY = ui->minYLineEdit->text().toDouble();
-    double maxY = ui->maxYLineEdit->text().toDouble();
-
-    double newMinX, newMaxX, newMinY, newMaxY;
-
-    double distanceX = maxX - minX;
-    double centerX = (maxX + minX) / 2;
-
-    double distanceY = maxY - minY;
-    double centerY = (maxY + minY) / 2;
-
-    distanceX = distanceX * factor;
-    distanceY = distanceY * factor;
-
-//    if ( (abs(distanceX) > 100000) ||
-//         (abs(distanceX) < 0.0001)  ||
-//         (abs(distanceY) > 100000) ||
-//         (abs(distanceY) < 0.0001) ) {
-//        return;
-//    }
-
-    if ( ((abs(distanceX) > 100000) || (abs(distanceY) > 100000)) &&
-         (delta < 0))
-        return;
-
-    if ( ((abs(distanceX) < 0.0001) || (abs(distanceY) < 0.0001)) &&
-         (delta > 0))
-        return;
-
-
-    //newMinX, newMaxX, newMinY, newMaxY are the new values
-
-    newMinX = centerX - distanceX / 2;
-    newMaxX = centerX + distanceX / 2;
-    newMinY = centerY - distanceY / 2;
-    newMaxY = centerY + distanceY / 2;
-
-
-    //The level of precision in rounding depends on the distance between the values
-    double distance = newMaxX - newMinX;
-    double power = -floor(log10(distance)) + 2;
-
-    //variable precision holds the level of precision
-    double precision = pow(10, power);
-
-    if (power > 0) {
-        minX = round(newMinX * precision) / precision;
-        maxX = round(newMaxX * precision) / precision;
-    }
-    else {
-        minX = round(newMinX);
-        maxX = round(newMaxX);
-    }
-
-    distance = newMaxY - newMinY;
-    power = -floor(log10(distance)) + 2;
-    precision = pow(10, power);
-    if (power > 0) {
-        minY = round(newMinY * precision) / precision;
-        maxY = round(newMaxY * precision) / precision;
-    }
-    else {
-        minY = round(newMinY);
-        maxY = round(newMaxY);
-    }
-
-    //We calculate with the new values, but we need to round them before displaying them
-    //if we round the values before zooming, zoom will not be smooth
-    emit calculate(ui->functionLineEdit->text(),
-                   QString::number(newMinX),
-                   QString::number(newMaxX),
-                   QString::number(newMinY),
-                   QString::number(newMaxY));
-
-    //we update with the rounded values
-    ui->minXLineEdit->setText(QString::number(minX));
-    ui->maxXLineEdit->setText(QString::number(maxX));
-    ui->minYLineEdit->setText(QString::number(minY));
-    ui->maxYLineEdit->setText(QString::number(maxY));
+    emit zoom(delta);
 }
 
 void MainWindow::mousePressed(int x, int y)
@@ -733,15 +655,9 @@ void MainWindow::mousePressed(int x, int y)
     if (!canZoomDrag)
         return;
 
-    m_minXDrag = ui->minXLineEdit->text().toDouble();
-    m_maxXDrag = ui->maxXLineEdit->text().toDouble();
-    m_minYDrag = ui->minYLineEdit->text().toDouble();
-    m_maxYDrag = ui->maxYLineEdit->text().toDouble();
-
     m_mousePressed = true;
-    m_xStartDrag = x;
-    m_yStartDrag = y;
 
+    emit startDrag(x, y);
 }
 
 void MainWindow::mouseMove(int diffX, int diffY)
@@ -749,60 +665,8 @@ void MainWindow::mouseMove(int diffX, int diffY)
     if (!m_mousePressed)
         return;
 
-    //The level of precision in rounding depends on the distance between the values
-    double distanceX = m_maxXDrag - m_minXDrag;
 
-    int powerX = -floor(log10(distanceX)) + 2;
-
-    //variable precision holds the level of precision
-    double precisionX = pow(10, powerX);
-
-    double distanceY = m_maxYDrag - m_minYDrag;
-
-    int powerY = -floor(log10(distanceY)) + 2;
-    double precisionY = pow(10, powerY);
-
-    int newDiffX = diffX - m_xStartDrag;
-    int newDiffY = diffY - m_yStartDrag;
-
-    int width = ui->renderArea->width();
-    int height = ui->renderArea->height();
-
-    double diffXDouble = (double)((m_maxXDrag - m_minXDrag)) / (double)width * newDiffX;
-    double diffYDouble = (double)((m_maxYDrag - m_minYDrag)) / (double)height * newDiffY;
-
-    //newMinX, newMaxX, newMinY, newMaxY are the new values
-    double newMinX, newMaxX, newMinY, newMaxY;
-
-    if (powerX > 0) {
-        newMinX = round( (m_minXDrag - diffXDouble) * precisionX) / precisionX;
-        newMaxX = round( (m_maxXDrag - diffXDouble) * precisionY) / precisionY;
-    } else {
-        newMinX = round(m_minXDrag - diffXDouble);
-        newMaxX = round(m_maxXDrag - diffXDouble);
-    }
-
-    if (powerY > 0) {
-        newMinY = round( (m_minYDrag + diffYDouble) * precisionY) / precisionY;
-        newMaxY = round( (m_maxYDrag + diffYDouble) * precisionY) / precisionY;
-    } else {
-        newMinY = round(m_minYDrag + diffYDouble);
-        newMaxY = round(m_maxYDrag + diffYDouble);
-    }
-
-
-    //we update with the rounded values
-    ui->minXLineEdit->setText(QString::number(newMinX));
-    ui->maxXLineEdit->setText(QString::number(newMaxX));
-    ui->minYLineEdit->setText(QString::number(newMinY));
-    ui->maxYLineEdit->setText(QString::number(newMaxY));
-
-    //We calculate with the new values
-    emit calculate(ui->functionLineEdit->text(),
-                   QString::number(newMinX),
-                   QString::number(newMaxX),
-                   QString::number(newMinY),
-                   QString::number(newMaxY));
+    emit drag(diffX, diffY, ui->renderArea->width(), ui->renderArea->height());
 }
 
 void MainWindow::mouseReleased()

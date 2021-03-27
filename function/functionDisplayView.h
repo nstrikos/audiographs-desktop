@@ -16,7 +16,7 @@ public:
     FunctionDisplayView(QQuickItem *parent = nullptr);
     ~FunctionDisplayView () override;
 
-    void updateView();
+    Q_INVOKABLE void updateView();
 
 //    void drawDerivative(FunctionModel *model);
 

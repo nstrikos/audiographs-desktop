@@ -16,7 +16,10 @@ SpinBox {
     onValueChanged: {
         window.stopAudio()
         parameters.axesSize = value
-        graphRect.graphCanvas.updateCanvas()
+        graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
+                                           controlsRect.textInput3.text,
+                                           controlsRect.textInput4.text,
+                                           controlsRect.textInput5.text)
     }
     editable: false
     

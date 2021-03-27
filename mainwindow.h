@@ -66,9 +66,13 @@ signals:
     void lastPoint();
     void errorAccepted();
     void derivativeMode(int mode);
+    void startDrag(int x , int y);
+    void drag(int diffX, int diffY, int width, int height);
+    void zoom(double delta);
 
 public slots:
     void updateGraph(Points *points, double minX, double maxX, double minY, double maxY);
+    void newInputValues(double minX, double maxX, double minY, double maxY);
     void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
 
     void error(QString errorString);
@@ -112,7 +116,7 @@ private slots:
     void errorDisplayStateActivated();
 
     void on_functionLineEdit_textEdited(const QString &arg1);
-    void zoom(int delta);
+    void performZoom(int delta);
     void mousePressed(int x, int y);
     void mouseMove(int diffX, int diffY);
     void mouseReleased();

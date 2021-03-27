@@ -11,6 +11,10 @@ void FunctionConnector::start(MainWindow &window, FunctionExpression &functionEx
 {
     QObject::connect(&window, &MainWindow::calculate, &functionExpression, &FunctionExpression::calculate);
     QObject::connect(&functionExpression, &FunctionExpression::newGraph, &window, &MainWindow::updateGraph);
+    QObject::connect(&functionExpression, &FunctionExpression::newInputValues, &window, &MainWindow::newInputValues);
+    QObject::connect(&window, &MainWindow::startDrag, &functionExpression, &FunctionExpression::startDrag);
+    QObject::connect(&window, &MainWindow::drag, &functionExpression, &FunctionExpression::drag);
+    QObject::connect(&window, &MainWindow::zoom, &functionExpression, &FunctionExpression::zoom);
     QObject::connect(&functionExpression, &FunctionExpression::updateDerivative, &window, &MainWindow::updateDerivative);
     QObject::connect(&functionExpression, &FunctionExpression::error, &window, &MainWindow::error);
     QObject::connect(&window, &MainWindow::playSound, &functionExpression, &FunctionExpression::audio);

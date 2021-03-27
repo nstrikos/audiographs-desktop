@@ -18,6 +18,7 @@ SOURCES += \
     audionotes/audiopoints.cpp \
     errorDisplayDialog.cpp \
     function/currentPoint.cpp \
+    function/dragHandler.cpp \
     function/functionConnector.cpp \
     function/functionDescription.cpp \
     function/functionDisplayView.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
     function/functionExpression.cpp \
     function/functionModel.cpp \
     function/functionPointView.cpp \
+    function/functionZoomer.cpp \
+    function/pinchHandler.cpp \
     function/point.cpp \
     function/pointInterest.cpp \
     generator/audio.cpp \
@@ -53,6 +56,7 @@ HEADERS += \
     constants.h \
     errorDisplayDialog.h \
     function/currentPoint.h \
+    function/dragHandler.h \
     function/functionConnector.h \
     function/functionDescription.h \
     function/functionDisplayView.h \
@@ -60,6 +64,8 @@ HEADERS += \
     function/functionExpression.h \
     function/functionModel.h \
     function/functionPointView.h \
+    function/functionZoomer.h \
+    function/pinchHandler.h \
     function/point.h \
     function/pointInterest.h \
     generator/audio.h \

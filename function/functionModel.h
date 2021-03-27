@@ -46,6 +46,8 @@ public:
 
     double maxDerivValue() const;
 
+    bool validExpression() const;
+
 signals:
     void error(QString);
     void newGraph(Points *points, double minX, double maxX, double minY, double maxY);
@@ -74,6 +76,7 @@ private:
     double m_maxValue;
     double m_minDerivValue;
     double m_maxDerivValue;
+    bool m_validExpression;
 
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
     symbol_table_t symbol_table;

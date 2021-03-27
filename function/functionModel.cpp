@@ -106,9 +106,11 @@ void FunctionModel::calculate(QString expression, QString minX, QString maxX, QS
     m_maxYString = maxY;
 
     if ( check() ) {
+        m_validExpression = true;
         calculatePoints();
         emit newGraph(&m_points, m_minX, m_maxX, m_minY, m_maxY);
     } else {
+        m_validExpression = false;
         emit error(m_errorString);
     }
 }
@@ -626,4 +628,9 @@ void FunctionModel::refreshDerivative()
 double FunctionModel::derivative(int i) const
 {
     return m_derivPoints[i].y;
+}
+
+bool FunctionModel::validExpression() const
+{
+    return m_validExpression;
 }

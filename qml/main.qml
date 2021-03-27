@@ -120,12 +120,12 @@ Window {
         }
     }
 
-//    Connections {
-//        target: functionController
-//        function onNewInputValues(minX, maxX, minY, maxY) {
-//            controlsRect.newInputValues(minX, maxX, minY, maxY)
-//        }
-//    }
+    Connections {
+        target: functionExpression
+        function onNewInputValues(minX, maxX, minY, maxY) {
+            controlsRect.newInputValues(minX, maxX, minY, maxY)
+        }
+    }
 
 //    Connections {
 //        target: functionController

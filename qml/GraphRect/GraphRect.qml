@@ -70,23 +70,23 @@ Rectangle {
     PinchArea {
         anchors.fill: parent
         onPinchStarted: {
-            functionController.startPinch()
+            functionExpression.startPinch()
         }
         onPinchUpdated: {
-            functionController.pinch(pinch.scale)
+            functionExpression.pinch(pinch.scale)
         }
         MouseArea {
             anchors.fill: parent
             onWheel: {
                 if (!parameters.exploreMode) {
                     //window.newGraph()
-                    functionController.zoom(wheel.angleDelta.y)
+                    functionExpression.zoom(wheel.angleDelta.y)
                 }
             }
             onPressedChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        functionController.startDrag(mouseX, mouseY)
+                        functionExpression.startDrag(mouseX, mouseY)
                 } else {
                     if (!pressed)
                         functionController.stopAudio()
@@ -95,7 +95,7 @@ Rectangle {
             onPositionChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        functionController.drag(mouseX, mouseY, width, height)
+                        functionExpression.drag(mouseX, mouseY, width, height)
                 } else {
                     if (pressed)
                         functionController.mousePoint(mouseX)
@@ -109,9 +109,9 @@ Rectangle {
 
     function updateCanvas() {
         window.stopAudio()
-        console.log(minX, maxX, minY, maxY)
         graphCanvas.updateCanvas(minX, maxX, minY, maxY)
         //functionController.viewDimensionsChanged()
+        displayView.updateView()
     }
 
     BeautifyGraphRect {

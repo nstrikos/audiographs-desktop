@@ -23,6 +23,15 @@ FunctionExpression::FunctionExpression(QObject *parent) : QObject(parent)
     m_pointsInterest = new PointsInterest(functionModel, *m_audioNotes, *m_currentPoint, *m_textToSpeech);
     connect(m_pointsInterest, &PointsInterest::finished, this, &FunctionExpression::interestingPointFinished);
 
+    m_dragHandler = new DragHandler();
+    connect(m_dragHandler, &DragHandler::newInputValues, this, &FunctionExpression::newInputValues);
+
+    m_zoomer = new FunctionZoomer();
+    connect(m_zoomer, &FunctionZoomer::newInputValues, this, &FunctionExpression::newInputValues);
+
+    m_pinchHandler = new PinchHandler();
+    connect(m_pinchHandler, &PinchHandler::newInputValues, this, &FunctionExpression::newInputValues);
+
     m_derivativeMode = 0;
 }
 
@@ -33,6 +42,9 @@ FunctionExpression::~FunctionExpression()
     delete m_currentPoint;
     delete m_textToSpeech;
     delete m_pointsInterest;
+    delete m_dragHandler;
+    delete m_zoomer;
+    delete m_pinchHandler;
 }
 
 void FunctionExpression::calculate(QString expression, QString minX, QString maxX, QString minY, QString maxY)
@@ -49,6 +61,34 @@ void FunctionExpression::calculate(QString expression, QString minX, QString max
         functionModel.calculate(expression, minX, maxX, minY, maxY);
         functionModel.calculateSecondDerivative();
     }
+}
+
+void FunctionExpression::startDrag(int x, int y)
+{
+    m_currentPoint->reset();
+    m_dragHandler->startDrag(functionModel, x, y);
+}
+
+void FunctionExpression::drag(int diffX, int diffY, int width, int height)
+{
+    m_dragHandler->drag(functionModel, diffX, diffY, width, height);
+}
+
+void FunctionExpression::zoom(double delta)
+{
+    m_currentPoint->reset();
+    m_zoomer->zoom(functionModel, delta);
+}
+
+void FunctionExpression::startPinch()
+{
+    m_currentPoint->reset();
+    m_pinchHandler->startPinch(functionModel);
+}
+
+void FunctionExpression::pinch(double scale)
+{
+    m_pinchHandler->pinch(functionModel, scale);
 }
 
 void FunctionExpression::audio()

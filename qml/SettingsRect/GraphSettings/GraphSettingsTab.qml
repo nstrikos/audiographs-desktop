@@ -28,11 +28,17 @@ Rectangle {
             } else if (request === "background color") {
                 parameters.backgroundColor = color
                 backgroundColor = color
-                graphRect.graphCanvas.updateCanvas()
+                graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
+                                                   controlsRect.textInput3.text,
+                                                   controlsRect.textInput4.text,
+                                                   controlsRect.textInput5.text)
             } else if (request === "axes color") {
                 parameters.axesColor = color
                 axesColor = color
-                graphRect.graphCanvas.updateCanvas()
+                graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
+                                                   controlsRect.textInput3.text,
+                                                   controlsRect.textInput4.text,
+                                                   controlsRect.textInput5.text)
             } else if (request === "highlight color") {
                 parameters.highlightColor = color
                 highlightColor = color
