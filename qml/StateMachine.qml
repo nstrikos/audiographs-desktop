@@ -124,11 +124,11 @@ Item {
                 console.log("play sound state")
                 controlsRect.startSoundButton.enabled = true
                 controlsRect.startSoundButton.text = qsTr("Stop sound")
-                functionController.audio()
+                functionExpression.audio()
             }
             onExited: {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
-                functionController.stopAudio()
+                functionExpression.stopAudio()
                 functionController.firstPoint()
             }
         }

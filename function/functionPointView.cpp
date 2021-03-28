@@ -9,6 +9,8 @@ FunctionPointView::FunctionPointView(QQuickItem *parent)
 {
     setFlag(ItemHasContents, true);
 
+    m_points = nullptr;
+
     m_timer.setInterval(50);
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_timer.start();
@@ -19,9 +21,19 @@ FunctionPointView::~FunctionPointView()
 
 }
 
-void FunctionPointView::setCurrentPoint(CurrentPoint *point)
+void FunctionPointView::draw(Points *points, double xMin, double xMax, double yMin, double yMax)
 {
-    m_currentPoint = point;
+    m_points = points;
+    m_xMin = xMin;
+    m_xMax = xMax;
+    m_yMin = yMin;
+    m_yMax = yMax;
+}
+
+void FunctionPointView::setCurrentPoint(double x, double y)
+{
+    m_x = ( this->width() / (m_xMax - m_xMin) * (x - m_xMin) );
+    m_y = this->height() - ( this->height() / (m_yMax - m_yMin) * (y - m_yMin) );
 }
 
 QSGNode *FunctionPointView::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
@@ -58,8 +70,8 @@ QSGNode *FunctionPointView::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeDat
         float x = r * cos(theta);
         float y = r * sin(theta);
 
-        if (m_currentPoint != nullptr)
-            lineVertices[ii].set(x + m_currentPoint->X(), y + m_currentPoint->Y());//output vertex
+        if (m_points != nullptr)
+            lineVertices[ii].set(x + m_x, y + m_y);//output vertex
         else
             lineVertices[ii].set(-20, -20);
     }

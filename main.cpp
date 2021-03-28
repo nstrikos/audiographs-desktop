@@ -79,6 +79,10 @@ int main(int argc, char *argv[])
         QObject::connect(&functionExpression, &FunctionExpression::newGraph, displayView, &FunctionDisplayView::draw);
         QObject::connect(&functionExpression, &FunctionExpression::error, displayView, &FunctionDisplayView::clear);
 
+        FunctionPointView *pointView = static_cast<FunctionPointView*>(qmlPointView);
+        QObject::connect(&functionExpression, &FunctionExpression::newGraph, pointView, &FunctionPointView::draw);
+        QObject::connect(&functionExpression, &FunctionExpression::newCurrentPoint, pointView, &FunctionPointView::setCurrentPoint);
+
         //            FunctionDisplayView *derivativeView = static_cast<FunctionDisplayView*>(qmlDerivativeView);
         //            functionController.setView(displayView);
         //            functionController.setPointView(pointView);

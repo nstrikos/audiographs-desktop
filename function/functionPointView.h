@@ -3,9 +3,10 @@
 
 
 #include <QtQuick/QQuickItem>
-#include "currentPoint.h"
 #include <QTimer>
 #include <QtQuick/qsgflatcolormaterial.h>
+
+#include "function/point.h"
 
 class FunctionPointView : public QQuickItem
 {
@@ -17,7 +18,6 @@ class FunctionPointView : public QQuickItem
 public:
     FunctionPointView(QQuickItem *parent = 0);
     ~FunctionPointView();
-    void setCurrentPoint(CurrentPoint *point);
 
     QColor color() const;
     void setColor(const QColor &color);
@@ -25,15 +25,28 @@ public:
     int size() const;
     void setSize(int size);
 
+public slots:
+    void draw(Points *points,
+              double xMin,
+              double xMax,
+              double yMin,
+              double yMax);
+    void setCurrentPoint(double x, double y);
+
 private:
     QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
 
-    double m_X;
-    double m_Y;
+    Points *m_points;
+    double m_xMin;
+    double m_xMax;
+    double m_yMin;
+    double m_yMax;
+
+    double m_x;
+    double m_y;
     QTimer m_timer;
     QColor m_color;
     int m_size;
-    CurrentPoint *m_currentPoint;
     QSGFlatColorMaterial *m_material;
 };
 

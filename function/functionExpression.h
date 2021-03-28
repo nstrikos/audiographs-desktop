@@ -23,8 +23,8 @@ public:
     ~FunctionExpression();
 
     Q_INVOKABLE void calculate(QString expression, QString minX, QString maxX, QString minY, QString maxY); 
-    void audio();
-    void stopAudio();
+    Q_INVOKABLE void audio();
+    Q_INVOKABLE void stopAudio();
     void nextPoint();
     void previousPoint();
     void sayX();
