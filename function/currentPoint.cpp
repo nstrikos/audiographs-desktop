@@ -2,6 +2,8 @@
 
 #include "constants.h"
 
+#include <QDebug>
+
 CurrentPoint::CurrentPoint(FunctionModel &model) : m_model(model)
 {
     timer.setTimerType(Qt::PreciseTimer);

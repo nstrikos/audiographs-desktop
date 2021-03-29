@@ -25,6 +25,8 @@ public:
     int size() const;
     void setSize(int size);
 
+    Q_INVOKABLE void clear();
+
 public slots:
     void draw(Points *points,
               double xMin,

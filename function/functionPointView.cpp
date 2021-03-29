@@ -91,6 +91,13 @@ void FunctionPointView::setSize(int size)
     m_size = size;
 }
 
+void FunctionPointView::clear()
+{
+    m_x = -40;
+    m_y = -40;
+    update();
+}
+
 QColor FunctionPointView::color() const
 {
     return m_color;

@@ -19,6 +19,9 @@ Rectangle {
     property var minY: -10
     property var maxY: 10
 
+    property alias displayView: displayView
+    property alias pointView: pointView
+
     property var graphCanvas: graphCanvas
     property color curveColor: parameters.lineColor
     property var curveWidth: parameters.lineWidth

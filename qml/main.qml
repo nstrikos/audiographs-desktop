@@ -24,6 +24,7 @@ Window {
     property bool anchorToLeft: undefined
 
     property alias settingsRect: settingsRect
+    property alias graphRect: graphRect
 
     signal evaluate()
     signal playPressed()

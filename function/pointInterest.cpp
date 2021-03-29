@@ -272,7 +272,7 @@ void PointsInterest::stop()
 //    if (m_audioNotes != nullptr)
         m_audioNotes.stopNotes();
     //m_isUpdated = false;
-        qDebug() << "stop";
+//        qDebug() << "stop";
 }
 
 void PointsInterest::setUpdated(bool updated)
