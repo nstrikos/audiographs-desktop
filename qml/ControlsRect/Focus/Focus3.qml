@@ -18,7 +18,7 @@ FocusScope {
 
     function pressed() {
         window.explore()
-        functionController.previousPointY();
+        functionExpression.previousPoint();
     }
     
     Rectangle {

@@ -25,13 +25,13 @@ public:
     Q_INVOKABLE void calculate(QString expression, QString minX, QString maxX, QString minY, QString maxY); 
     Q_INVOKABLE void audio();
     Q_INVOKABLE void stopAudio();
-    void nextPoint();
-    void previousPoint();
+    Q_INVOKABLE void nextPoint();
+    Q_INVOKABLE void previousPoint();
     void sayX();
     void sayY();
     void sayDerivative();
-    void decStep();
-    void incStep();
+    Q_INVOKABLE void decStep();
+    Q_INVOKABLE void incStep();
     void previousPointInterest();
     void nextPointInterest();
     void previousFast();

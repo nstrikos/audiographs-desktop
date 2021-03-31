@@ -18,7 +18,7 @@ FocusScope {
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        functionController.incStep()
+        functionExpression.incStep()
     }
     
     Rectangle {

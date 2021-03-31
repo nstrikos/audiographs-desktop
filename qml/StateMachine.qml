@@ -246,7 +246,7 @@ Item {
             onEntered: {
                 console.log("initial state")
                 disableControls()
-//                window.graphRect.displayView.clear()
+                //                window.graphRect.displayView.clear()
             }
         }
 
@@ -302,10 +302,10 @@ Item {
                 targetState: playSoundState
                 signal: playPressed
             }
-            //            DSM.SignalTransition {
-            //                targetState: exploreState//pointState
-            //                signal: explore
-            //            }
+            DSM.SignalTransition {
+                targetState: exploreState//pointState
+                signal: explore
+            }
             //            DSM.SignalTransition {
             //                targetState: interestingPointState//pointState
             //                signal: interestingPoint
@@ -342,30 +342,56 @@ Item {
                 targetState: graphReadyState
                 signal: playPressed
             }
-//            DSM.SignalTransition {
-//                targetState: exploreState//pointState
-//                signal: explore
-//            }
-//            DSM.SignalTransition {
-//                targetState: interestingPointState//pointState
-//                signal: interestingPoint
-//            }
+            DSM.SignalTransition {
+                targetState: exploreState//pointState
+                signal: explore
+            }
+            //            DSM.SignalTransition {
+            //                targetState: interestingPointState//pointState
+            //                signal: interestingPoint
+            //            }
             onEntered: {
                 console.log("play sound state")
                 enableControls()
                 controlsRect.startSoundButton.text = qsTr("Stop sound")
-//                window.graphRect.pointView.enable
                 functionExpression.audio()
             }
             onExited: {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
-//                window.graphRect.pointView.visible = false
-
-                window.graphRect.pointView.clear()
                 functionExpression.stopAudio()
-//                functionController.firstPoint()
+                window.graphRect.pointView.clear()
             }
         }
+
+        DSM.State {
+            id: exploreState
+            DSM.SignalTransition {
+                targetState: evaluateState
+                signal: evaluate
+            }
+            DSM.SignalTransition {
+                targetState: initialState
+                signal: error
+            }
+            DSM.SignalTransition {
+                targetState: playSoundState
+                signal: playPressed
+            }
+            DSM.SignalTransition {
+                targetState: graphReadyState
+                signal: newGraph
+            }
+            //            DSM.SignalTransition {
+            //                targetState: interestingPointState
+            //                signal: interestingPoint
+            //            }
+            onEntered: {
+                console.log("explore state")
+                //functionController.stopAudio()
+                functionExpression.stopAudio()
+            }
+        }
+
     }
 
     function disableControls()
