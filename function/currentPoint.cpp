@@ -164,7 +164,7 @@ void CurrentPoint::stop()
     //        m_X = -100;
     //        m_Y = -100;
     //    }
-    emit newCurrentPoint(m_X, m_Y);
+    //emit newCurrentPoint(m_X, m_Y);
 }
 
 void CurrentPoint::pause()

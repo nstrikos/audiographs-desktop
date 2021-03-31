@@ -128,6 +128,13 @@ Window {
         }
     }
 
+    Connections {
+        target: functionExpression
+        function onAudioFinished() {
+            stopAudio()
+        }
+    }
+
 //    Connections {
 //        target: functionController
 //        function onMovingPointFinished() {

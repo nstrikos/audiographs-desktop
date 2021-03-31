@@ -361,8 +361,8 @@ Item {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
 //                window.graphRect.pointView.visible = false
 
-                functionExpression.stopAudio()
                 window.graphRect.pointView.clear()
+                functionExpression.stopAudio()
 //                functionController.firstPoint()
             }
         }
