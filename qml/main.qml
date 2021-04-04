@@ -26,14 +26,19 @@ Window {
     property alias settingsRect: settingsRect
     property alias graphRect: graphRect
 
+    property bool canZoomDrag: false
+
     signal evaluate()
     signal playPressed()
     signal newGraph()
     signal error()
-    signal init()
-    signal stopAudio()
+    signal errorAccepted()
     signal explore()
     signal interestingPoint()
+
+
+
+    signal stopAudio()
     signal interestingPointStopped()
 
     Settings {
@@ -99,6 +104,7 @@ Window {
     }
 
     StateMachine {
+        id: stateMachine
     }
 
 //    Connections {
@@ -170,7 +176,39 @@ Window {
         interval: 3000
         onTriggered: {
             messageDialog.visible = false
-            window.init()
+            //window.init()
+        }
+    }
+
+    function sayX()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.sayX()
+        }
+    }
+
+    function sayY()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.sayY()
+        }
+    }
+
+    function previousPoint()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.previousPoint()
+        }
+    }
+
+    function nextPoint()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.nextPoint()
         }
     }
 }

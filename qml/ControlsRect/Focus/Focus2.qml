@@ -17,8 +17,7 @@ FocusScope {
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.stopAudio()
-        functionController.sayYCoordinate()
+        window.sayY()
     }
     
     Rectangle {

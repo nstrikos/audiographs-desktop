@@ -18,8 +18,7 @@ FocusScope {
 
     function pressed() {
         console.log("pressed")
-        window.stopAudio()
-        functionController.sayXCoordinate()
+        window.sayX()
     }
     
     Rectangle {

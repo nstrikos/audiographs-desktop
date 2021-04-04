@@ -17,8 +17,7 @@ FocusScope {
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.explore()
-        functionExpression.previousPoint();
+        window.previousPoint()
     }
     
     Rectangle {

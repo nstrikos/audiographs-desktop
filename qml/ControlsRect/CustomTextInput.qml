@@ -37,11 +37,21 @@ TextField {
             window.interestingPoint()
             functionController.previousPointInterest()
             event.accepted = true;
-        }
-
-        if (event.key === Qt.Key_Right  && event.modifiers & Qt.ControlModifier) {
+        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.ControlModifier) {
             window.interestingPoint()
             functionController.nextPointInterest()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_X  && event.modifiers & Qt.ControlModifier) {
+            window.sayX()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Y  && event.modifiers & Qt.ControlModifier) {
+            window.sayY()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_PageDown) {
+            window.previousPoint()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_PageUp) {
+            window.nextPoint()
             event.accepted = true;
         }
     }

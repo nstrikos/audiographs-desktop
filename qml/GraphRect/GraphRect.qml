@@ -83,13 +83,15 @@ Rectangle {
             onWheel: {
                 if (!parameters.exploreMode) {
                     //window.newGraph()
-                    functionExpression.zoom(wheel.angleDelta.y)
+                    if (window.canZoomDrag)
+                        functionExpression.zoom(wheel.angleDelta.y)
                 }
             }
             onPressedChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        functionExpression.startDrag(mouseX, mouseY)
+                        if (window.canZoomDrag)
+                            functionExpression.startDrag(mouseX, mouseY)
                 } else {
                     if (!pressed)
                         functionController.stopAudio()
@@ -98,7 +100,8 @@ Rectangle {
             onPositionChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        functionExpression.drag(mouseX, mouseY, width, height)
+                        if (window.canZoomDrag)
+                            functionExpression.drag(mouseX, mouseY, width, height)
                 } else {
                     if (pressed)
                         functionController.mousePoint(mouseX)

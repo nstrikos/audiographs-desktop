@@ -27,8 +27,8 @@ public:
     Q_INVOKABLE void stopAudio();
     Q_INVOKABLE void nextPoint();
     Q_INVOKABLE void previousPoint();
-    void sayX();
-    void sayY();
+    Q_INVOKABLE void sayX();
+    Q_INVOKABLE void sayY();
     void sayDerivative();
     Q_INVOKABLE void decStep();
     Q_INVOKABLE void incStep();

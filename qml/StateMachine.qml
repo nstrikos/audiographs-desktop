@@ -239,14 +239,11 @@ Item {
                 targetState: errorDisplayState
                 signal: window.playPressed
             }
-            DSM.SignalTransition {
-                targetState: graphReadyState
-                signal: window.newgraph
-            }
             onEntered: {
                 console.log("initial state")
+                window.graphRect.pointView.clear()
+                window.graphRect.graphCanvas.updateCanvas(-10, 10, -10, 10)
                 disableControls()
-                //                window.graphRect.displayView.clear()
             }
         }
 
@@ -254,11 +251,11 @@ Item {
             id: errorDisplayState
             DSM.SignalTransition {
                 targetState: initialState
-                signal: window.init
+                signal: window.errorAccepted
             }
             onEntered: {
                 console.log("error state")
-                window.showError(functionController.getError())
+                window.showError(functionExpression.getError())
             }
         }
 
@@ -303,13 +300,13 @@ Item {
                 signal: playPressed
             }
             DSM.SignalTransition {
-                targetState: exploreState//pointState
+                targetState: exploreState
                 signal: explore
             }
-            //            DSM.SignalTransition {
-            //                targetState: interestingPointState//pointState
-            //                signal: interestingPoint
-            //            }
+            DSM.SignalTransition {
+                targetState: interestingPointState
+                signal: interestingPoint
+            }
             onEntered: {
                 console.log("graph ready state")
                 enableControls()
@@ -326,10 +323,7 @@ Item {
                 targetState: evaluateState
                 signal: window.evaluate
             }
-            DSM.SignalTransition {
-                targetState: initialState
-                signal: error
-            }
+
             DSM.SignalTransition {
                 targetState: graphReadyState
                 signal: stopAudio
@@ -343,13 +337,13 @@ Item {
                 signal: playPressed
             }
             DSM.SignalTransition {
-                targetState: exploreState//pointState
+                targetState: exploreState
                 signal: explore
             }
-            //            DSM.SignalTransition {
-            //                targetState: interestingPointState//pointState
-            //                signal: interestingPoint
-            //            }
+            DSM.SignalTransition {
+                targetState: interestingPointState
+                signal: interestingPoint
+            }
             onEntered: {
                 console.log("play sound state")
                 enableControls()
@@ -359,7 +353,7 @@ Item {
             onExited: {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
                 functionExpression.stopAudio()
-                window.graphRect.pointView.clear()
+                //window.graphRect.pointView.clear()
             }
         }
 
@@ -369,10 +363,7 @@ Item {
                 targetState: evaluateState
                 signal: evaluate
             }
-            DSM.SignalTransition {
-                targetState: initialState
-                signal: error
-            }
+
             DSM.SignalTransition {
                 targetState: playSoundState
                 signal: playPressed
@@ -381,14 +372,25 @@ Item {
                 targetState: graphReadyState
                 signal: newGraph
             }
-            //            DSM.SignalTransition {
-            //                targetState: interestingPointState
-            //                signal: interestingPoint
-            //            }
+//            DSM.SignalTransition {
+//                targetState: exploreState
+//                signal: explore
+//            }
+            DSM.SignalTransition {
+                targetState: interestingPointState
+                signal: interestingPoint
+            }
             onEntered: {
                 console.log("explore state")
                 //functionController.stopAudio()
                 functionExpression.stopAudio()
+            }
+        }
+        DSM.State {
+            id: interestingPointState
+            DSM.SignalTransition {
+                targetState: interestingPointState
+                signal: interestingPoint
             }
         }
 
@@ -397,10 +399,12 @@ Item {
     function disableControls()
     {
         controlsRect.startSoundButton.enabled = false
+        window.canZoomDrag = false
     }
 
     function enableControls()
     {
         controlsRect.startSoundButton.enabled = true
+        window.canZoomDrag = true
     }
 }

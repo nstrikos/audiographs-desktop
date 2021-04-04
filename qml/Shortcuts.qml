@@ -8,32 +8,29 @@ Item {
         onActivated: close()
     }
     Shortcut {
-        sequence: "F2"
-        onActivated: window.playPressed()
+        sequence: "Return"
+        onActivated: {
+            window.playPressed()
+        }
     }
     Shortcut {
-        sequence: "Ctrl+Space"
-        onActivated: window.playPressed()
-    }
-    Shortcut {
-        sequence: "Shift+F2"
+        sequence: "Ctrl+N"
         onActivated: {
             controlsRect.textInput.clear()
             controlsRect.textInput.forceActiveFocus()
+            window.evaluate()
         }
     }
     Shortcut {
-        sequence: "F3"
+        sequence: "Ctrl+X"
         onActivated: {
-            window.stopAudio()
-            functionController.sayXCoordinate()
+            window.sayX()
         }
     }
     Shortcut {
-        sequence: "Ctrl+Down"
+        sequence: "Ctrl+Y"
         onActivated: {
-            window.stopAudio()
-            functionController.sayXCoordinate()
+            window.sayY()
         }
     }
     Shortcut {
@@ -150,13 +147,13 @@ Item {
     Shortcut {
         sequence: StandardKey.MoveToPreviousPage
         onActivated: {
-            functionController.firstPoint()
+            window.nextPoint()
         }
     }
     Shortcut {
         sequence: StandardKey.MoveToNextPage
         onActivated: {
-            functionController.endPoint()
+            window.previousPoint()
         }
     }
     Shortcut {
