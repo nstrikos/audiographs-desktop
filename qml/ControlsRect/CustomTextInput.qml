@@ -33,15 +33,7 @@ TextField {
     Accessible.name: qsTr("Set minimum x")
 
     Keys.onPressed: {
-        if (event.key === Qt.Key_Left  && event.modifiers & Qt.ControlModifier) {
-            window.interestingPoint()
-            functionController.previousPointInterest()
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.ControlModifier) {
-            window.interestingPoint()
-            functionController.nextPointInterest()
-            event.accepted = true;
-        } else if (event.key === Qt.Key_X  && event.modifiers & Qt.ControlModifier) {
+        if (event.key === Qt.Key_X  && event.modifiers & Qt.ControlModifier) {
             window.sayX()
             event.accepted = true;
         } else if (event.key === Qt.Key_Y  && event.modifiers & Qt.ControlModifier) {
@@ -52,6 +44,24 @@ TextField {
             event.accepted = true;
         } else if (event.key === Qt.Key_PageUp) {
             window.nextPoint()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Left  && event.modifiers & Qt.ControlModifier) {
+            window.previousPointInterest()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.ControlModifier) {
+            window.nextPointInterest()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Left  && event.modifiers & Qt.AltModifier) {
+            window.previousFast()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.AltModifier) {
+            window.nextFast()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Home) {
+            window.firstPoint()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_End) {
+            window.lastPoint()
             event.accepted = true;
         }
     }

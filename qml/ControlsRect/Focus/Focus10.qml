@@ -11,15 +11,14 @@ FocusScope {
     height: 50
     
     activeFocusOnTab: true
-    Accessible.name: qsTr("Next point sound only")
+    Accessible.name: qsTr("Last point")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.explore()
-        functionController.nextPoint()
+        window.lastPoint()
     }
     
     Rectangle {
@@ -29,7 +28,7 @@ FocusScope {
         border.color: focus10.activeFocus ? lightColor : "light gray"
         border.width: focus10.activeFocus ? 2 : 1
         property bool checked: true
-        property var text: "Next point sound only"
+        property var text: "Last point"
         
         signal clicked()
         

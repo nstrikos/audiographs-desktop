@@ -10,15 +10,14 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Previous point of interest fast mode")
+    Accessible.name: qsTr("Previous point fast mode")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.interestingPoint()
-        functionController.previousPointInterestFast()
+        window.previousFast()
     }
     
     Rectangle {
@@ -28,7 +27,7 @@ FocusScope {
         border.color: focus7.activeFocus ? lightColor : "light gray"
         border.width: focus7.activeFocus ? 2 : 1
         property bool checked: true
-        property var text: "Previous point of interest fast mode"
+        property var text: "Previous point (fast)"
         
         signal clicked()
         

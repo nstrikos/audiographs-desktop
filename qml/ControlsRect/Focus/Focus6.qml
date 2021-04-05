@@ -17,8 +17,7 @@ FocusScope {
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.interestingPoint()
-        functionController.nextPointInterest()
+        window.nextPointInterest()
     }
     
     Rectangle {

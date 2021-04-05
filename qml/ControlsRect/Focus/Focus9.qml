@@ -11,15 +11,14 @@ FocusScope {
     anchors.rightMargin: 15
     
     activeFocusOnTab: true
-    Accessible.name: qsTr("Previous point sound only")
+    Accessible.name: qsTr("First point")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()
     Keys.onReturnPressed: pressed()
 
     function pressed() {
-        window.explore()
-        functionController.previousPoint()
+        window.firstPoint()
     }
     
     Rectangle {
@@ -29,7 +28,7 @@ FocusScope {
         border.color: focus9.activeFocus ? lightColor : "light gray"
         border.width: focus9.activeFocus ? 2 : 1
         property bool checked: true
-        property var text: "Previous point sound only"
+        property var text: "First point"
         
         signal clicked()
         

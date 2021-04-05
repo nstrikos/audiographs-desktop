@@ -277,7 +277,6 @@ Item {
                                              controlsRect.textInput3.text,
                                              controlsRect.textInput4.text,
                                              controlsRect.textInput5.text)
-                controlsRect.startSoundButton.enabled = false
             }
         }
 
@@ -372,10 +371,6 @@ Item {
                 targetState: graphReadyState
                 signal: newGraph
             }
-//            DSM.SignalTransition {
-//                targetState: exploreState
-//                signal: explore
-//            }
             DSM.SignalTransition {
                 targetState: interestingPointState
                 signal: interestingPoint
@@ -389,8 +384,62 @@ Item {
         DSM.State {
             id: interestingPointState
             DSM.SignalTransition {
+                targetState: evaluateState
+                signal: evaluate
+            }
+
+            DSM.SignalTransition {
+                targetState: exploreState
+                signal: playPressed
+            }
+            DSM.SignalTransition {
+                targetState: graphReadyState
+                signal: newGraph
+            }
+            DSM.SignalTransition {
+                targetState: exploreState
+                signal: explore
+            }
+            DSM.SignalTransition {
+                targetState: interestingPointStoppedState
+                signal: interestingPointFinished
+            }
+            onEntered: {
+                console.log("interesting point state")
+                controlsRect.startSoundButton.text = qsTr("Stop sound")
+            }
+            onExited: {
+                controlsRect.startSoundButton.text = qsTr("Start sound")
+                functionExpression.stopAudio()
+            }
+        }
+
+        DSM.State {
+            id: interestingPointStoppedState
+            DSM.SignalTransition {
+                targetState: evaluateState
+                signal: evaluate
+            }
+
+            DSM.SignalTransition {
+                targetState: exploreState
+                signal: playPressed
+            }
+            DSM.SignalTransition {
+                targetState: graphReadyState
+                signal: newGraph
+            }
+            DSM.SignalTransition {
+                targetState: exploreState
+                signal: explore
+            }
+            DSM.SignalTransition {
                 targetState: interestingPointState
                 signal: interestingPoint
+            }
+            onEntered: {
+                console.log("interesting point finished")
+                controlsRect.startSoundButton.text = qsTr("Start sound")
             }
         }
 

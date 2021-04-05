@@ -32,12 +32,12 @@ public:
     void sayDerivative();
     Q_INVOKABLE void decStep();
     Q_INVOKABLE void incStep();
-    void previousPointInterest();
-    void nextPointInterest();
-    void previousFast();
-    void nextFast();
-    void firstPoint();
-    void lastPoint();
+    Q_INVOKABLE void previousPointInterest();
+    Q_INVOKABLE void nextPointInterest();
+    Q_INVOKABLE void previousFast();
+    Q_INVOKABLE void nextFast();
+    Q_INVOKABLE void firstPoint();
+    Q_INVOKABLE void lastPoint();
     void setDerivativeMode(int mode);
 
 public slots:

@@ -35,6 +35,7 @@ Window {
     signal errorAccepted()
     signal explore()
     signal interestingPoint()
+    signal interestingPointFinished()
 
 
 
@@ -107,14 +108,14 @@ Window {
         id: stateMachine
     }
 
-//    Connections {
-//        target: functionExpression
-//        onNewGraph: newGraph()
-//        onNewInputValues: controlsRect.newInputValues(minX, maxX, minY, maxY)
-//        onMovingPointFinished: stopAudio()
-//        onInterestingPointStopped: interestingPointStopped()
-//        onError: error()
-//    }
+    //    Connections {
+    //        target: functionExpression
+    //        onNewGraph: newGraph()
+    //        onNewInputValues: controlsRect.newInputValues(minX, maxX, minY, maxY)
+    //        onMovingPointFinished: stopAudio()
+    //        onInterestingPointStopped: interestingPointStopped()
+    //        onError: error()
+    //    }
 
     Connections {
         target: functionExpression
@@ -141,12 +142,12 @@ Window {
         }
     }
 
-//    Connections {
-//        target: functionController
-//        function onMovingPointFinished() {
-//            stopAudio()
-//        }
-//    }
+    Connections {
+        target: functionExpression
+        function onInterestingPointFinished() {
+            interestingPointFinished()
+        }
+    }
 
     Connections {
         target: functionExpression
@@ -167,8 +168,8 @@ Window {
         text: title//"It's so cool that you are using Qt Quick."
         onAccepted: visible = false
         Component.onCompleted: visible = false
-//        Accessible.name: qsTr("Error")
-//        Accessible.description: qsTr("Error")
+        //        Accessible.name: qsTr("Error")
+        //        Accessible.description: qsTr("Error")
     }
 
     Timer {
@@ -211,4 +212,55 @@ Window {
             functionExpression.nextPoint()
         }
     }
+
+    function previousPointInterest()
+    {
+        if (window.canZoomDrag) {
+            window.interestingPoint()
+            functionExpression.previousPointInterest()
+        }
+    }
+
+    function nextPointInterest()
+    {
+        if (window.canZoomDrag) {
+            window.interestingPoint()
+            functionExpression.nextPointInterest()
+        }
+    }
+
+    function previousFast()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.previousFast()
+        }
+    }
+
+    function nextFast()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.nextFast()
+        }
+    }
+
+    function firstPoint()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.firstPoint()
+        }
+    }
+
+    function lastPoint()
+    {
+        if (window.canZoomDrag) {
+            window.explore()
+            functionExpression.lastPoint()
+        }
+    }
+
+
+
 }
