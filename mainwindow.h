@@ -73,7 +73,7 @@ signals:
 public slots:
     void updateGraph(Points *points, double minX, double maxX, double minY, double maxY);
     void newInputValues(double minX, double maxX, double minY, double maxY);
-    void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void updateDerivative(Points *points, double minX, double maxX, double minY, double maxY);
 
     void error(QString errorString);
 
@@ -201,7 +201,7 @@ private:
     playSoundState, exploreState, interestingPointState, interestingPointStoppedState;
 
     Points *m_points;
-    QVector<Point> *m_derivPoints;
+    Points *m_derivPoints;
     double m_minX, m_maxX, m_minY, m_maxY;
 
     bool m_mousePressed = false;

@@ -261,6 +261,17 @@ Window {
         }
     }
 
+    function sayDerivative()
+    {
+        if (window.canZoomDrag) {
+            functionExpression.sayDerivative()
+        }
+    }
 
-
+    function firstDerivative()
+    {
+        if (window.canZoomDrag) {
+            functionExpression.setDerivativeMode(1)
+        }
+    }
 }

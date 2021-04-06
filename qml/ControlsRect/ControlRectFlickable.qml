@@ -10,7 +10,7 @@ Flickable {
     anchors.top: controlsTitleBar.bottom
     anchors.topMargin: 40
     anchors.bottom: parent.bottom
-    contentHeight: 870
+    contentHeight: 970
     clip: true
 
     property alias textInput: textInput
@@ -266,6 +266,22 @@ Flickable {
 
         Focus12 {
             id: focus12
+        }
+
+        Focus13 {
+            id: focus13
+        }
+
+        Focus14 {
+            id: focus14
+        }
+
+        Focus15 {
+            id: focus15
+        }
+
+        Focus16 {
+            id: focus16
         }
     }
 }

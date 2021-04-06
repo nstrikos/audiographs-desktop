@@ -619,7 +619,7 @@ void MainWindow::newInputValues(double minX, double maxX, double minY, double ma
     ui->maxYLineEdit->setText(QString::number(maxY));
 }
 
-void MainWindow::updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY)
+void MainWindow::updateDerivative(Points *points, double minX, double maxX, double minY, double maxY)
 {
     m_derivPoints = points;
     m_minX = minX;

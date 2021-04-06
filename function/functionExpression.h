@@ -29,7 +29,7 @@ public:
     Q_INVOKABLE void previousPoint();
     Q_INVOKABLE void sayX();
     Q_INVOKABLE void sayY();
-    void sayDerivative();
+    Q_INVOKABLE void sayDerivative();
     Q_INVOKABLE void decStep();
     Q_INVOKABLE void incStep();
     Q_INVOKABLE void previousPointInterest();
@@ -38,7 +38,7 @@ public:
     Q_INVOKABLE void nextFast();
     Q_INVOKABLE void firstPoint();
     Q_INVOKABLE void lastPoint();
-    void setDerivativeMode(int mode);
+    Q_INVOKABLE void setDerivativeMode(int mode);
 
 public slots:
     Q_INVOKABLE void startDrag(int x, int y);
@@ -51,7 +51,7 @@ signals:
     void error(QString errorString);
     void newGraph(Points *points, double minX, double maxX, double minY, double maxY);
     void newInputValues(double minX, double maxX, double minY, double maxY);
-    void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void updateDerivative(Points *points, double minX, double maxX, double minY, double maxY);
     void audioFinished();
     void newCurrentPoint(double x, double y);
     void interestingPointFinished();

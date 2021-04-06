@@ -81,6 +81,14 @@ Item {
             window.lastPoint()
         }
     }
+    Shortcut {
+        sequence: "Ctrl+D"
+        onActivated: {
+            window.sayDerivative()
+        }
+    }
+
+
 
     Shortcut {
         sequence: "F11"
@@ -98,13 +106,6 @@ Item {
         sequence: "Ctrl+F12"
         onActivated: {
             window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked = !window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked
-        }
-    }
-
-    Shortcut {
-        sequence: "Ctrl+D"
-        onActivated: {
-            functionController.setMode()
         }
     }
 }

@@ -64,5 +64,9 @@
         <file>qml/Shortcuts.qml</file>
         <file>qml/SpeechSettings.qml</file>
         <file>qml/StateMachine.qml</file>
+        <file>qml/ControlsRect/Focus/Focus13.qml</file>
+        <file>qml/ControlsRect/Focus/Focus14.qml</file>
+        <file>qml/ControlsRect/Focus/Focus15.qml</file>
+        <file>qml/ControlsRect/Focus/Focus16.qml</file>
     </qresource>
 </RCC>

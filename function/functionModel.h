@@ -40,7 +40,7 @@ public:
     void calculateSecondDerivative();
     void refreshDerivative();
 
-    double derivative(int i) const;
+    double derivative(int i);
 
     double minDerivValue() const;
 
@@ -51,7 +51,7 @@ public:
 signals:
     void error(QString);
     void newGraph(Points *points, double minX, double maxX, double minY, double maxY);
-    void updateDerivative(QVector<Point> *points, double minX, double maxX, double minY, double maxY);
+    void updateDerivative(Points *points, double minX, double maxX, double minY, double maxY);
 
 private:
     void replaceConstants();
@@ -89,7 +89,7 @@ private:
     //QVector<Point> m_points;
     //array<Point,10000>m_points;
     Points m_points;
-    QVector<Point> m_derivPoints;
+    Points m_derivPoints;
 };
 
 #endif // FUNCTIONMODEL_H

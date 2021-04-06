@@ -22,7 +22,7 @@ public:
                      double yMin,
                      double yMax);
 
-    void updateDerivative(QVector<Point> *points,
+    void updateDerivative(Points *points,
                           double xMin,
                           double xMax,
                           double yMin,
@@ -67,7 +67,7 @@ private:
     Points *m_points;
     QVector<Point> m_coordPoints;
 
-    QVector<Point> *m_derivPoints;
+    Points *m_derivPoints;
     QVector<Point> m_derivCoordPoints;
 
     QVector<int> m_xGridCoords;

@@ -63,6 +63,9 @@ TextField {
         } else if (event.key === Qt.Key_End) {
             window.lastPoint()
             event.accepted = true;
+        } else if (event.key === Qt.Key_D  && event.modifiers & Qt.ControlModifier) {
+            window.sayDerivative()
+            event.accepted = true;
         }
     }
 }
