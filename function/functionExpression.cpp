@@ -71,13 +71,13 @@ void FunctionExpression::startDrag(int x, int y)
 
 void FunctionExpression::drag(int diffX, int diffY, int width, int height)
 {
-    m_dragHandler->drag(functionModel, diffX, diffY, width, height);
+    m_dragHandler->drag(functionModel, diffX, diffY, width, height, m_derivativeMode);
 }
 
 void FunctionExpression::zoom(double delta)
 {
     m_currentPoint->reset();
-    m_zoomer->zoom(functionModel, delta);
+    m_zoomer->zoom(functionModel, delta, m_derivativeMode);
 }
 
 void FunctionExpression::startPinch()

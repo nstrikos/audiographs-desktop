@@ -28,21 +28,19 @@ Rectangle {
             } else if (request === "background color") {
                 parameters.backgroundColor = color
                 backgroundColor = color
-                graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
-                                                   controlsRect.textInput3.text,
-                                                   controlsRect.textInput4.text,
-                                                   controlsRect.textInput5.text)
+                graphRect.updateCanvas()
             } else if (request === "axes color") {
                 parameters.axesColor = color
                 axesColor = color
-                graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
-                                                   controlsRect.textInput3.text,
-                                                   controlsRect.textInput4.text,
-                                                   controlsRect.textInput5.text)
+                graphRect.updateCanvas()
             } else if (request === "highlight color") {
                 parameters.highlightColor = color
                 highlightColor = color
                 graphRect.highlightColor = color
+            } else if (request === "derivative color") {
+                parameters.derivColor = color
+                derivativeColor = color
+                graphRect.derivativeColor = color
             }
         }
     }
@@ -56,6 +54,8 @@ Rectangle {
             colorDialog.color = parameters.axesColor
         } else if (request === "highlight color") {
             colorDialog.color = parameters.highlightColor
+        } else if (request === "derivative color") {
+            colorDialog.color = parameters.derivColor
         }
 
         colorDialog.request = request
@@ -113,6 +113,12 @@ Rectangle {
         }
         ShowAxesFocusScope {
             id: showAxesFocusScope
+        }
+        Label10 {
+            id: label10
+        }
+        DerivativeColorFocusScope {
+            id: derivativeColorFocusScope
         }
         Label9 {
             id: label9

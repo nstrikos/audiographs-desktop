@@ -88,18 +88,37 @@ Item {
         }
     }
 
-
+    Shortcut {
+        sequence: "Ctrl+0"
+        onActivated: {
+            window.normalDerivative()
+        }
+    }
 
     Shortcut {
-        sequence: "F11"
+        sequence: "Ctrl+1"
         onActivated: {
-            functionController.decStep()
+            window.firstDerivative()
+        }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+2"
+        onActivated: {
+            window.secondDerivative()
+        }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+["
+        onActivated: {
+            functionExpression.decStep()
         }
     }
     Shortcut {
-        sequence: "F12"
+        sequence: "Ctrl+]"
         onActivated: {
-            functionController.incStep()
+            functionExpression.incStep()
         }
     }
     Shortcut {

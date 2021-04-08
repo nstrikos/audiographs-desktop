@@ -68,5 +68,7 @@
         <file>qml/ControlsRect/Focus/Focus14.qml</file>
         <file>qml/ControlsRect/Focus/Focus15.qml</file>
         <file>qml/ControlsRect/Focus/Focus16.qml</file>
+        <file>qml/SettingsRect/GraphSettings/DerivativeColorFocusScope.qml</file>
+        <file>qml/SettingsRect/GraphSettings/Label10.qml</file>
     </qresource>
 </RCC>

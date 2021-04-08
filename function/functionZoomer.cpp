@@ -6,7 +6,7 @@ FunctionZoomer::FunctionZoomer(QObject *parent) : QObject(parent)
 
 }
 
-void FunctionZoomer::zoom(FunctionModel &model, double delta)
+void FunctionZoomer::zoom(FunctionModel &model, double delta, int derivMode)
 {
     //    if (!model.validExpression())
     //        return;
@@ -17,10 +17,10 @@ void FunctionZoomer::zoom(FunctionModel &model, double delta)
     else
         factor = 0.9;
 
-    performZoom(model, factor);
+    performZoom(model, factor, derivMode);
 }
 
-void FunctionZoomer::performZoom(FunctionModel &model, double factor)
+void FunctionZoomer::performZoom(FunctionModel &model, double factor, int derivMode)
 {
     double minX = model.minX();
     double maxX = model.maxX();
@@ -90,6 +90,11 @@ void FunctionZoomer::performZoom(FunctionModel &model, double factor)
                     QString::number(newMaxX),
                     QString::number(newMinY),
                     QString::number(newMaxY));
+
+    if (derivMode == 1)
+        model.calculateDerivative();
+    else if (derivMode == 2)
+        model.calculateSecondDerivative();
 
     emit newInputValues(minX, maxX, minY, maxY);
 }

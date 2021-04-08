@@ -66,6 +66,21 @@ TextField {
         } else if (event.key === Qt.Key_D  && event.modifiers & Qt.ControlModifier) {
             window.sayDerivative()
             event.accepted = true;
+        } else if (event.key === Qt.Key_0  && event.modifiers & Qt.ControlModifier) {
+            window.normalDerivative()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_1  && event.modifiers & Qt.ControlModifier) {
+            window.firstDerivative()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_2  && event.modifiers & Qt.ControlModifier) {
+            window.secondDerivative()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_BracketLeft  && event.modifiers & Qt.ControlModifier) {
+            functionExpression.decStep()
+            event.accepted = true;
+        } else if (event.key === Qt.Key_BracketRight  && event.modifiers & Qt.ControlModifier) {
+            functionExpression.incStep()
+            event.accepted = true;
         }
     }
 }

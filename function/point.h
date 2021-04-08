@@ -27,7 +27,6 @@ public:
     double yAt(int i);
     bool validAt(int i);
 
-
 private:
     array<Point, 10000> m_points;
 };

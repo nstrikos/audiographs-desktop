@@ -19,7 +19,7 @@ void DragHandler::startDrag(FunctionModel &model, int x, int y)
     m_maxY = model.maxY();
 }
 
-void DragHandler::drag(FunctionModel &model, int diffX, int diffY, int width, int height)
+void DragHandler::drag(FunctionModel &model, int diffX, int diffY, int width, int height, int derivMode)
 {
     if (!model.validExpression())
         return;
@@ -63,11 +63,16 @@ void DragHandler::drag(FunctionModel &model, int diffX, int diffY, int width, in
     }
 
 
-//    //we update with the rounded values
+    //    //we update with the rounded values
     model.calculate(model.expression(),
                     QString::number(newMinX),
                     QString::number(newMaxX),
                     QString::number(newMinY),
                     QString::number(newMaxY));
+
+    if (derivMode == 1)
+        model.calculateDerivative();
+    else if (derivMode == 2)
+        model.calculateSecondDerivative();
     emit newInputValues(newMinX, newMaxX, newMinY, newMaxY);
 }

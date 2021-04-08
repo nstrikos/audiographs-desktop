@@ -14,6 +14,7 @@ Rectangle {
     property color backgroundColor: parameters.backgroundColor
     property color highlightColor: parameters.highlightColor
     property color axesColor: parameters.axesColor
+    property color derivativeColor: parameters.derivColor
 
     property alias audioSettingsTab: audioSettingsTab
 

@@ -11,7 +11,7 @@ class DragHandler : public QObject
 public:
     DragHandler();
     void startDrag(FunctionModel &model, int x, int y);
-    void drag(FunctionModel &model, int diffX, int diffY, int width, int height);
+    void drag(FunctionModel &model, int diffX, int diffY, int width, int height, int derivMode);
 
 signals:
     void newInputValues(double minX, double maxX, double minY, double maxY);

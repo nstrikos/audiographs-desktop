@@ -29,3 +29,4 @@ bool Points::validAt(int i)
 {
     return m_points.at(i).isValid;
 }
+

@@ -12,6 +12,7 @@ FunctionDisplayView::FunctionDisplayView(QQuickItem *parent)
     m_newColor = m_color;
     m_lineWidth = 10;
     m_factor = 1;
+    m_update = true;
 }
 
 FunctionDisplayView::~FunctionDisplayView()
@@ -21,6 +22,9 @@ FunctionDisplayView::~FunctionDisplayView()
 
 void FunctionDisplayView::updateView()
 {
+    if (m_update == false)
+        return;
+
     calcCoords(this->width(), this->height());
     update();
 }
@@ -31,6 +35,9 @@ void FunctionDisplayView::draw(Points *points,
                                double yMin,
                                double yMax)
 {
+    if (m_update == false)
+        return;
+
     m_points = points;
     m_xMin = xMin;
     m_xMax = xMax;
@@ -211,6 +218,11 @@ QSGNode *FunctionDisplayView::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeD
     node->markDirty(QSGNode::DirtyGeometry);
     m_newColor = m_color;
     return node;
+}
+
+void FunctionDisplayView::setUpdate(bool update)
+{
+    m_update = update;
 }
 
 int FunctionDisplayView::lineWidth() const

@@ -241,9 +241,11 @@ Item {
             }
             onEntered: {
                 console.log("initial state")
+                functionExpression.setDerivativeMode(0)
                 window.graphRect.pointView.clear()
+                window.graphRect.derivativeView.setUpdate(false);
                 window.graphRect.graphCanvas.updateCanvas(-10, 10, -10, 10)
-                disableControls()
+                disableControls()               
             }
         }
 
@@ -272,6 +274,8 @@ Item {
             onEntered: {
                 console.log("evaluate state")
                 disableControls()
+                functionExpression.setDerivativeMode(0)
+                window.graphRect.derivativeView.setUpdate(false);
                 functionExpression.calculate(controlsRect.textInput.text,
                                              controlsRect.textInput2.text,
                                              controlsRect.textInput3.text,

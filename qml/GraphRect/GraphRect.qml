@@ -21,16 +21,19 @@ Rectangle {
 
     property alias displayView: displayView
     property alias pointView: pointView
+    property alias derivativeView: derivativeView
 
     property var graphCanvas: graphCanvas
     property color curveColor: parameters.lineColor
     property var curveWidth: parameters.lineWidth
     property color highlightColor: parameters.highlightColor
+    property color derivativeColor: parameters.derivColor
     property var highlightSize: parameters.highlightSize
 
     onCurveColorChanged: displayView.color = curveColor
     onCurveWidthChanged: displayView.lineWidth = curveWidth
     onHighlightColorChanged: pointView.color = highlightColor
+    onDerivativeColorChanged: derivativeView.color = derivativeColor
     onHighlightSizeChanged: pointView.size = highlightSize
 
     GraphCanvas {
@@ -118,6 +121,7 @@ Rectangle {
         graphCanvas.updateCanvas(minX, maxX, minY, maxY)
         //functionController.viewDimensionsChanged()
         displayView.updateView()
+        derivativeView.updateView()
     }
 
     BeautifyGraphRect {

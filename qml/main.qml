@@ -268,10 +268,31 @@ Window {
         }
     }
 
+    function normalDerivative()
+    {
+        if (window.canZoomDrag) {
+            window.graphRect.derivativeView.setUpdate(false);
+            window.graphRect.derivativeView.clear()
+            functionExpression.setDerivativeMode(0)
+            newGraph()
+        }
+    }
+
     function firstDerivative()
     {
         if (window.canZoomDrag) {
+            window.graphRect.derivativeView.setUpdate(true);
             functionExpression.setDerivativeMode(1)
+            newGraph()
+        }
+    }
+
+    function secondDerivative()
+    {
+        if (window.canZoomDrag) {
+            window.graphRect.derivativeView.setUpdate(true);
+            functionExpression.setDerivativeMode(2)
+            newGraph()
         }
     }
 }

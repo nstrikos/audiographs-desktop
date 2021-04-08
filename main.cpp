@@ -85,6 +85,8 @@ int main(int argc, char *argv[])
 
         FunctionDisplayView *derivativeView = static_cast<FunctionDisplayView*>(qmlDerivativeView);
         QObject::connect(&functionExpression, &FunctionExpression::updateDerivative, derivativeView, &FunctionDisplayView::draw);
+        QObject::connect(&functionExpression, &FunctionExpression::error, derivativeView, &FunctionDisplayView::clear);
+
 //        QObject::connect(&functionExpression, &FunctionExpression::newCurrentPoint, pointView, &FunctionPointView::setCurrentPoint);
 
         //            FunctionDisplayView *derivativeView = static_cast<FunctionDisplayView*>(qmlDerivativeView);

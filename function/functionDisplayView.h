@@ -26,13 +26,15 @@ public:
     int lineWidth() const;
     void setLineWidth(int lineWidth);
 
+    Q_INVOKABLE void setUpdate(bool update);
+
 public slots:
     void draw(Points *points,
               double xMin,
               double xMax,
               double yMin,
               double yMax);
-    void clear();
+    Q_INVOKABLE void clear();
 
 
 private:
@@ -41,6 +43,7 @@ private:
     QColor m_newColor;
     int m_lineWidth;
     int m_factor;
+    bool m_update;
 };
 
 #endif // FUNCTIONDISPLAYVIEW_H
