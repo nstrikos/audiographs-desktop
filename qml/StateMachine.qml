@@ -257,7 +257,7 @@ Item {
             }
             onEntered: {
                 console.log("error state")
-                window.showError(functionExpression.getError())
+                //window.showError(functionExpression.getError())
             }
         }
 

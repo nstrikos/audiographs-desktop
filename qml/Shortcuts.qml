@@ -122,9 +122,15 @@ Item {
         }
     }
     Shortcut {
-        sequence: "Ctrl+F12"
+        sequence: "F12"
         onActivated: {
             window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked = !window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked
+        }
+    }
+    Shortcut {
+        sequence: "F11"
+        onActivated: {
+            window.settingsRect.audioSettingsTab.useDifferentNotesFocusScope.useDifferentNotesCheckBox.checked = !window.settingsRect.audioSettingsTab.useDifferentNotesFocusScope.useDifferentNotesCheckBox.checked
         }
     }
 }

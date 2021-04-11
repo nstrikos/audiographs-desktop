@@ -19,6 +19,8 @@ Rectangle {
     property color bgColor: !parameters.invertTheme ? "white" : "black"
 
     property alias useNotesFocusScope: useNotesFocusScope
+    property alias useDifferentNotesFocusScope: useDifferentNotesFocusScope
+
 
     Flickable {
         anchors.fill: parent
@@ -64,6 +66,14 @@ Rectangle {
         UseNotesFocusScope {
             id: useNotesFocusScope
         }
+        Label6 {
+            id: label6
+        }
+        UseDifferentNotesFocusScope {
+            id: useDifferentNotesFocusScope
+        }
+
+
         Label5 {
             id: label5
         }

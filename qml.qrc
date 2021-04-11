@@ -70,5 +70,7 @@
         <file>qml/ControlsRect/Focus/Focus16.qml</file>
         <file>qml/SettingsRect/GraphSettings/DerivativeColorFocusScope.qml</file>
         <file>qml/SettingsRect/GraphSettings/Label10.qml</file>
+        <file>qml/SettingsRect/AudioSettings/Label6.qml</file>
+        <file>qml/SettingsRect/AudioSettings/UseDifferentNotesFocusScope.qml</file>
     </qresource>
 </RCC>
