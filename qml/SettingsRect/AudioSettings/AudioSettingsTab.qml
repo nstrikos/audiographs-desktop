@@ -72,8 +72,6 @@ Rectangle {
         UseDifferentNotesFocusScope {
             id: useDifferentNotesFocusScope
         }
-
-
         Label5 {
             id: label5
         }

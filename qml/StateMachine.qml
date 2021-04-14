@@ -235,10 +235,10 @@ Item {
                 targetState: evaluateState
                 signal: window.evaluate
             }
-            DSM.SignalTransition {
-                targetState: errorDisplayState
-                signal: window.playPressed
-            }
+//            DSM.SignalTransition {
+//                targetState: errorDisplayState
+//                signal: window.playPressed
+//            }
             onEntered: {
                 console.log("initial state")
                 functionExpression.setDerivativeMode(0)

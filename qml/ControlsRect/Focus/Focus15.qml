@@ -24,8 +24,8 @@ FocusScope {
         id: rect15
         anchors.fill: parent
         color: bgColor
-        border.color: focus11.activeFocus ? lightColor : "light gray"
-        border.width: focus11.activeFocus ? 2 : 1
+        border.color: focus15.activeFocus ? lightColor : "light gray"
+        border.width: focus15.activeFocus ? 2 : 1
         property bool checked: true
         property var text: "First derivative"
 

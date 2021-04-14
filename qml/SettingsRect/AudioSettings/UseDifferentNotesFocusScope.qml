@@ -23,8 +23,8 @@ FocusScope {
         anchors.fill: parent
         color: bgColor
         property bool checked: parameters.useNegativeNotes
-        border.color: useDifferentNotesCheckBox.activeFocus ? lightColor : "light gray"
-        border.width: useDifferentNotesCheckBox.activeFocus ? 2 : 1
+        border.color: useDifferentNotesFocusScope.activeFocus ? lightColor : "light gray"
+        border.width: useDifferentNotesFocusScope.activeFocus ? 2 : 1
         Text {
             text: useDifferentNotesCheckBox.checked ? qsTr("On") : qsTr("Off")
             anchors.centerIn: parent
