@@ -21,15 +21,23 @@ Flickable {
     property alias startSoundButton: startButtonFocusScope.startSoundButton
     property alias startSoundButtonFocusScope: startButtonFocusScope
 
-    onContentYChanged: {
+    ScrollBar.vertical: ScrollBar {
+        id: scrollBar
+        active: true
+    }
+
+    onMovementEnded: scrollBar.active = true
+
+//    onContentYChanged: {
         //        ensureVisible(textInput)
         //        ensureVisible(textInput2)
         //        ensureVisible(textInput3)
         //        ensureVisible(textInput4)
         //        ensureVisible(textInput5)
-    }
+//    }
     
     function ensureVisible(item) {
+//        scrollBar.active = true
         var ypos = item.mapToItem(contentItem, 0, 0).y
         var ext = item.height + ypos
         if ( ypos < contentY // begins before
@@ -37,12 +45,12 @@ Flickable {
                 || ext < contentY // ends before
                 || ext > contentY + height) { // ends after
             //            // don't exceed bounds
-            //            //contentY = Math.max(0, Math.min(ypos - height + item.height, contentHeight - height))
+            contentY = Math.max(0, Math.min(ypos - height + item.height, contentHeight - height))
             //            console.log(item.id, "not visible")
-            item.enabled = false
+//            item.enabled = false
         } else {
             //            console.log(item.id, "visible")
-            item.enabled = true
+//            item.enabled = true
         }
     }
     
@@ -67,7 +75,7 @@ Flickable {
             anchors.verticalCenter: label1.verticalCenter
             anchors.rightMargin: 50
             placeholderText: (parent.width > 0) ? "Function expression" : ""
-            onFocusChanged: ensureVisible(textInput)
+            onFocusChanged: controlRectFlickable.ensureVisible(textInput)
             Accessible.name: qsTr("Function expression")
             onTextChanged: {
                 controlsRect.active = false
@@ -87,6 +95,7 @@ Flickable {
             anchors.rightMargin: 10
             anchors.top: textInput.top
             anchors.bottom: textInput.bottom
+            onFocusChanged: controlRectFlickable.ensureVisible(clearExpressionFocusScope)
 
             activeFocusOnTab: true
             Accessible.name: qsTr("Clear expression")
@@ -142,6 +151,7 @@ Flickable {
                 if (controlsRect.active)
                     evaluate()
             }
+            onFocusChanged: controlRectFlickable.ensureVisible(textInput2)
         }
         
         Label {
@@ -160,7 +170,7 @@ Flickable {
             anchors.left: label3.right
             anchors.verticalCenter: label3.verticalCenter
             placeholderText: (parent.width > 0) ? "maximum X" : ""
-            onFocusChanged: ensureVisible(textInput3)
+            onFocusChanged: controlRectFlickable.ensureVisible(textInput3)
             Accessible.name: qsTr("Set maximum x")
             onTextChanged: {
                 if (controlsRect.active)
@@ -184,7 +194,7 @@ Flickable {
             anchors.left: label4.right
             anchors.verticalCenter: label4.verticalCenter
             placeholderText: (parent.width > 0) ? "minimum Y" : ""
-            onFocusChanged: ensureVisible(textInput4)
+            onFocusChanged: controlRectFlickable.ensureVisible(textInput4)
             Accessible.name: qsTr("Set minimum Y")
             onTextChanged: {
                 if (controlsRect.active)
@@ -208,7 +218,7 @@ Flickable {
             anchors.left: label5.right
             anchors.verticalCenter: label5.verticalCenter
             placeholderText: (parent.width > 0) ? "maximum Y" : ""
-            onFocusChanged: ensureVisible(textInput5)
+            onFocusChanged: controlRectFlickable.ensureVisible(textInput5)
             Accessible.name: qsTr("Set maximum Y")
             onTextChanged: {
                 if (controlsRect.active)
@@ -218,70 +228,91 @@ Flickable {
         
         StartButtonFocusScope {
             id: startButtonFocusScope
+            onFocusChanged: controlRectFlickable.ensureVisible(startButtonFocusScope)
         }
 
         Focus1 {
             id: focus1
+            onFocusChanged: controlRectFlickable.ensureVisible(focus1)
         }
 
         Focus2 {
             id: focus2
+            onFocusChanged: controlRectFlickable.ensureVisible(focus2)
         }
 
         Focus3 {
             id: focus3
+            onFocusChanged: controlRectFlickable.ensureVisible(focus3)
         }
 
         Focus4 {
             id: focus4
+            onFocusChanged: controlRectFlickable.ensureVisible(focus4)
         }
 
         Focus5 {
             id: focus5
+            onFocusChanged: controlRectFlickable.ensureVisible(focus5)
         }
 
         Focus6 {
             id: focus6
+            onFocusChanged: controlRectFlickable.ensureVisible(focus6)
         }
 
         Focus7 {
             id: focus7
+            onFocusChanged: controlRectFlickable.ensureVisible(focus7)
         }
 
         Focus8 {
             id: focus8
+            onFocusChanged: controlRectFlickable.ensureVisible(focus8)
         }
 
         Focus9 {
             id: focus9
+            onFocusChanged: controlRectFlickable.ensureVisible(focus9)
         }
 
         Focus10 {
             id: focus10
+            onFocusChanged: controlRectFlickable.ensureVisible(focus10)
         }
 
         Focus11 {
             id: focus11
+            onFocusChanged: controlRectFlickable.ensureVisible(focus11)
         }
 
         Focus12 {
             id: focus12
+            onFocusChanged: controlRectFlickable.ensureVisible(focus12)
         }
 
         Focus13 {
             id: focus13
+            onFocusChanged: controlRectFlickable.ensureVisible(focus13)
         }
 
         Focus14 {
             id: focus14
+            onFocusChanged: controlRectFlickable.ensureVisible(focus14)
         }
 
         Focus15 {
             id: focus15
+            onFocusChanged: controlRectFlickable.ensureVisible(focus15)
         }
 
         Focus16 {
             id: focus16
+            onFocusChanged: controlRectFlickable.ensureVisible(focus16)
         }
+    }
+
+    Component.onCompleted: {
+        scrollBar.position = 0
     }
 }
