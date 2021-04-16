@@ -6,7 +6,7 @@ FocusScope {
     id: useDifferentNotesFocusScope
     height: 30
     width: 150
-    anchors.verticalCenter: label6.verticalCenter
+    anchors.verticalCenter: audioLabel6.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
     property alias useDifferentNotesCheckBox: useDifferentNotesCheckBox

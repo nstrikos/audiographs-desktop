@@ -23,7 +23,7 @@ Window {
 
     property bool anchorToLeft: undefined
 
-    property alias settingsRect: settingsRect
+//    property alias settingsRect: settingsRect
     property alias graphRect: graphRect
 
     property bool canZoomDrag: false
@@ -53,21 +53,21 @@ Window {
         id: controlsRect
     }
 
-    ControlsButton {
-        id: controlsButton
-    }
+//    ControlsButton {
+//        id: controlsButton
+//    }
 
     GraphRect {
         id: graphRect
     }
 
-    SettingsButton {
-        id: settingsButton
-    }
+//    SettingsButton {
+//        id: settingsButton
+//    }
 
-    SettingsRect {
-        id: settingsRect
-    }
+//    SettingsRect {
+//        id: settingsRect
+//    }
 
     AnchorChangeState {
         id: anchorChangeState

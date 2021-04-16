@@ -8,40 +8,40 @@ import "GraphSettings"
 
 Rectangle {
     id: settingsRect
-    anchors.leftMargin: window.width / 8
+//    anchors.leftMargin: window.width / 8
 
-    property color lineColor: parameters.lineColor
-    property color backgroundColor: parameters.backgroundColor
-    property color highlightColor: parameters.highlightColor
-    property color axesColor: parameters.axesColor
-    property color derivativeColor: parameters.derivColor
+//    property color lineColor: parameters.lineColor
+//    property color backgroundColor: parameters.backgroundColor
+//    property color highlightColor: parameters.highlightColor
+//    property color axesColor: parameters.axesColor
+//    property color derivativeColor: parameters.derivColor
 
-    property alias audioSettingsTab: audioSettingsTab
+//    property alias audioSettingsTab: audioSettingsTab
 
-    TabBar {
-        id: bar
-        width: parent.width
-        TabButton {
-            text: qsTr("Audio")
-        }
-        TabButton {
-            text: qsTr("Graph")
-        }
-    }
+//    TabBar {
+//        id: bar
+//        width: parent.width
+//        TabButton {
+//            text: qsTr("Audio")
+//        }
+//        TabButton {
+//            text: qsTr("Graph")
+//        }
+//    }
 
-    StackLayout {
-        width: parent.width
-        anchors.top: bar.bottom
-        anchors.bottom: parent.bottom
-        currentIndex: bar.currentIndex
-        AudioSettingsTab {
-            id: audioSettingsTab
-        }
-        GraphSettingsTab {
-            id: graphSettingsTab
-        }
-        Item {
-            id: activityTab
-        }
-    }  
+//    StackLayout {
+//        width: parent.width
+//        anchors.top: bar.bottom
+//        anchors.bottom: parent.bottom
+//        currentIndex: bar.currentIndex
+//        AudioSettingsTab {
+//            id: audioSettingsTab
+//        }
+//        GraphSettingsTab {
+//            id: graphSettingsTab
+//        }
+//        Item {
+//            id: activityTab
+//        }
+//    }
 }

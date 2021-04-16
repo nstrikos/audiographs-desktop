@@ -6,7 +6,7 @@ SpinBox {
     id: maxFreqSpinbox
     height: 30
     width: 150
-    anchors.verticalCenter: label3.verticalCenter
+    anchors.verticalCenter: audioLabel3.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
     activeFocusOnTab: true

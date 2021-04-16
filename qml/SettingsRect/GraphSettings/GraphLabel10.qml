@@ -3,13 +3,13 @@ import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.3
 
 Label {
-    id: label1
-    anchors.top: parent.top
+    id: label10
+    text: qsTr("Derivative color") + ":"
+    anchors.top: label8.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10
     width: 80
     height: 15
-    text: qsTr("Graph color") + ":"
     color: fontColor
 }

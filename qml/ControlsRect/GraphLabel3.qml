@@ -4,8 +4,8 @@ import QtQuick.Dialogs 1.3
 
 Label {
     id: label3
-    text: qsTr("Maximum frequency") + ":"
-    anchors.top: audioLabel2.bottom
+    text: qsTr("Line width") + ":"
+    anchors.top: graphLabel2.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10

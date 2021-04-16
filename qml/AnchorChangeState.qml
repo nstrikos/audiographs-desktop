@@ -27,35 +27,35 @@ Item {
                 anchors.left: controlsRect.right
                 anchors.right: parent.right
             }
-            AnchorChanges {
-                target: settingsRect
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: parent.right
-                anchors.right: parent.right
-            }
+//            AnchorChanges {
+//                target: settingsRect
+//                anchors.top: parent.top
+//                anchors.bottom: parent.bottom
+//                anchors.left: parent.right
+//                anchors.right: parent.right
+//            }
             
-            AnchorChanges {
-                target: controlsButton
-                anchors.top: parent.top
-                anchors.right: parent.horizontalCenter
-            }
+//            AnchorChanges {
+//                target: controlsButton
+//                anchors.top: parent.top
+//                anchors.right: parent.horizontalCenter
+//            }
             
-            AnchorChanges {
-                target: settingsButton
-                anchors.top: parent.top
-                anchors.right: graphRect.right
-            }
+//            AnchorChanges {
+//                target: settingsButton
+//                anchors.top: parent.top
+//                anchors.right: graphRect.right
+//            }
             
             PropertyChanges {
                 target: controlsRect
                 width: getWidth()
             }
             
-            PropertyChanges {
-                target: settingsRect
-                anchors.leftMargin: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                anchors.leftMargin: 0
+//            }
         },
         State {
             name: "state2"
@@ -76,13 +76,13 @@ Item {
                 anchors.bottom: parent.bottom
             }
             
-            AnchorChanges {
-                target: settingsRect
-                anchors.left: parent.right
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-            }
+//            AnchorChanges {
+//                target: settingsRect
+//                anchors.left: parent.right
+//                anchors.right: parent.right
+//                anchors.top: parent.top
+//                anchors.bottom: parent.bottom
+//            }
             
             AnchorChanges {
                 target: controlsButton
@@ -101,10 +101,10 @@ Item {
                 anchors.rightMargin: 0
             }
             
-            PropertyChanges {
-                target: settingsRect
-                anchors.leftMargin: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                anchors.leftMargin: 0
+//            }
         },
         State {
             name: "state3"
@@ -117,13 +117,13 @@ Item {
                 anchors.bottom: parent.bottom
             }
             
-            AnchorChanges {
-                target: settingsRect
-                anchors.left: parent.horizontalCenter
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-            }
+//            AnchorChanges {
+//                target: settingsRect
+//                anchors.left: parent.horizontalCenter
+//                anchors.right: parent.right
+//                anchors.top: parent.top
+//                anchors.bottom: parent.bottom
+//            }
             
             AnchorChanges {
                 target: controlsButton
@@ -145,7 +145,7 @@ Item {
             AnchorChanges {
                 target: graphRect
                 anchors.left: parent.left
-                anchors.right: settingsRect.left
+//                anchors.right: settingsRect.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
             }
@@ -177,39 +177,39 @@ Item {
 //                anchors.right: parent.right
 //            }
             
-            PropertyChanges {
-                target: settingsRect
-                //height: 0
-//                visible: true
-                z: controlsRect.z - 1
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                //height: 0
+////                visible: true
+//                z: controlsRect.z - 1
+//            }
             
             PropertyChanges {
                 target: controlsRect
                 anchors.rightMargin: 0
             }
             
-            PropertyChanges {
-                target: controlsButton
-                anchors.rightMargin: 0
-            }
+//            PropertyChanges {
+//                target: controlsButton
+//                anchors.rightMargin: 0
+//            }
             
-            PropertyChanges {
-                target: settingsRect
-                anchors.leftMargin: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                anchors.leftMargin: 0
+//            }
             
-            AnchorChanges {
-                target: controlsButton
-                anchors.bottom: graphRect.bottom
-                anchors.right: graphRect.right
-            }
+//            AnchorChanges {
+//                target: controlsButton
+//                anchors.bottom: graphRect.bottom
+//                anchors.right: graphRect.right
+//            }
             
-            AnchorChanges {
-                target: settingsButton
-                anchors.top: graphRect.top
-                anchors.right: graphRect.right
-            }
+//            AnchorChanges {
+//                target: settingsButton
+//                anchors.top: graphRect.top
+//                anchors.right: graphRect.right
+//            }
         },
         State {
             name: "state5"
@@ -230,18 +230,18 @@ Item {
                 anchors.right: parent.right
             }
             
-            AnchorChanges {
-                target: settingsRect
-                anchors.top: parent.top
-                anchors.bottom: graphRect.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
+//            AnchorChanges {
+//                target: settingsRect
+//                anchors.top: parent.top
+//                anchors.bottom: graphRect.top
+//                anchors.left: parent.left
+//                anchors.right: parent.right
+//            }
             
-            PropertyChanges {
-                target: settingsRect
-                height: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                height: 0
+//            }
             
             PropertyChanges {
                 target: controlsRect
@@ -253,10 +253,10 @@ Item {
                 anchors.rightMargin: 0
             }
             
-            PropertyChanges {
-                target: settingsRect
-                anchors.leftMargin: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                anchors.leftMargin: 0
+//            }
             
             AnchorChanges {
                 target: controlsButton
@@ -273,17 +273,17 @@ Item {
         State {
             name: "state6"
             
-            AnchorChanges {
-                target: settingsRect
-                anchors.top: parent.top
-                anchors.bottom: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
+//            AnchorChanges {
+//                target: settingsRect
+//                anchors.top: parent.top
+//                anchors.bottom: parent.verticalCenter
+//                anchors.left: parent.left
+//                anchors.right: parent.right
+//            }
             
             AnchorChanges {
                 target: graphRect
-                anchors.top: settingsRect.bottom
+//                anchors.top: settingsRect.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
@@ -319,10 +319,10 @@ Item {
                 anchors.rightMargin: 0
             }
             
-            PropertyChanges {
-                target: settingsRect
-                anchors.leftMargin: 0
-            }
+//            PropertyChanges {
+//                target: settingsRect
+//                anchors.leftMargin: 0
+//            }
         }
     ]
 

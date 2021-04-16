@@ -3,13 +3,13 @@ import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.3
 
 Label {
-    id: label3
-    text: qsTr("Maximum frequency") + ":"
-    anchors.top: audioLabel2.bottom
+    id: label4
+    anchors.top: graphLabel3.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10
     width: 80
     height: 15
+    text: qsTr("Highlight color") + ":"
     color: fontColor
 }

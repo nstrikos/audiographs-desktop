@@ -124,33 +124,33 @@ Rectangle {
         derivativeView.updateView()
     }
 
-    BeautifyGraphRect {
+//    BeautifyGraphRect {
 
-    }
+//    }
 
-    BeautifyGraphRect {
-        anchors.top: parent.top
-        anchors.bottom: undefined
-        height: 8
-        visible: (settingsRect.height > 0) && (!anchorToLeft)
+//    BeautifyGraphRect {
+//        anchors.top: parent.top
+//        anchors.bottom: undefined
+//        height: 8
+//        visible: (settingsRect.height > 0) && (!anchorToLeft)
 
-        gradient: Gradient {
-            GradientStop {
-                color: Qt.rgba(0, 0, 0, 0.4)
-                position: 0
-            }
-            GradientStop {
-                color: Qt.rgba(0, 0, 0, 0.15)
-                position: 0.5
-            }
-            GradientStop {
-                color: Qt.rgba(0, 0, 0, 0)
-                position: 1
-            }
-        }
-    }
+//        gradient: Gradient {
+//            GradientStop {
+//                color: Qt.rgba(0, 0, 0, 0.4)
+//                position: 0
+//            }
+//            GradientStop {
+//                color: Qt.rgba(0, 0, 0, 0.15)
+//                position: 0.5
+//            }
+//            GradientStop {
+//                color: Qt.rgba(0, 0, 0, 0)
+//                position: 1
+//            }
+//        }
+//    }
 
-    BeautifyRect {
-        visible: (settingsRect.width > 0)
-    }
+//    BeautifyRect {
+//        visible: (settingsRect.width > 0)
+//    }
 }

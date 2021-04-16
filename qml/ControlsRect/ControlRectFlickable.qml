@@ -4,13 +4,18 @@ import QtQuick.Controls 2.12
 import "../BeautityRect"
 import "./Focus"
 
+import "../SettingsRect/AudioSettings"
+//import "../SettingsRect/GraphSettings"
+
+import QtQuick.Dialogs 1.3
+
 Flickable {
     id: controlRectFlickable
     width: parent.width
     anchors.top: controlsTitleBar.bottom
     anchors.topMargin: 40
     anchors.bottom: parent.bottom
-    contentHeight: 970
+    contentHeight: 1970
     clip: true
 
     property alias textInput: textInput
@@ -20,6 +25,12 @@ Flickable {
     property alias textInput5: textInput5
     property alias startSoundButton: startButtonFocusScope.startSoundButton
     property alias startSoundButtonFocusScope: startButtonFocusScope
+
+    property color lineColor: parameters.lineColor
+    property color backgroundColor: parameters.backgroundColor
+    property color highlightColor: parameters.highlightColor
+    property color axesColor: parameters.axesColor
+    property color derivativeColor: parameters.derivColor
 
     ScrollBar.vertical: ScrollBar {
         id: scrollBar
@@ -37,6 +48,8 @@ Flickable {
 //    }
     
     function ensureVisible(item) {
+        if(!item.focus)
+            return
 //        scrollBar.active = true
         var ypos = item.mapToItem(contentItem, 0, 0).y
         var ext = item.height + ypos
@@ -310,7 +323,150 @@ Flickable {
             id: focus16
             onFocusChanged: controlRectFlickable.ensureVisible(focus16)
         }
+
+        Label1 {
+            id: audioLabel1
+            anchors.top: focus16.bottom
+        }
+        DurationSpinbox {
+            id: durationSpinbox
+            onFocusChanged: controlRectFlickable.ensureVisible(durationSpinbox)
+        }
+        Label2 {
+            id: audioLabel2
+        }
+        MinFreqSpinbox {
+            id: minFreqSpinbox
+            onFocusChanged: controlRectFlickable.ensureVisible(minFreqSpinbox)
+        }
+        Label3 {
+            id: audioLabel3
+        }
+        MaxFreqSpinbox {
+            id: maxFreqSpinbox
+            onFocusChanged: controlRectFlickable.ensureVisible(maxFreqSpinbox)
+        }
+        Label {
+            id: audioLabel4
+            text: qsTr("Precision digits") + ":"
+            anchors.top: audioLabel3.bottom
+            anchors.topMargin: 30
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            width: 80
+            height: 15
+            color: fontColor
+        }
+
+        PrecisionSpinbox {
+            id: precisionSpinbox
+            onFocusChanged: controlRectFlickable.ensureVisible(precisionSpinbox)
+        }
+
+        Label4 {
+            id: audioLabel5
+        }
+        UseNotesFocusScope {
+            id: useNotesFocusScope
+            onFocusChanged: controlRectFlickable.ensureVisible(useNotesFocusScope)
+        }
+        Label6 {
+            id: audioLabel6
+        }
+        UseDifferentNotesFocusScope {
+            id: useDifferentNotesFocusScope
+            onFocusChanged: controlRectFlickable.ensureVisible(useDifferentNotesFocusScope)
+        }
+        Label5 {
+            id: audioLabel7
+        }
+        ExploreModeFocusScope {
+            id: exploreModeFocusScope
+            onFocusChanged: controlRectFlickable.ensureVisible(exploreModeFocusScope)
+        }
+        ResetButton {
+            id: resetButton
+            onFocusChanged: controlRectFlickable.ensureVisible(resetButton)
+        }
+
+        ColorDialog {
+            id: colorDialog
+            property var request
+            onAccepted: {
+                if (request === "line color") {
+                    parameters.lineColor = color
+                    lineColor = color
+                    graphRect.curveColor = color
+                } else if (request === "background color") {
+                    parameters.backgroundColor = color
+                    backgroundColor = color
+                    graphRect.updateCanvas()
+                } else if (request === "axes color") {
+                    parameters.axesColor = color
+                    axesColor = color
+                    graphRect.updateCanvas()
+                } else if (request === "highlight color") {
+                    parameters.highlightColor = color
+                    highlightColor = color
+                    graphRect.highlightColor = color
+                } else if (request === "derivative color") {
+                    parameters.derivColor = color
+                    derivativeColor = color
+                    graphRect.derivativeColor = color
+                }
+            }
+        }
+
+        function openColorDialog(request) {
+            if (request === "line color") {
+                colorDialog.color = parameters.lineColor
+            } else if (request === "background color") {
+                colorDialog.color = parameters.backgroundColor
+            } else if (request === "axes color") {
+                colorDialog.color = parameters.axesColor
+            } else if (request === "highlight color") {
+                colorDialog.color = parameters.highlightColor
+            } else if (request === "derivative color") {
+                colorDialog.color = parameters.derivColor
+            }
+
+            colorDialog.request = request
+            colorDialog.open()
+        }
+
+        GraphLabel1 {
+            id: graphLabel1
+        }
+        GraphColorFocusScope {
+            id: graphColorFocusScope
+        }
+        GraphLabel2 {
+            id: graphLabel2
+        }
+        BackgroundColorFocusScope {
+            id: backgroundColorFocusScope
+        }
+        GraphLabel3 {
+            id: graphLabel3
+        }
+        LineWidthSpinbox {
+            id: lineWidthSpinbox
+        }
+        GraphLabel4 {
+            id: graphLabel4
+        }
+        HighlightColorFocusScope {
+            id: highlightColorFocusScope
+        }
+        GraphLabel5 {
+            id: graphLabel5
+        }
+        HighlightSizeSpinbox {
+            id: highlightSizeSpinbox
+        }
     }
+
+
 
     Component.onCompleted: {
         scrollBar.position = 0

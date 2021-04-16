@@ -3,9 +3,9 @@ import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.3
 
 Label {
-    id: label3
-    text: qsTr("Maximum frequency") + ":"
-    anchors.top: audioLabel2.bottom
+    id: label5
+    text: qsTr("Highlight size") + ":"
+    anchors.top: graphLabel4.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10

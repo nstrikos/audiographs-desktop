@@ -44,17 +44,17 @@
         <file>qml/SettingsRect/GraphSettings/HighlightColorFocusScope.qml</file>
         <file>qml/SettingsRect/GraphSettings/HighlightSizeSpinbox.qml</file>
         <file>qml/SettingsRect/GraphSettings/InvertThemeFocusScope.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label1.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label2.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label3.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label4.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label5.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label6.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label7.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label8.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label9.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel1.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel2.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel3.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel4.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel5.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel6.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel7.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel8.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel9.qml</file>
         <file>qml/SettingsRect/GraphSettings/LineWidthSpinbox.qml</file>
-        <file>qml/SettingsRect/GraphSettings/ResetButton.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphResetButton.qml</file>
         <file>qml/SettingsRect/GraphSettings/ShowAxesFocusScope.qml</file>
         <file>qml/SettingsRect/SettingsRect.qml</file>
         <file>qml/AnchorChangeState.qml</file>
@@ -69,8 +69,24 @@
         <file>qml/ControlsRect/Focus/Focus15.qml</file>
         <file>qml/ControlsRect/Focus/Focus16.qml</file>
         <file>qml/SettingsRect/GraphSettings/DerivativeColorFocusScope.qml</file>
-        <file>qml/SettingsRect/GraphSettings/Label10.qml</file>
+        <file>qml/SettingsRect/GraphSettings/GraphLabel10.qml</file>
         <file>qml/SettingsRect/AudioSettings/Label6.qml</file>
         <file>qml/SettingsRect/AudioSettings/UseDifferentNotesFocusScope.qml</file>
+        <file>qml/ControlsRect/GraphLabel1.qml</file>
+        <file>qml/ControlsRect/GraphLabel2.qml</file>
+        <file>qml/ControlsRect/GraphLabel3.qml</file>
+        <file>qml/ControlsRect/GraphLabel4.qml</file>
+        <file>qml/ControlsRect/GraphLabel5.qml</file>
+        <file>qml/ControlsRect/GraphLabel6.qml</file>
+        <file>qml/ControlsRect/GraphLabel7.qml</file>
+        <file>qml/ControlsRect/GraphLabel8.qml</file>
+        <file>qml/ControlsRect/GraphLabel9.qml</file>
+        <file>qml/ControlsRect/GraphLabel10.qml</file>
+        <file>qml/ControlsRect/GraphResetButton.qml</file>
+        <file>qml/ControlsRect/GraphColorFocusScope.qml</file>
+        <file>qml/ControlsRect/BackgroundColorFocusScope.qml</file>
+        <file>qml/ControlsRect/LineWidthSpinbox.qml</file>
+        <file>qml/ControlsRect/HighlightColorFocusScope.qml</file>
+        <file>qml/ControlsRect/HighlightSizeSpinbox.qml</file>
     </qresource>
 </RCC>

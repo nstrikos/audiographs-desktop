@@ -6,7 +6,7 @@ FocusScope {
     id: exploreModeFocusScope
     height: 30
     width: 150
-    anchors.verticalCenter: label5.verticalCenter
+    anchors.verticalCenter: audioLabel7.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
     property alias color: exploreModeCheckBox.color

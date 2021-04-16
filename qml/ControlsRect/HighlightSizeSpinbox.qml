@@ -3,49 +3,47 @@ import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.3
 
 SpinBox {
-    id: minFreqSpinbox
+    id: highlightSizeSpinbox
     height: 30
-    width: 150
-    anchors.verticalCenter: audioLabel2.verticalCenter
+    width: 100
+    anchors.verticalCenter: graphLabel5.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
-    activeFocusOnTab: true
-    Accessible.name: qsTr("Minimum frequency")
-    value: parameters.minFreq
-    from: 200
-    to: 4000
-    stepSize: 100
+    from: 5
+    to: 20
+    value: parameters.highlightSize
+    Accessible.name: qsTr("Highlight size")
     onValueChanged: {
         window.stopAudio()
-        parameters.minFreq = value
+        graphRect.highlightSize = value
+        parameters.highlightSize = value
     }
-    
     editable: false
     
     contentItem: TextInput {
         z: 2
-        text: minFreqSpinbox.textFromValue(minFreqSpinbox.value, minFreqSpinbox.locale)
+        text: highlightSizeSpinbox.textFromValue(highlightSizeSpinbox.value, highlightSizeSpinbox.locale)
         
-        font: minFreqSpinbox.font
+        font: highlightSizeSpinbox.font
         color: fontColor
         selectionColor: "#21be2b"
         selectedTextColor: "#ffffff"
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
         
-        readOnly: !minFreqSpinbox.editable
-        validator: minFreqSpinbox.validator
+        readOnly: !highlightSizeSpinbox.editable
+        validator: highlightSizeSpinbox.validator
         inputMethodHints: Qt.ImhFormattedNumbersOnly
     }
     
     up.indicator: Rectangle {
-        x: minFreqSpinbox.mirrored ? 0 : parent.width - width
+        x: highlightSizeSpinbox.mirrored ? 0 : parent.width - width
         height: parent.height
         implicitWidth: 30
         implicitHeight: 30
         color: "light gray"
         border.color: {
-            if (minFreqSpinbox.activeFocus) {
+            if (highlightSizeSpinbox.activeFocus) {
                 if (invertTheme)
                     return "yellow"
                 else
@@ -55,10 +53,11 @@ SpinBox {
                 return "light gray"
             }
         }
-        border.width: minFreqSpinbox.activeFocus ? 2 : 1
+        border.width: highlightSizeSpinbox.activeFocus ? 2 : 1
+        
         Text {
             text: "+"
-            font.pixelSize: minFreqSpinbox.font.pixelSize * 2
+            font.pixelSize: highlightSizeSpinbox.font.pixelSize * 2
             color: fontColor
             anchors.fill: parent
             fontSizeMode: Text.Fit
@@ -68,13 +67,13 @@ SpinBox {
     }
     
     down.indicator: Rectangle {
-        x: minFreqSpinbox.mirrored ? parent.width - width : 0
+        x: highlightSizeSpinbox.mirrored ? parent.width - width : 0
         height: parent.height
         implicitWidth: 30
         implicitHeight: 30
         color: "light gray"
         border.color: {
-            if (minFreqSpinbox.activeFocus) {
+            if (highlightSizeSpinbox.activeFocus) {
                 if (invertTheme)
                     return "yellow"
                 else
@@ -84,12 +83,11 @@ SpinBox {
                 return "light gray"
             }
         }
-        border.width: minFreqSpinbox.activeFocus ? 2 : 1
-        
+        border.width: highlightSizeSpinbox.activeFocus ? 2 : 1
         
         Text {
             text: "-"
-            font.pixelSize: minFreqSpinbox.font.pixelSize * 2
+            font.pixelSize: highlightSizeSpinbox.font.pixelSize * 2
             color: fontColor
             anchors.fill: parent
             fontSizeMode: Text.Fit
@@ -102,7 +100,7 @@ SpinBox {
         implicitWidth: 140
         color: bgColor
         border.color: {
-            if (minFreqSpinbox.activeFocus) {
+            if (highlightSizeSpinbox.activeFocus) {
                 if (invertTheme)
                     return "yellow"
                 else
@@ -112,6 +110,6 @@ SpinBox {
                 return "light gray"
             }
         }
-        border.width: minFreqSpinbox.activeFocus ? 2 : 1
+        border.width: highlightSizeSpinbox.activeFocus ? 2 : 1
     }
 }
