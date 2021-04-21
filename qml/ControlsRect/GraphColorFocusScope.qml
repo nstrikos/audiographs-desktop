@@ -12,9 +12,9 @@ FocusScope {
     property alias color: lineColorRect.color
     activeFocusOnTab: true
     Accessible.name: qsTr("Graph color")
-    Keys.onSpacePressed: openColorDialog("line color")
-    Keys.onEnterPressed: openColorDialog("line color")
-    Keys.onReturnPressed: openColorDialog("line color")
+    Keys.onSpacePressed: controlsMainRect.openColorDialog("line color")
+    Keys.onEnterPressed: controlsMainRect.openColorDialog("line color")
+    Keys.onReturnPressed: controlsMainRect.openColorDialog("line color")
     
     Rectangle {
         id: lineColorRect

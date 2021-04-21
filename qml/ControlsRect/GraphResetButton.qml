@@ -4,8 +4,8 @@ import QtQuick.Dialogs 1.3
 
 Button {
     id: resetButton
-    text: qsTr("Reset")
-    anchors.top: label9.bottom
+    text: qsTr("Reset graph settings")
+    anchors.top: graphLabel10.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.right: parent.right

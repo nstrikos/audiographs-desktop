@@ -88,8 +88,12 @@ Flickable {
             anchors.verticalCenter: label1.verticalCenter
             anchors.rightMargin: 50
             placeholderText: (parent.width > 0) ? "Function expression" : ""
-            onFocusChanged: controlRectFlickable.ensureVisible(textInput)
-            Accessible.name: qsTr("Function expression")
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(textInput)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+            Accessible.name: accessibleName
             onTextChanged: {
                 controlsRect.active = false
                 textInput2.text = "-10"
@@ -99,6 +103,8 @@ Flickable {
                 window.evaluate()
                 controlsRect.active = true
             }
+
+            property string accessibleName: qsTr("Function expression")
         }
 
         FocusScope {
@@ -108,7 +114,11 @@ Flickable {
             anchors.rightMargin: 10
             anchors.top: textInput.top
             anchors.bottom: textInput.bottom
-            onFocusChanged: controlRectFlickable.ensureVisible(clearExpressionFocusScope)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(clearExpressionFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
 
             activeFocusOnTab: true
             Accessible.name: qsTr("Clear expression")
@@ -164,7 +174,11 @@ Flickable {
                 if (controlsRect.active)
                     evaluate()
             }
-            onFocusChanged: controlRectFlickable.ensureVisible(textInput2)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(textInput2)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         
         Label {
@@ -183,7 +197,11 @@ Flickable {
             anchors.left: label3.right
             anchors.verticalCenter: label3.verticalCenter
             placeholderText: (parent.width > 0) ? "maximum X" : ""
-            onFocusChanged: controlRectFlickable.ensureVisible(textInput3)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(textInput3)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
             Accessible.name: qsTr("Set maximum x")
             onTextChanged: {
                 if (controlsRect.active)
@@ -207,7 +225,11 @@ Flickable {
             anchors.left: label4.right
             anchors.verticalCenter: label4.verticalCenter
             placeholderText: (parent.width > 0) ? "minimum Y" : ""
-            onFocusChanged: controlRectFlickable.ensureVisible(textInput4)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(textInput4)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
             Accessible.name: qsTr("Set minimum Y")
             onTextChanged: {
                 if (controlsRect.active)
@@ -231,7 +253,11 @@ Flickable {
             anchors.left: label5.right
             anchors.verticalCenter: label5.verticalCenter
             placeholderText: (parent.width > 0) ? "maximum Y" : ""
-            onFocusChanged: controlRectFlickable.ensureVisible(textInput5)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(textInput5)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
             Accessible.name: qsTr("Set maximum Y")
             onTextChanged: {
                 if (controlsRect.active)
@@ -241,87 +267,155 @@ Flickable {
         
         StartButtonFocusScope {
             id: startButtonFocusScope
-            onFocusChanged: controlRectFlickable.ensureVisible(startButtonFocusScope)
+            onFocusChanged: {
+                 controlRectFlickable.ensureVisible(startButtonFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus1 {
             id: focus1
-            onFocusChanged: controlRectFlickable.ensureVisible(focus1)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus1)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus2 {
             id: focus2
-            onFocusChanged: controlRectFlickable.ensureVisible(focus2)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus2)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus3 {
             id: focus3
-            onFocusChanged: controlRectFlickable.ensureVisible(focus3)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus3)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus4 {
             id: focus4
-            onFocusChanged: controlRectFlickable.ensureVisible(focus4)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus4)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus5 {
             id: focus5
-            onFocusChanged: controlRectFlickable.ensureVisible(focus5)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus5)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus6 {
             id: focus6
-            onFocusChanged: controlRectFlickable.ensureVisible(focus6)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus6)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus7 {
             id: focus7
-            onFocusChanged: controlRectFlickable.ensureVisible(focus7)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus7)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus8 {
             id: focus8
-            onFocusChanged: controlRectFlickable.ensureVisible(focus8)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus8)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus9 {
             id: focus9
-            onFocusChanged: controlRectFlickable.ensureVisible(focus9)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus9)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus10 {
             id: focus10
-            onFocusChanged: controlRectFlickable.ensureVisible(focus10)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus10)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus11 {
             id: focus11
-            onFocusChanged: controlRectFlickable.ensureVisible(focus11)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus11)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus12 {
             id: focus12
-            onFocusChanged: controlRectFlickable.ensureVisible(focus12)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus12)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus13 {
             id: focus13
-            onFocusChanged: controlRectFlickable.ensureVisible(focus13)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus13)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus14 {
             id: focus14
-            onFocusChanged: controlRectFlickable.ensureVisible(focus14)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus14)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus15 {
             id: focus15
-            onFocusChanged: controlRectFlickable.ensureVisible(focus15)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus15)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Focus16 {
             id: focus16
-            onFocusChanged: controlRectFlickable.ensureVisible(focus16)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(focus16)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Label1 {
@@ -330,21 +424,33 @@ Flickable {
         }
         DurationSpinbox {
             id: durationSpinbox
-            onFocusChanged: controlRectFlickable.ensureVisible(durationSpinbox)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(durationSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         Label2 {
             id: audioLabel2
         }
         MinFreqSpinbox {
             id: minFreqSpinbox
-            onFocusChanged: controlRectFlickable.ensureVisible(minFreqSpinbox)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(minFreqSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         Label3 {
             id: audioLabel3
         }
         MaxFreqSpinbox {
             id: maxFreqSpinbox
-            onFocusChanged: controlRectFlickable.ensureVisible(maxFreqSpinbox)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(maxFreqSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         Label {
             id: audioLabel4
@@ -360,7 +466,11 @@ Flickable {
 
         PrecisionSpinbox {
             id: precisionSpinbox
-            onFocusChanged: controlRectFlickable.ensureVisible(precisionSpinbox)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(precisionSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         Label4 {
@@ -368,25 +478,41 @@ Flickable {
         }
         UseNotesFocusScope {
             id: useNotesFocusScope
-            onFocusChanged: controlRectFlickable.ensureVisible(useNotesFocusScope)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(useNotesFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         Label6 {
             id: audioLabel6
         }
         UseDifferentNotesFocusScope {
             id: useDifferentNotesFocusScope
-            onFocusChanged: controlRectFlickable.ensureVisible(useDifferentNotesFocusScope)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(useDifferentNotesFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         Label5 {
             id: audioLabel7
         }
         ExploreModeFocusScope {
             id: exploreModeFocusScope
-            onFocusChanged: controlRectFlickable.ensureVisible(exploreModeFocusScope)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(exploreModeFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         ResetButton {
             id: resetButton
-            onFocusChanged: controlRectFlickable.ensureVisible(resetButton)
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(resetButton)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
 
         ColorDialog {
@@ -439,30 +565,118 @@ Flickable {
         }
         GraphColorFocusScope {
             id: graphColorFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(graphColorFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         GraphLabel2 {
             id: graphLabel2
         }
         BackgroundColorFocusScope {
             id: backgroundColorFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(backgroundColorFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         GraphLabel3 {
             id: graphLabel3
         }
         LineWidthSpinbox {
             id: lineWidthSpinbox
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(lineWidthSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         GraphLabel4 {
             id: graphLabel4
         }
         HighlightColorFocusScope {
             id: highlightColorFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(highlightColorFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
         GraphLabel5 {
             id: graphLabel5
         }
         HighlightSizeSpinbox {
             id: highlightSizeSpinbox
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(highlightSizeSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphLabel6 {
+            id: graphLabel6
+        }
+        AxesColorFocusScope {
+            id: axesColorFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(axesColorFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphLabel7 {
+            id: graphLabel7
+        }
+        AxesSizeSpinbox {
+            id: axesSizeSpinbox
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(axesSizeSpinbox)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphLabel8 {
+            id: graphLabel8
+        }
+        ShowAxesFocusScope {
+            id: showAxesFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(showAxesFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphLabel9 {
+            id: graphLabel9
+        }
+        DerivativeColorFocusScope {
+            id: derivativeColorFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(derivativeColorFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphLabel10{
+            id: graphLabel10
+        }
+        InvertThemeFocusScope {
+            id: invertThemeFocusScope
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(invertThemeFocusScope)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
+        }
+        GraphResetButton {
+            id: graphResetButton
+            onFocusChanged: {
+                controlRectFlickable.ensureVisible(graphResetButton)
+                if (activeFocus)
+                    textToSpeech.speak(Accessible.name)
+            }
         }
     }
 
@@ -470,5 +684,6 @@ Flickable {
 
     Component.onCompleted: {
         scrollBar.position = 0
+        textToSpeech.speak(textInput.accessibleName)
     }
 }

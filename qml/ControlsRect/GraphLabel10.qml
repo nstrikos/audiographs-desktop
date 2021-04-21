@@ -4,8 +4,8 @@ import QtQuick.Dialogs 1.3
 
 Label {
     id: label10
-    text: qsTr("Derivative color") + ":"
-    anchors.top: label8.bottom
+    text: qsTr("Invert theme") + ":"
+    anchors.top: graphLabel9.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10

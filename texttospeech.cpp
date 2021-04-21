@@ -79,6 +79,25 @@ void TextToSpeech::currentVoiceChanged(int index)
     m_speech->setVoice(m_voices.at(index));
 }
 
+QString TextToSpeech::normalizeText(QString text)
+{
+    QString normText = text;
+    normText.replace("(", " left parenthesis ");
+    normText.replace(")", " right parenthesis ");
+    normText.replace("^", " power ");
+    normText.replace("+", " plus ");
+    normText.replace("-", " minus ");
+    normText.replace("*", " asterisk ");
+    normText.replace("/", " slash ");
+    normText.replace(",", " comma ");
+    normText.replace(">", " greater than ");
+    normText.replace("<", " less than ");
+    normText.replace("=", " equals ");
+    normText.replace(".", " period ");
+
+    return normText;
+}
+
 QStringList TextToSpeech::voicesNames() const
 {
     return m_voicesNames;

@@ -3,10 +3,10 @@ import QtQuick 2.0
 import QtQuick 2.12
 
 Item {
-    Shortcut {
-        sequence: "Esc"
-        onActivated: close()
-    }
+//    Shortcut {
+//        sequence: "Esc"
+//        onActivated: close()
+//    }
     Shortcut {
         sequence: "Return"
         onActivated: {

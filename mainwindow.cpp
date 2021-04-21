@@ -408,25 +408,6 @@ void MainWindow::accessText(QWidget *widget, QString text)
         m_textToSpeech->speak(widget->accessibleName() + " " + text);
 }
 
-QString MainWindow::normalizeText(QString text)
-{
-    QString normText = text;
-    normText.replace("(", " left parenthesis ");
-    normText.replace(")", " right parenthesis ");
-    normText.replace("^", " power ");
-    normText.replace("+", " plus ");
-    normText.replace("-", " minus ");
-    normText.replace("*", " asterisk ");
-    normText.replace("/", " slash ");
-    normText.replace(",", " comma ");
-    normText.replace(">", " greater than ");
-    normText.replace("<", " less than ");
-    normText.replace("=", " equals ");
-    normText.replace(".", " period ");
-
-    return normText;
-}
-
 void MainWindow::readSettings()
 {
     QSettings settings("Audiographs", "Audiographs");
@@ -597,7 +578,7 @@ void MainWindow::errorDisplayStateActivated()
     errorDisplayDialog->setText(m_errorString);
     errorDisplayDialog->show();
     if (m_parameters->selfVoice())
-        m_textToSpeech->speak(tr("Error ") + normalizeText(m_errorString));
+        m_textToSpeech->speak(tr("Error ") + m_textToSpeech->normalizeText(m_errorString));
 }
 
 void MainWindow::updateGraph(Points *points, double minX, double maxX, double minY, double maxY)
@@ -1108,14 +1089,14 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             int n = ui->functionLineEdit->cursorPosition();
             if (n == 0) {
                 QString text = ui->functionLineEdit->text();
-                accessText(ui->functionLineEdit, normalizeText(text));
+                accessText(ui->functionLineEdit, m_textToSpeech->normalizeText(text));
             }
             return false;
         } else if ( (key->key() == Qt::Key_Right && (obj == ui->functionLineEdit) ) ) {
             int n = ui->functionLineEdit->cursorPosition();
             if (n == ui->functionLineEdit->text().size()) {
                 QString text = ui->functionLineEdit->text();
-                accessText(ui->functionLineEdit, normalizeText(text));
+                accessText(ui->functionLineEdit, m_textToSpeech->normalizeText(text));
             }
             return false;
         } /*else if ( (key->key() == Qt::Key_F2 ) ) {
@@ -1126,7 +1107,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 
     if (event->type() == QEvent::FocusIn) {
         if (obj == ui->functionLineEdit) {
-            accessText(ui->functionLineEdit, normalizeText(ui->functionLineEdit->text()));
+            accessText(ui->functionLineEdit, m_textToSpeech->normalizeText(ui->functionLineEdit->text()));
         } else if (obj == ui->minXLineEdit) {
             accessText(ui->minXLineEdit, ui->minXLineEdit->text());
         } else if (obj == ui->maxXLineEdit) {
@@ -1182,9 +1163,9 @@ void MainWindow::on_functionLineEdit_cursorPositionChanged(int arg1, int arg2)
     QString text = ui->functionLineEdit->text();
     if (n >= 0) {
         QString t = text.mid(n, 1);
-        m_textToSpeech->speak(normalizeText(t));
+        m_textToSpeech->speak(m_textToSpeech->normalizeText(t));
     } else {
-        accessText(ui->functionLineEdit, normalizeText(text));
+        accessText(ui->functionLineEdit, m_textToSpeech->normalizeText(text));
     }
 }
 
@@ -1424,7 +1405,7 @@ void MainWindow::sayWidget()
     QAction *action = static_cast<QAction*> (sender);
     QString text = action->text();
     text = text.replace("&", "");
-    text = normalizeText(text);
+    text = m_textToSpeech->normalizeText(text);
     m_textToSpeech->speak(text);
 }
 

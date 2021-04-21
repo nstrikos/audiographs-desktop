@@ -88,5 +88,10 @@
         <file>qml/ControlsRect/LineWidthSpinbox.qml</file>
         <file>qml/ControlsRect/HighlightColorFocusScope.qml</file>
         <file>qml/ControlsRect/HighlightSizeSpinbox.qml</file>
+        <file>qml/ControlsRect/AxesColorFocusScope.qml</file>
+        <file>qml/ControlsRect/AxesSizeSpinbox.qml</file>
+        <file>qml/ControlsRect/ShowAxesFocusScope.qml</file>
+        <file>qml/ControlsRect/DerivativeColorFocusScope.qml</file>
+        <file>qml/ControlsRect/InvertThemeFocusScope.qml</file>
     </qresource>
 </RCC>

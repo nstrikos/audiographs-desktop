@@ -32,6 +32,11 @@ TextField {
     }
     Accessible.name: qsTr("Set minimum x")
 
+    onCursorPositionChanged: {
+        var res = text.substring(cursorPosition - 1, cursorPosition)
+        textToSpeech.speak( textToSpeech.normalizeText((res) ) )
+    }
+
     Keys.onPressed: {
         if (event.key === Qt.Key_X  && event.modifiers & Qt.ControlModifier) {
             window.sayX()

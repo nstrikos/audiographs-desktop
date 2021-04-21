@@ -14,9 +14,9 @@ FocusScope {
     property alias color: highlightColorRect.color
     activeFocusOnTab: true
     Accessible.name: qsTr("Highlight color")
-    Keys.onSpacePressed: openColorDialog("highlight color")
-    Keys.onEnterPressed: openColorDialog("highlight color")
-    Keys.onReturnPressed: openColorDialog("hightlight color")
+    Keys.onSpacePressed: controlsMainRect.openColorDialog("highlight color")
+    Keys.onEnterPressed: controlsMainRect.openColorDialog("highlight color")
+    Keys.onReturnPressed: controlsMainRect.openColorDialog("hightlight color")
     
     Rectangle {
         id: highlightColorRect

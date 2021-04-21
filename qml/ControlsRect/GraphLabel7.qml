@@ -5,7 +5,7 @@ import QtQuick.Dialogs 1.3
 Label {
     id: label7
     text: qsTr("Axes size")
-    anchors.top: label6.bottom
+    anchors.top: graphLabel6.bottom
     anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 10

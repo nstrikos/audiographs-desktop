@@ -249,7 +249,6 @@ private:
     TextToSpeech *m_textToSpeech;
 
     void accessText(QWidget *widget, QString text);
-    QString normalizeText(QString text);
 
     void readSettings();
     void writeSettings();

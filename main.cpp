@@ -13,6 +13,8 @@
 #include "function/functionExpression.h"
 #include "function/point.h"
 
+#include "texttospeech.h"
+
 int main(int argc, char *argv[])
 {
     bool runMobile = false;
@@ -54,10 +56,12 @@ int main(int argc, char *argv[])
 
         Parameters *parameters = &Parameters::getInstance();
         FunctionExpression functionExpression;
+        TextToSpeech textToSpeech;
 
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("parameters", parameters);
         engine.rootContext()->setContextProperty("functionExpression", &functionExpression);
+        engine.rootContext()->setContextProperty("textToSpeech", &textToSpeech);
         //qRegisterMetaType<FunctionController*>("FunctionController*");
 
 

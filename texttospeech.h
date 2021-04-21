@@ -33,6 +33,7 @@ public:
     Q_INVOKABLE void currentEngineChanged(int index);
     Q_INVOKABLE void currentLanguageChanged(int index);
     Q_INVOKABLE void currentVoiceChanged(int index);
+    Q_INVOKABLE QString normalizeText(QString text);
 
     QStringList voicesNames() const;
 

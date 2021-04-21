@@ -12,9 +12,9 @@ FocusScope {
     activeFocusOnTab: true
     property alias color: backGroundColorRect.color
     Accessible.name: qsTr("Background color")
-    Keys.onSpacePressed: openColorDialog("background color")
-    Keys.onEnterPressed: openColorDialog("background color")
-    Keys.onReturnPressed: openColorDialog("background color")
+    Keys.onSpacePressed: controlsMainRect.openColorDialog("background color")
+    Keys.onEnterPressed: controlsMainRect.openColorDialog("background color")
+    Keys.onReturnPressed: controlsMainRect.openColorDialog("background color")
     Rectangle {
         id: backGroundColorRect
         anchors.fill: parent
