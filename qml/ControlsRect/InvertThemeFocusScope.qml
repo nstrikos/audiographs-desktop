@@ -42,6 +42,7 @@ FocusScope {
             window.stopAudio()
             parameters.invertTheme = checked
             controlsRect.invertTheme = checked
+            textToSpeech.speak(invertThemeFocusScope.Accessible.name + " " + parameters.invertTheme)
             //audioSettingsTab.invertTheme = checked
             //graphSettingsTab.invertTheme = checked
             window.setColor()

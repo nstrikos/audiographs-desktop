@@ -66,6 +66,7 @@ void FunctionExpression::calculate(QString expression, QString minX, QString max
 void FunctionExpression::startDrag(int x, int y)
 {
     m_currentPoint->reset();
+    m_pointsInterest->setUpdated(false);
     m_dragHandler->startDrag(functionModel, x, y);
 }
 
@@ -77,6 +78,7 @@ void FunctionExpression::drag(int diffX, int diffY, int width, int height)
 void FunctionExpression::zoom(double delta)
 {
     m_currentPoint->reset();
+    m_pointsInterest->setUpdated(false);
     m_zoomer->zoom(functionModel, delta, m_derivativeMode);
 }
 

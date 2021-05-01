@@ -91,7 +91,7 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(textInput)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput.text))
             }
             Accessible.name: accessibleName
             onTextChanged: {
@@ -177,8 +177,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(textInput2)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput2.text))
             }
+            property string accessibleName: qsTr("Set minimum x")
         }
         
         Label {
@@ -200,13 +201,15 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(textInput3)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput3.text))
             }
-            Accessible.name: qsTr("Set maximum x")
+            Accessible.name: accessibleName
             onTextChanged: {
                 if (controlsRect.active)
                     evaluate()
             }
+            property string accessibleName: qsTr("Set maximum x")
+
         }
         
         Label {
@@ -228,13 +231,14 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(textInput4)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput4.text))
             }
-            Accessible.name: qsTr("Set minimum Y")
+            Accessible.name: accessibleName
             onTextChanged: {
                 if (controlsRect.active)
                     evaluate()
             }
+            property string accessibleName: qsTr("Set minimum Y")
         }
         
         Label {
@@ -256,13 +260,14 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(textInput5)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput5.text))
             }
-            Accessible.name: qsTr("Set maximum Y")
+            Accessible.name: accessibleName
             onTextChanged: {
                 if (controlsRect.active)
                     evaluate()
             }
+            property string accessibleName: qsTr("Set maximum Y")
         }
         
         StartButtonFocusScope {
@@ -427,8 +432,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(durationSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("seconds"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("seconds"))
         }
         Label2 {
             id: audioLabel2
@@ -438,8 +444,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(minFreqSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("hertz"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("hertz"))
         }
         Label3 {
             id: audioLabel3
@@ -449,8 +456,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(maxFreqSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("hertz"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("hertz"))
         }
         Label {
             id: audioLabel4
@@ -469,8 +477,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(precisionSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("digits"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("digits"))
         }
 
         Label4 {
@@ -481,9 +490,10 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(useNotesFocusScope)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + parameters.useNotes)
             }
         }
+
         Label6 {
             id: audioLabel6
         }
@@ -492,7 +502,7 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(useDifferentNotesFocusScope)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + parameters.useNegativeNotes)
             }
         }
         Label5 {
@@ -590,8 +600,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(lineWidthSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("pixels"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("pixels"))
         }
         GraphLabel4 {
             id: graphLabel4
@@ -612,8 +623,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(highlightSizeSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("pixels"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("pixels"))
         }
         GraphLabel6 {
             id: graphLabel6
@@ -634,8 +646,9 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(axesSizeSpinbox)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(Accessible.name + " " + value + " " + qsTr("pixels"))
             }
+            onValueChanged: textToSpeech.speak(value + " " + qsTr("pixels"))
         }
         GraphLabel8 {
             id: graphLabel8

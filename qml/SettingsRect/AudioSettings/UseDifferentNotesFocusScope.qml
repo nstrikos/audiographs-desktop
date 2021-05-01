@@ -14,9 +14,9 @@ FocusScope {
     activeFocusOnTab: true
     Accessible.name: qsTr("Use different notes for negative values")
 
-    Keys.onSpacePressed: useDifferentNotesCheckBox.checked = ! useDifferentNotesCheckBox.checked
-    Keys.onEnterPressed: useDifferentNotesCheckBox.checked = ! useDifferentNotesCheckBox.checked
-    Keys.onReturnPressed: useDifferentNotesCheckBox.checked = ! useDifferentNotesCheckBox.checked
+    Keys.onSpacePressed: useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked
+    Keys.onEnterPressed: useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked
+    Keys.onReturnPressed: useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked
 
     Rectangle {
         id: useDifferentNotesCheckBox
@@ -35,12 +35,13 @@ FocusScope {
         MouseArea {
             anchors.fill: parent
             onPressed: {
-                useDifferentNotesCheckBox.checked = ! useDifferentNotesCheckBox.checked
+                useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked
             }
         }
         onCheckedChanged: {
             window.stopAudio()
             parameters.useNegativeNotes = checked
+            textToSpeech.speak(useDifferentNotesFocusScope.Accessible.name + " " + parameters.useNegativeNotes)
         }
     }
 }

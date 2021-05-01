@@ -9,7 +9,7 @@ SpinBox {
     anchors.verticalCenter: audioLabel3.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
-    activeFocusOnTab: true
+//    activeFocusOnTab: true
     Accessible.name: qsTr("Maximum frequency")
     value: parameters.maxFreq
     from: 400

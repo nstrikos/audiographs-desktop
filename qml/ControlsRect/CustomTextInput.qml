@@ -33,8 +33,10 @@ TextField {
     Accessible.name: qsTr("Set minimum x")
 
     onCursorPositionChanged: {
-        var res = text.substring(cursorPosition - 1, cursorPosition)
-        textToSpeech.speak( textToSpeech.normalizeText((res) ) )
+        if (activeFocus) {
+            var res = text.substring(cursorPosition - 1, cursorPosition)
+            textToSpeech.speak( textToSpeech.normalizeText((res) ) )
+        }
     }
 
     Keys.onPressed: {

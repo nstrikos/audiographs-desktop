@@ -86,15 +86,23 @@ Rectangle {
             onWheel: {
                 if (!parameters.exploreMode) {
                     //window.newGraph()
-                    if (window.canZoomDrag)
+                    if (window.canZoomDrag) {
+                        functionExpression.setDerivativeMode(0)
+                        window.graphRect.derivativeView.setUpdate(false);
+                        window.graphRect.derivativeView.visible = false
                         functionExpression.zoom(wheel.angleDelta.y)
+                    }
                 }
             }
             onPressedChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        if (window.canZoomDrag)
+                        if (window.canZoomDrag) {
+                            functionExpression.setDerivativeMode(0)
+                            window.graphRect.derivativeView.setUpdate(false);
+                            window.graphRect.derivativeView.visible = false
                             functionExpression.startDrag(mouseX, mouseY)
+                        }
                 } else {
                     if (!pressed)
                         functionController.stopAudio()
@@ -103,8 +111,12 @@ Rectangle {
             onPositionChanged: {
                 if (!parameters.exploreMode) {
                     if (pressed)
-                        if (window.canZoomDrag)
+                        if (window.canZoomDrag) {
+                            functionExpression.setDerivativeMode(0)
+                            window.graphRect.derivativeView.setUpdate(false);
+                            window.graphRect.derivativeView.visible = false
                             functionExpression.drag(mouseX, mouseY, width, height)
+                        }
                 } else {
                     if (pressed)
                         functionController.mousePoint(mouseX)

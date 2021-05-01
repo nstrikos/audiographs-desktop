@@ -9,9 +9,8 @@ SpinBox {
     anchors.verticalCenter: audioLabel2.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
-    activeFocusOnTab: true
-    Accessible.name: qsTr("Minimum frequency")
     value: parameters.minFreq
+
     from: 200
     to: 4000
     stepSize: 100
@@ -19,25 +18,26 @@ SpinBox {
         window.stopAudio()
         parameters.minFreq = value
     }
-    
+    Accessible.name: qsTr("Minimum frequency")
+
     editable: false
-    
+
     contentItem: TextInput {
         z: 2
         text: minFreqSpinbox.textFromValue(minFreqSpinbox.value, minFreqSpinbox.locale)
-        
+
         font: minFreqSpinbox.font
         color: fontColor
         selectionColor: "#21be2b"
         selectedTextColor: "#ffffff"
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
-        
+
         readOnly: !minFreqSpinbox.editable
         validator: minFreqSpinbox.validator
         inputMethodHints: Qt.ImhFormattedNumbersOnly
     }
-    
+
     up.indicator: Rectangle {
         x: minFreqSpinbox.mirrored ? 0 : parent.width - width
         height: parent.height
@@ -56,6 +56,7 @@ SpinBox {
             }
         }
         border.width: minFreqSpinbox.activeFocus ? 2 : 1
+
         Text {
             text: "+"
             font.pixelSize: minFreqSpinbox.font.pixelSize * 2
@@ -66,7 +67,7 @@ SpinBox {
             verticalAlignment: Text.AlignVCenter
         }
     }
-    
+
     down.indicator: Rectangle {
         x: minFreqSpinbox.mirrored ? parent.width - width : 0
         height: parent.height
@@ -85,8 +86,7 @@ SpinBox {
             }
         }
         border.width: minFreqSpinbox.activeFocus ? 2 : 1
-        
-        
+
         Text {
             text: "-"
             font.pixelSize: minFreqSpinbox.font.pixelSize * 2
@@ -97,7 +97,7 @@ SpinBox {
             verticalAlignment: Text.AlignVCenter
         }
     }
-    
+
     background: Rectangle {
         implicitWidth: 140
         color: bgColor

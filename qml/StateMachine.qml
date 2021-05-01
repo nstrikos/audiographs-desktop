@@ -276,6 +276,7 @@ Item {
                 disableControls()
                 functionExpression.setDerivativeMode(0)
                 window.graphRect.derivativeView.setUpdate(false);
+                window.graphRect.derivativeView.visible = false
                 functionExpression.calculate(controlsRect.textInput.text,
                                              controlsRect.textInput2.text,
                                              controlsRect.textInput3.text,

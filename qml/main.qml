@@ -281,6 +281,7 @@ Window {
     function firstDerivative()
     {
         if (window.canZoomDrag) {
+            window.graphRect.derivativeView.visible = true
             window.graphRect.derivativeView.setUpdate(true);
             functionExpression.setDerivativeMode(1)
             newGraph()
@@ -290,6 +291,7 @@ Window {
     function secondDerivative()
     {
         if (window.canZoomDrag) {
+            window.graphRect.derivativeView.visible = true;
             window.graphRect.derivativeView.setUpdate(true);
             functionExpression.setDerivativeMode(2)
             newGraph()

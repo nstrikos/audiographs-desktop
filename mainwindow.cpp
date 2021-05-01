@@ -628,6 +628,9 @@ void MainWindow::performZoom(int delta)
     if (!canZoomDrag)
         return;
 
+    ui->renderArea->disableCurrentPoint();
+    emit derivativeMode(0);
+    ui->renderArea->setDerivativeMode(0);
     emit zoom(delta);
 }
 
@@ -638,6 +641,9 @@ void MainWindow::mousePressed(int x, int y)
 
     m_mousePressed = true;
 
+    ui->renderArea->disableCurrentPoint();
+    emit derivativeMode(0);
+    ui->renderArea->setDerivativeMode(0);
     emit startDrag(x, y);
 }
 

@@ -14,9 +14,9 @@ FocusScope {
     activeFocusOnTab: true
     Accessible.name: qsTr("Use notes")
     
-    Keys.onSpacePressed: useNotesCheckBox.checked = ! useNotesCheckBox.checked
-    Keys.onEnterPressed: useNotesCheckBox.checked = ! useNotesCheckBox.checked
-    Keys.onReturnPressed: useNotesCheckBox.checked = ! useNotesCheckBox.checked
+    Keys.onSpacePressed: useNotesCheckBox.checked = !useNotesCheckBox.checked
+    Keys.onEnterPressed: useNotesCheckBox.checked = !useNotesCheckBox.checked
+    Keys.onReturnPressed: useNotesCheckBox.checked = !useNotesCheckBox.checked
     
     Rectangle {
         id: useNotesCheckBox
@@ -35,12 +35,13 @@ FocusScope {
         MouseArea {
             anchors.fill: parent
             onPressed: {
-                useNotesCheckBox.checked = ! useNotesCheckBox.checked
+                useNotesCheckBox.checked = !useNotesCheckBox.checked
             }
         }
         onCheckedChanged: {
             window.stopAudio()
             parameters.useNotes = checked
+            textToSpeech.speak(useNotesFocusScope.Accessible.name + " " + parameters.useNotes)
         }
     }
 }

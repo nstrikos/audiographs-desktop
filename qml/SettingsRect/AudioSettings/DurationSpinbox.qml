@@ -9,7 +9,7 @@ SpinBox {
     anchors.verticalCenter: audioLabel1.verticalCenter
     anchors.right: parent.right
     anchors.rightMargin: 10
-    activeFocusOnTab: true
+//    activeFocusOnTab: true
     Accessible.name: qsTr("Duration")
     value: parameters.duration
     from: 10

@@ -40,6 +40,7 @@ FocusScope {
         onCheckedChanged: {
             window.stopAudio()
             parameters.showAxes = checked
+            textToSpeech.speak(showAxesFocusScope.Accessible.name + " " + parameters.showAxes)
             if (window.canZoomDrag)
                 graphRect.graphCanvas.updateCanvas(controlsRect.textInput2.text,
                                                    controlsRect.textInput3.text,
