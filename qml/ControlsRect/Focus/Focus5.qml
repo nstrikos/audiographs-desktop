@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Previous point of interest")
+    Accessible.name: qsTr("Previous point of interest control plus left")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

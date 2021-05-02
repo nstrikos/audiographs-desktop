@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Derivative")
+    Accessible.name: qsTr("Derivative control plus d")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

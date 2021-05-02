@@ -25,6 +25,8 @@ Flickable {
     property alias textInput5: textInput5
     property alias startSoundButton: startButtonFocusScope.startSoundButton
     property alias startSoundButtonFocusScope: startButtonFocusScope
+    property alias useNotesFocusScope: useNotesFocusScope
+    property alias useDifferentNotesFocusScope: useDifferentNotesFocusScope
 
     property color lineColor: parameters.lineColor
     property color backgroundColor: parameters.backgroundColor
@@ -117,11 +119,11 @@ Flickable {
             onFocusChanged: {
                 controlRectFlickable.ensureVisible(clearExpressionFocusScope)
                 if (activeFocus)
-                    textToSpeech.speak(Accessible.name)
+                    textToSpeech.speak(textToSpeech.normalizeText(Accessible.name))
             }
 
             activeFocusOnTab: true
-            Accessible.name: qsTr("Clear expression")
+            Accessible.name: qsTr("Clear expression Control + N")
 
             Keys.onSpacePressed: pressed()
             Keys.onEnterPressed: pressed()
@@ -179,7 +181,7 @@ Flickable {
                 if (activeFocus)
                     textToSpeech.speak(accessibleName + " " + textToSpeech.normalizeText(textInput2.text))
             }
-            property string accessibleName: qsTr("Set minimum x")
+            property string accessibleName: qsTr("Set minimum x text edit")
         }
         
         Label {
@@ -208,7 +210,7 @@ Flickable {
                 if (controlsRect.active)
                     evaluate()
             }
-            property string accessibleName: qsTr("Set maximum x")
+            property string accessibleName: qsTr("Set maximum x text edit")
 
         }
         
@@ -238,7 +240,7 @@ Flickable {
                 if (controlsRect.active)
                     evaluate()
             }
-            property string accessibleName: qsTr("Set minimum Y")
+            property string accessibleName: qsTr("Set minimum Y text edit")
         }
         
         Label {
@@ -267,7 +269,7 @@ Flickable {
                 if (controlsRect.active)
                     evaluate()
             }
-            property string accessibleName: qsTr("Set maximum Y")
+            property string accessibleName: qsTr("Set maximum Y text edit")
         }
         
         StartButtonFocusScope {

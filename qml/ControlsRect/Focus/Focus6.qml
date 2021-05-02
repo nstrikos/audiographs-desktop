@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.right
     height: 50
     activeFocusOnTab: true
-    Accessible.name: qsTr("Next point of interest")
+    Accessible.name: qsTr("Next point of interest control plus right")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

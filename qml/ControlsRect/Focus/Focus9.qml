@@ -11,7 +11,7 @@ FocusScope {
     anchors.rightMargin: 15
     
     activeFocusOnTab: true
-    Accessible.name: qsTr("First point")
+    Accessible.name: qsTr("First point - home")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

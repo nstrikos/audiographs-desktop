@@ -58,13 +58,13 @@ Item {
         }
     }
     Shortcut {
-        sequence: "Alt+Left"
+        sequence: "Shift+Left"
         onActivated: {
             window.previousFast()
         }
     }
     Shortcut {
-        sequence: "Alt+Right"
+        sequence: "Shift+Right"
         onActivated: {
             window.nextFast()
         }
@@ -122,15 +122,15 @@ Item {
         }
     }
     Shortcut {
-        sequence: "F12"
+        sequence: "F9"
         onActivated: {
-            window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked = !window.settingsRect.audioSettingsTab.useNotesFocusScope.useNotesCheckBox.checked
+            window.controlsRect.useNotesFocusScope.useNotesCheckBox.checked = !window.controlsRect.useNotesFocusScope.useNotesCheckBox.checked
         }
     }
     Shortcut {
-        sequence: "F11"
+        sequence: "F10"
         onActivated: {
-            window.settingsRect.audioSettingsTab.useDifferentNotesFocusScope.useDifferentNotesCheckBox.checked = !window.settingsRect.audioSettingsTab.useDifferentNotesFocusScope.useDifferentNotesCheckBox.checked
+            window.controlsRect.useNegativeNotesFocusScope.useDifferentNotesCheckBox.checked= !window.controlsRect.useNegativeNotesFocusScope.useDifferentNotesCheckBox.checked
         }
     }
 }

@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Decrease step")
+    Accessible.name: qsTr("Decrease step control plus left bracket")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

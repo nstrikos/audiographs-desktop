@@ -11,7 +11,7 @@ FocusScope {
     height: 50
     
     activeFocusOnTab: true
-    Accessible.name: qsTr("Last point")
+    Accessible.name: qsTr("Last point end")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

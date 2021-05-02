@@ -12,7 +12,7 @@ FocusScope {
     property alias useNotesCheckBox: useNotesCheckBox
     property alias color: useNotesCheckBox.color
     activeFocusOnTab: true
-    Accessible.name: qsTr("Use notes")
+    Accessible.name: qsTr("Use notes control plus f nine")
     
     Keys.onSpacePressed: useNotesCheckBox.checked = !useNotesCheckBox.checked
     Keys.onEnterPressed: useNotesCheckBox.checked = !useNotesCheckBox.checked

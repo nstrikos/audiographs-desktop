@@ -11,7 +11,7 @@ FocusScope {
     height: 50
     
     activeFocusOnTab: true
-    Accessible.name: qsTr("Increase step")
+    Accessible.name: qsTr("Increase step control plus right bracket")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

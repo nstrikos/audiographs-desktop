@@ -58,10 +58,10 @@ TextField {
         } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.ControlModifier) {
             window.nextPointInterest()
             event.accepted = true;
-        } else if (event.key === Qt.Key_Left  && event.modifiers & Qt.AltModifier) {
+        } else if (event.key === Qt.Key_Left  && event.modifiers & Qt.ShiftModifier) {
             window.previousFast()
             event.accepted = true;
-        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.AltModifier) {
+        } else if (event.key === Qt.Key_Right  && event.modifiers & Qt.ShiftModifier) {
             window.nextFast()
             event.accepted = true;
         } else if (event.key === Qt.Key_Home) {

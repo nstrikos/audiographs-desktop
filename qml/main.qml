@@ -25,6 +25,7 @@ Window {
 
 //    property alias settingsRect: settingsRect
     property alias graphRect: graphRect
+    property alias controlsRect: controlsRect
 
     property bool canZoomDrag: false
 

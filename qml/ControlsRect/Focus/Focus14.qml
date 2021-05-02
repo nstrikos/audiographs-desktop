@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.right
     anchors.leftMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Normal mode")
+    Accessible.name: qsTr("Normal mode control plus 0")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

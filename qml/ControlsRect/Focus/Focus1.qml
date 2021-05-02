@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("X")
+    Accessible.name: qsTr("X coordinate control plus x")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

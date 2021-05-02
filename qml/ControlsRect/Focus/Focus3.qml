@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Previous point")
+    Accessible.name: qsTr("Previous point page down")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

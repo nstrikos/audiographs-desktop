@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.right
     anchors.leftMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Second derivative")
+    Accessible.name: qsTr("Second derivative control plus two")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

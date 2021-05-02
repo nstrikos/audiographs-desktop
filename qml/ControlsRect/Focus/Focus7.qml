@@ -10,7 +10,7 @@ FocusScope {
     anchors.right: startButtonFocusScope.horizontalCenter
     anchors.rightMargin: 15
     activeFocusOnTab: true
-    Accessible.name: qsTr("Previous point fast mode")
+    Accessible.name: qsTr("Previous point fast shift plus left")
 
     Keys.onSpacePressed: pressed()
     Keys.onEnterPressed: pressed()

@@ -14,6 +14,9 @@ Rectangle {
     property color lightColor: parameters.invertTheme ? "yellow" : "blue"
     property bool invertTheme: parameters.invertTheme
 
+    property alias useNotesFocusScope: controlRectFlickable.useNotesFocusScope
+    property alias useNegativeNotesFocusScope: controlRectFlickable.useDifferentNotesFocusScope
+
     property alias startSoundButton: controlRectFlickable.startSoundButton
     property alias startSoundButtonFocusScope: controlRectFlickable.startSoundButtonFocusScope
 
