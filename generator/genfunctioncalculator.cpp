@@ -46,6 +46,8 @@ GenFunctionCalculatorThread::GenFunctionCalculatorThread(GenParameters *params,
     m_first = first;
     m_last = last;
 
+
+
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
     symbol_table.add_function(
@@ -127,6 +129,8 @@ GenFunctionCalculatorThread::GenFunctionCalculatorThread(GenParameters *params,
     symbol_table.add_constants();
 
     parser_expression.register_symbol_table(symbol_table);
+#else
+    m_fparser.AddFunction("powerint", powerint, 3);
 #endif
 }
 
