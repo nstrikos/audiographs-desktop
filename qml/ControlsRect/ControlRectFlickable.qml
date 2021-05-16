@@ -131,6 +131,7 @@ Flickable {
 
             function pressed() {
                 textInput.clear()
+                textToSpeech.speak(qsTr("Function expression"))
             }
 
             Rectangle {

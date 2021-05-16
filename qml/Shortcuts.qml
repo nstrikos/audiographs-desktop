@@ -18,6 +18,7 @@ Item {
         onActivated: {
             controlsRect.textInput.clear()
             controlsRect.textInput.forceActiveFocus()
+            textToSpeech.speak(qsTr("Function expression"))
             window.evaluate()
         }
     }

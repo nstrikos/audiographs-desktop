@@ -50,6 +50,8 @@ private:
     QColor m_color;
     int m_size;
     QSGFlatColorMaterial *m_material;
+
+    int POINT_SEGMENTS = 16;
 };
 
 #endif // FUNCTIONPOINTVIEW_H

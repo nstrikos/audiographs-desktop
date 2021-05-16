@@ -11,7 +11,7 @@ FunctionDisplayView::FunctionDisplayView(QQuickItem *parent)
     setFlag(ItemHasContents, true);
     m_newColor = m_color;
     m_lineWidth = 10;
-    m_factor = 1;
+    m_factor = 10;
     m_update = true;
 }
 
@@ -173,7 +173,7 @@ QSGNode *FunctionDisplayView::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeD
                     int r = m_lineWidth;
                     for(int ii = 0; ii < POINT_SEGMENTS; ii++) {
                         float theta = 2.0f * 3.1415926f * float(ii) / float(POINT_SEGMENTS);//get the current angle
-
+                        qDebug() << theta;
                         float x = r * cos(theta);
                         float y = r * sin(theta);
 
@@ -202,14 +202,22 @@ QSGNode *FunctionDisplayView::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeD
             cy = -10;//m_points[i].y;
 
             int r = m_lineWidth;
-            for(int ii = 0; ii < POINT_SEGMENTS; ii++) {
-                float theta = 2.0f * 3.1415926f * float(ii) / float(POINT_SEGMENTS);//get the current angle
+//            for(int ii = 0; ii < POINT_SEGMENTS; ii++) {
+//                float theta = 2.0f * 3.1415926f * float(ii) / float(POINT_SEGMENTS);//get the current angle
 
-                float x = r * cos(theta);
-                float y = r * sin(theta);
+//                float x = r * cos(theta);
+//                float y = r * sin(theta);
 
-                vertices[ii].set(x + cx, y + cy);//output vertex
-            }
+//                qDebug() << cos(theta) << sin(theta);
+
+//                vertices[ii].set(x + cx, y + cy);//output vertex
+//            }
+
+            vertices[0].set(cx + r, cy);
+            vertices[1].set(cx, cy + r);
+            vertices[2].set(cx - r, cy);
+            vertices[3].set(cx, cy - r);
+
             tmpNode->markDirty(QSGNode::DirtyGeometry);
         }
     }
