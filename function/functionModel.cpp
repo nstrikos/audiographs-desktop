@@ -1,20 +1,21 @@
 #include "functionModel.h"
 
-#include <QtMath>
+//#include <QtMath>
 
 #include "constants.h"
 
-#include <QDebug>
+int mygcd(int a, int b)
+{
+    return b ? mygcd(b, a%b) : a;
+}
 
-#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
-#include <bits/stdc++.h>
-using namespace std;
-#else
+#if defined Q_OS_WIN || defined(Q_OS_ANDROID)
+
 double powerint(const double *p)
 {
     int a = p[1];
     int b = p[2];
-    int d = __gcd(a, b);
+    int d = mygcd(a, b);
     a = a / d;
     b = b / d;
 
@@ -49,7 +50,7 @@ FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
         int a = (int) v1;
         int b = (int) v2;
 
-        int d = __gcd(a, b);
+        int d = mygcd(a, b);
 
         a = a / d;
         b = b / d;
@@ -91,7 +92,7 @@ FunctionModel::FunctionModel(QObject *parent) : QObject(parent)
 
         int a = (int) (v1 * b);
 
-        int d = __gcd(a, b);
+        int d = mygcd(a, b);
 
         a = a / d;
         b = b / d;

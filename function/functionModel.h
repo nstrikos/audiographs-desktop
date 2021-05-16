@@ -15,6 +15,8 @@ typedef exprtk::parser<double>             parser_t;
 double powerint(const double* p);
 #endif
 
+int mygcd(int a, int b);
+
 class FunctionModel : public QObject
 {
     Q_OBJECT
