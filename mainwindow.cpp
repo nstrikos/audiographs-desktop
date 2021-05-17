@@ -849,12 +849,12 @@ void MainWindow::initActions()
     connect(nextInterestPointAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     previousFastAction = new QAction(tr("&Previous point (fast)"), this);
-    previousFastAction->setShortcut(Qt::ALT + Qt::Key_Left);
+    previousFastAction->setShortcut(Qt::SHIFT + Qt::Key_Left);
     connect(previousFastAction, &QAction::triggered, this, &MainWindow::on_previousFastPushButton_clicked);
     connect(previousFastAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     nextFastAction = new QAction(tr("&Next point (fast)"), this);
-    nextFastAction->setShortcut(Qt::ALT + Qt::Key_Right);
+    nextFastAction->setShortcut(Qt::SHIFT + Qt::Key_Right);
     connect(nextFastAction, &QAction::triggered, this, &MainWindow::on_nextFastPushButton_clicked);
     connect(nextFastAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
@@ -874,12 +874,12 @@ void MainWindow::initActions()
     connect(selfVoiceAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     useNotesAction = new QAction(tr("&Use notes"), this);
-    useNotesAction->setShortcut(Qt::Key_F12);
+    useNotesAction->setShortcut(Qt::Key_F3);
     connect(useNotesAction, &QAction::triggered, this, &MainWindow::useNotesActionActivated);
     connect(useNotesAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     useNegativeNotesAction = new QAction(tr("&Use different notes for negative values"), this);
-    useNegativeNotesAction->setShortcut(Qt::Key_F11);
+    useNegativeNotesAction->setShortcut(Qt::Key_F4);
     connect(useNegativeNotesAction, &QAction::triggered, this, &MainWindow::useNegativeNotesActionActivated);
     connect(useNegativeNotesAction, &QAction::hovered, this, &MainWindow::sayWidget);
     useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
@@ -1064,10 +1064,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         } else if ( (key->key() == Qt::Key_Left && key->modifiers()==Qt::ControlModifier) ) {
             on_previousPointInterestPushButton_clicked();
             return true;
-        } else if ( (key->key() == Qt::Key_Right && key->modifiers()==Qt::AltModifier) ) {
+        } else if ( (key->key() == Qt::Key_Right && key->modifiers()==Qt::ShiftModifier) ) {
             on_nextFastPushButton_clicked();
             return true;
-        } else if ( (key->key() == Qt::Key_Left && key->modifiers()==Qt::AltModifier) ) {
+        } else if ( (key->key() == Qt::Key_Left && key->modifiers()==Qt::ShiftModifier) ) {
             on_previousFastPushButton_clicked();
             return true;
         } else if ( (key->key() == Qt::Key_PageUp) ) {
@@ -1183,7 +1183,7 @@ void MainWindow::selfVoiceActionActivated()
 void MainWindow::useNotesActionActivated()
 {
     ui->useNotesCheckBox->setChecked(!ui->useNotesCheckBox->isChecked());
-    useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
+    //useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
 }
 
 void MainWindow::useNegativeNotesActionActivated()
@@ -1339,8 +1339,8 @@ void MainWindow::showShortcuts()
         text += tr("Derivative - Ctrl + D\n");
         text += tr("Previous point of interest - Ctrl + Left\n");
         text += tr("Next point of interest - Ctrl + Right\n");
-        text += tr("Previous point (fast) - Alt + Left\n");
-        text += tr("Next point (fast) - Alt + Right\n");
+        text += tr("Previous point (fast) - Shift + Left\n");
+        text += tr("Next point (fast) - Shift + Right\n");
         text += tr("First point - Home\n");
         text += tr("Last point - End\n");
         text += tr("Decrease step - Ctrl + [\n");
@@ -1349,8 +1349,8 @@ void MainWindow::showShortcuts()
         text += tr("First derivative mode - Ctrl + 1\n");
         text += tr("Second derivative mode - Ctrl + 2\n");
         text += tr("Self voice - F2\n");
-        text += tr("Use notes - F12\n");
-        text += tr("Use different notes for negative values - F11\n");
+        text += tr("Use notes - F3\n");
+        text += tr("Use different notes for negative values - F4\n");
         text += tr("Recent function expressions - Alt + 1 to 9");
 
         helpDialog->setWindowTitle(tr("Help"));

@@ -42,7 +42,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-309</y>
          <width>300</width>
          <height>1531</height>
         </rect>
@@ -605,13 +605,13 @@
               </font>
              </property>
              <property name="accessibleName">
-              <string>Alt plus left Previous point fast pushbutton</string>
+              <string>shift plus left Previous point fast pushbutton</string>
              </property>
              <property name="accessibleDescription">
               <string>Previous point fast</string>
              </property>
              <property name="text">
-              <string>Alt+Left - Previous point (fast) </string>
+              <string>Shift+Left - Previous point (fast) </string>
              </property>
             </widget>
            </item>
@@ -637,13 +637,13 @@
               </font>
              </property>
              <property name="accessibleName">
-              <string>Alt plus right Next point fast pushbutton</string>
+              <string>Shift plus right Next point fast pushbutton</string>
              </property>
              <property name="accessibleDescription">
               <string>Next point fast</string>
              </property>
              <property name="text">
-              <string>Alt+Right - Next point (fast)</string>
+              <string>Shift+Right - Next point (fast)</string>
              </property>
             </widget>
            </item>
@@ -1113,7 +1113,7 @@
                  <string>use notes</string>
                 </property>
                 <property name="text">
-                 <string>F12 - Use notes</string>
+                 <string>F3 - Use notes</string>
                 </property>
                </widget>
               </item>
@@ -1142,7 +1142,7 @@
                  <string>Use different notes for negative values</string>
                 </property>
                 <property name="text">
-                 <string>F11 - Use different notes
+                 <string>F4 - Use different notes
 for negative values</string>
                 </property>
                </widget>

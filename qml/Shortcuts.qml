@@ -123,13 +123,13 @@ Item {
         }
     }
     Shortcut {
-        sequence: "F9"
+        sequence: "F3"
         onActivated: {
             window.controlsRect.useNotesFocusScope.useNotesCheckBox.checked = !window.controlsRect.useNotesFocusScope.useNotesCheckBox.checked
         }
     }
     Shortcut {
-        sequence: "F10"
+        sequence: "F4"
         onActivated: {
             window.controlsRect.useNegativeNotesFocusScope.useDifferentNotesCheckBox.checked= !window.controlsRect.useNegativeNotesFocusScope.useDifferentNotesCheckBox.checked
         }
