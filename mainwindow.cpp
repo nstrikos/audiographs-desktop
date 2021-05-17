@@ -306,10 +306,10 @@ void MainWindow::initGraphControls()
     ui->maxFreqSpinBox->setValue(m_parameters->maxFreq());
     ui->useNotesCheckBox->setChecked(m_parameters->useNotes());
     ui->useNegativeNotescheckBox->setChecked(m_parameters->useNegativeNotes());
-    if (m_parameters->useNotes())
-        ui->useNegativeNotescheckBox->setEnabled(true);
-    else
-        ui->useNegativeNotescheckBox->setEnabled(false);
+//    if (m_parameters->useNotes())
+//        ui->useNegativeNotescheckBox->setEnabled(true);
+//    else
+//        ui->useNegativeNotescheckBox->setEnabled(false);
     ui->selfVoiceCheckBox->setChecked(m_parameters->selfVoice());
     ui->precisionDigitsSpinBox->setValue(m_parameters->precisionDigits());
     ui->graphWidthSpinBox->setValue(m_parameters->lineWidth());
@@ -1259,7 +1259,7 @@ void MainWindow::useNotesCheckBoxStateChanged()
         accessText(ui->useNotesCheckBox, tr("checked"));
     else
         accessText(ui->useNotesCheckBox, tr("not checked"));
-    ui->useNegativeNotescheckBox->setEnabled(state);
+    //ui->useNegativeNotescheckBox->setEnabled(state);
 }
 
 void MainWindow::useNegativeNotesCheckBoxStateChanged()
