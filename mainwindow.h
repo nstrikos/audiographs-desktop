@@ -99,6 +99,8 @@ public slots:
 
     void on_lastPointPushButton_clicked();
 
+    void displayText(QString text);
+
     void exit();
 
 private slots:

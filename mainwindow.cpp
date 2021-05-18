@@ -471,6 +471,7 @@ void MainWindow::initialStateActivated()
     ui->renderArea->clear();
     ui->renderArea->disableCurrentPoint();
     emit derivativeMode(0);
+    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::evaluateStateActivated()
@@ -1038,6 +1039,11 @@ void MainWindow::on_firstPointPushButton_clicked()
 void MainWindow::on_lastPointPushButton_clicked()
 {
     emit lastPoint();
+}
+
+void MainWindow::displayText(QString text)
+{
+    ui->renderArea->setDisplayText(text);
 }
 
 void MainWindow::exit()

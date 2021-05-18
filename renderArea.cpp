@@ -42,6 +42,7 @@ void RenderArea::updateGraph(Points *points, double xMin, double xMax, double yM
 
     m_x = -100;
     m_y = -100;
+    m_displayText = "";
 
     calcCoordinates();
     update();
@@ -85,6 +86,12 @@ void RenderArea::setDerivativeMode(int mode)
 void RenderArea::clearDerivative()
 {
     m_derivCoordPoints.clear();
+    update();
+}
+
+void RenderArea::setDisplayText(const QString &displayText)
+{
+    m_displayText = displayText;
     update();
 }
 
@@ -158,6 +165,14 @@ void RenderArea::paintEvent(QPaintEvent *event)
     QPen linePen(m_parameters->highlightColor(), 3);
 
     drawGrid(&painter);
+
+    QRect rect = QRect(50, 50, 350, 350);
+    QFont font = painter.font();
+    font.setPixelSize(48);
+    painter.setFont(font);
+    QPen pen(m_parameters->lineColor());
+    painter.setPen(pen);
+    painter.drawText(rect, Qt::AlignLeft, m_displayText);
 
     QBrush pointBrush(m_parameters->lineColor());
     painter.setBrush(pointBrush);

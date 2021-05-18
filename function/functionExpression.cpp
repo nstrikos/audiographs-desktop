@@ -168,10 +168,13 @@ void FunctionExpression::sayX()
     char c = 'f';
     QString value = QString::number(x, c, m_parameters->precisionDigits());
     m_textToSpeech->speak(value);
+
+    emit displayText(value);
 }
 
 void FunctionExpression::sayY()
 {
+    QString value;
     if (functionModel.isValid(m_currentPoint->point())) {
         double y = functionModel.y(m_currentPoint->point());
 
@@ -179,11 +182,12 @@ void FunctionExpression::sayY()
         y = round (y * Pow) / Pow;
 
         char c = 'f';
-        QString value = QString::number(y, c, m_parameters->precisionDigits());
-        m_textToSpeech->speak(value);
+        value = QString::number(y, c, m_parameters->precisionDigits());
     } else {
-        m_textToSpeech->speak(tr("Not defined"));
+        value = tr("Not defined");
     }
+    m_textToSpeech->speak(value);
+    emit displayText(value);
 }
 
 void FunctionExpression::sayDerivative()
