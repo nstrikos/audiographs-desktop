@@ -157,6 +157,13 @@ Window {
         }
     }
 
+    Connections {
+        target: functionExpression
+        function onDisplayText(text) {
+            displayText(text)
+        }
+    }
+
     function showError(errorString) {
         messageDialog.title = errorString
         messageDialog.visible = true
@@ -203,6 +210,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.previousPoint()
+            window.graphRect.displayText("")
         }
     }
 
@@ -211,6 +219,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.nextPoint()
+            window.graphRect.displayText("")
         }
     }
 
@@ -219,6 +228,7 @@ Window {
         if (window.canZoomDrag) {
             window.interestingPoint()
             functionExpression.previousPointInterest()
+            window.graphRect.displayText("")
         }
     }
 
@@ -227,6 +237,7 @@ Window {
         if (window.canZoomDrag) {
             window.interestingPoint()
             functionExpression.nextPointInterest()
+            window.graphRect.displayText("")
         }
     }
 
@@ -235,6 +246,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.previousFast()
+            window.graphRect.displayText("")
         }
     }
 
@@ -243,6 +255,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.nextFast()
+            window.graphRect.displayText("")
         }
     }
 
@@ -251,6 +264,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.firstPoint()
+            window.graphRect.displayText("")
         }
     }
 
@@ -259,6 +273,7 @@ Window {
         if (window.canZoomDrag) {
             window.explore()
             functionExpression.lastPoint()
+            window.graphRect.displayText("")
         }
     }
 
@@ -275,6 +290,7 @@ Window {
             window.graphRect.derivativeView.setUpdate(false);
             window.graphRect.derivativeView.clear()
             functionExpression.setDerivativeMode(0)
+            window.graphRect.displayText("")
             newGraph()
         }
     }
@@ -285,6 +301,7 @@ Window {
             window.graphRect.derivativeView.visible = true
             window.graphRect.derivativeView.setUpdate(true);
             functionExpression.setDerivativeMode(1)
+            window.graphRect.displayText("")
             newGraph()
         }
     }
@@ -295,7 +312,13 @@ Window {
             window.graphRect.derivativeView.visible = true;
             window.graphRect.derivativeView.setUpdate(true);
             functionExpression.setDerivativeMode(2)
+            window.graphRect.displayText("")
             newGraph()
         }
+    }
+
+    function displayText(newText)
+    {
+        graphRect.displayText(newText)
     }
 }

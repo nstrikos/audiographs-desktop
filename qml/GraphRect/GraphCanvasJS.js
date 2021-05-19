@@ -1,8 +1,8 @@
-function paintCanvas(minX, maxX, minY, maxY)
+function paintCanvas(minX, maxX, minY, maxY, text)
 {
     initializeCanvas()
     initializeArrays()
-    draw(minX, maxX, minY, maxY)
+    draw(minX, maxX, minY, maxY, text)
 }
 
 function initializeCanvas()
@@ -23,9 +23,15 @@ function initializeArrays()
     yGridCoords.length = 0
 }
 
-function draw(minX, maxX, minY, maxY)
+function draw(minX, maxX, minY, maxY, text)
 {
     drawGrid(minX, maxX, minY, maxY)
+
+    ctx.font = "36px sans-serif";
+    ctx.fillStyle = parameters.lineColor;
+    ctx.fillText(text, 50, 100);
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, canvas.height)
 
     requestPaint()
 }
