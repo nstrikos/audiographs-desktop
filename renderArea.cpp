@@ -166,15 +166,13 @@ void RenderArea::paintEvent(QPaintEvent *event)
 
     drawGrid(&painter);
 
-    if (m_displayText != "") {
-        QRect rect = QRect(50, 50, 350, 350);
-        QFont font = painter.font();
-        font.setPixelSize(48);
-        painter.setFont(font);
-        QPen pen(m_parameters->lineColor());
-        painter.setPen(pen);
-        painter.drawText(rect, Qt::AlignLeft, m_displayText);
-    }
+    QRect rect = QRect(50, 50, 350, 350);
+    QFont font = painter.font();
+    font.setPixelSize(48);
+    painter.setFont(font);
+    QPen pen(m_parameters->lineColor());
+    painter.setPen(pen);
+    painter.drawText(rect, Qt::AlignLeft, m_displayText);
 
     QBrush pointBrush(m_parameters->lineColor());
     painter.setBrush(pointBrush);
@@ -456,7 +454,6 @@ void RenderArea::newCurrentPoint(double x, double y)
     m_oldY = y;
 
     getResizedCoords(m_oldX, m_oldY);
-    m_displayText = "";
     update();
 }
 
