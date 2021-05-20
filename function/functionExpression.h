@@ -55,7 +55,6 @@ signals:
     void audioFinished();
     void newCurrentPoint(double x, double y);
     void interestingPointFinished();
-    void displayText(QString text);
 
 private:
     FunctionModel functionModel;
