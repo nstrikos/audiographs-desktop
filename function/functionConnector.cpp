@@ -36,5 +36,4 @@ void FunctionConnector::start(MainWindow &window, FunctionExpression &functionEx
     QObject::connect(&window, &MainWindow::firstPoint, &functionExpression, &FunctionExpression::firstPoint);
     QObject::connect(&window, &MainWindow::lastPoint, &functionExpression, &FunctionExpression::lastPoint);
     QObject::connect(&window, &MainWindow::derivativeMode, &functionExpression, &FunctionExpression::setDerivativeMode);
-    QObject::connect(&functionExpression, &FunctionExpression::displayText, &window, &MainWindow::displayText);
 }

@@ -36,8 +36,6 @@ public:
     void enableCurrentPoint();
     void disableCurrentPoint();
 
-    void setDisplayText(const QString &displayText);
-
 signals:
     void zoom(int delta);
     void mousePressed(int x, int y);
@@ -93,10 +91,6 @@ private:
     double m_oldX, m_oldY;
 
     int m_derivMode = 0;
-
-    QString m_displayText = "";
-
-
 };
 
 #endif // RENDERAREA_H
