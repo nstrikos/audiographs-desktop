@@ -169,7 +169,7 @@ void FunctionExpression::sayX()
     QString value = QString::number(x, c, m_parameters->precisionDigits());
     m_textToSpeech->speak(value);
 
-    emit displayText("x " + value);
+    emit displayText(value);
 }
 
 void FunctionExpression::sayY()
@@ -187,20 +187,11 @@ void FunctionExpression::sayY()
         value = tr("Not defined");
     }
     m_textToSpeech->speak(value);
-    emit displayText("y " + value);
+    emit displayText(value);
 }
 
 void FunctionExpression::sayDerivative()
 {
-    QString value, text;
-
-    if (m_derivativeMode == 0)
-        text = "y' ";
-    else if (m_derivativeMode == 1)
-        text = "y' ";
-    else if (m_derivativeMode == 2)
-        text = "y'' ";
-
     if (functionModel.isValid(m_currentPoint->point())) {
 
         if (m_derivativeMode == 0)
@@ -212,13 +203,11 @@ void FunctionExpression::sayDerivative()
         y = round (y * Pow) / Pow;
 
         char c = 'f';
-
-        value = QString::number(y, c, m_parameters->precisionDigits());
+        QString value = QString::number(y, c, m_parameters->precisionDigits());
+        m_textToSpeech->speak(value);
     } else {
-        value = tr("not defined");
+        m_textToSpeech->speak(tr("Not defined"));
     }
-    m_textToSpeech->speak(value);
-    emit displayText(text + " " + value);
 }
 
 void FunctionExpression::decStep()
@@ -226,9 +215,7 @@ void FunctionExpression::decStep()
     m_currentPoint->decStep();
 
     double realStep = (double) m_currentPoint->step() / functionModel.size() * (functionModel.maxX() - functionModel.minX());
-    QString value = tr("Step: ") + QString::number(realStep);
-    m_textToSpeech->speak(value);
-    emit displayText(value);
+    m_textToSpeech->speak(tr("Step is ") + QString::number(realStep));
 }
 
 void FunctionExpression::incStep()
@@ -236,9 +223,7 @@ void FunctionExpression::incStep()
     m_currentPoint->incStep();
 
     double realStep = (double) m_currentPoint->step() / functionModel.size() * (functionModel.maxX() - functionModel.minX());
-    QString value = tr("Step: ") + QString::number(realStep);
-    m_textToSpeech->speak(value);
-    emit displayText(value);
+    m_textToSpeech->speak(tr("Step is ") + QString::number(realStep));
 }
 
 void FunctionExpression::previousPointInterest()

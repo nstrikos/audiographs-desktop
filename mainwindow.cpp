@@ -486,7 +486,6 @@ void MainWindow::evaluateStateActivated()
                    ui->maxXLineEdit->text(),
                    ui->minYLineEdit->text(),
                    ui->maxYLineEdit->text());
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::graphReadyStateActivated()
@@ -504,7 +503,6 @@ void MainWindow::graphReadyStateActivated()
     recentFiles.removeAll(expression);
     recentFiles.prepend(expression);
     updateRecentFileActions();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::playSoundStateActivated()
@@ -514,7 +512,6 @@ void MainWindow::playSoundStateActivated()
     ui->renderArea->enableCurrentPoint();
     enableControls();
     emit playSound();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::playSoundStateDeactivated()
@@ -523,7 +520,6 @@ void MainWindow::playSoundStateDeactivated()
     ui->startSoundPushButton->setText(tr("Enter - Start sound"));
     ui->renderArea->disableCurrentPoint();
     emit stopSound();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::exploreStateActivated()
@@ -536,7 +532,6 @@ void MainWindow::exploreStateDeactivated()
 {
     qDebug() << "explore state deactivated";
     ui->renderArea->disableCurrentPoint();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::interestingPointStateActivated()
@@ -544,7 +539,6 @@ void MainWindow::interestingPointStateActivated()
     qDebug() << "interesting point state";
     ui->startSoundPushButton->setText(tr("Enter - Stop sound"));
     ui->renderArea->enableCurrentPoint();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::interestingPointStateDeactivated()
@@ -553,7 +547,6 @@ void MainWindow::interestingPointStateDeactivated()
     ui->startSoundPushButton->setText(tr("Enter - Start sound"));
     //ui->renderArea->disableCurrentPoint();
     emit stopSound();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::interestingPointStoppedStateActivated()
@@ -561,7 +554,6 @@ void MainWindow::interestingPointStoppedStateActivated()
     qDebug() << "interesting point stopped state activated";
     ui->startSoundPushButton->setText(tr("Enter - Start sound"));
     ui->renderArea->enableCurrentPoint();
-    ui->renderArea->setDisplayText("");
 }
 
 void MainWindow::interestingPointStoppedStateDeactivated()
