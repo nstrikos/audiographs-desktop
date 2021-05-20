@@ -244,7 +244,7 @@ Item {
                 functionExpression.setDerivativeMode(0)
                 window.graphRect.pointView.clear()
                 window.graphRect.derivativeView.setUpdate(false);
-                window.graphRect.graphCanvas.updateCanvas(-10, 10, -10, 10, "")
+                window.graphRect.graphCanvas.updateCanvas(-10, 10, -10, 10)
                 disableControls()               
             }
         }
@@ -315,7 +315,6 @@ Item {
                 console.log("graph ready state")
                 enableControls()
                 controlsRect.startSoundButton.text = qsTr("Start sound")
-                window.graphRect.displayText("")
                 graphRect.updateCanvas()
                 window.graphRect.pointView.clear()
             }
@@ -354,12 +353,10 @@ Item {
                 enableControls()
                 controlsRect.startSoundButton.text = qsTr("Stop sound")
                 functionExpression.audio()
-                window.graphRect.displayText("")
             }
             onExited: {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
                 functionExpression.stopAudio()
-                window.graphRect.displayText("")
                 //window.graphRect.pointView.clear()
             }
         }
@@ -415,12 +412,10 @@ Item {
             onEntered: {
                 console.log("interesting point state")
                 controlsRect.startSoundButton.text = qsTr("Stop sound")
-                window.graphRect.displayText("")
             }
             onExited: {
                 controlsRect.startSoundButton.text = qsTr("Start sound")
                 functionExpression.stopAudio()
-                window.graphRect.displayText("")
             }
         }
 
@@ -450,7 +445,6 @@ Item {
             onEntered: {
                 console.log("interesting point finished")
                 controlsRect.startSoundButton.text = qsTr("Start sound")
-                window.graphRect.displayText("")
             }
         }
 

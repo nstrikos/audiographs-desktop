@@ -18,12 +18,12 @@ Canvas {
 
     renderStrategy: Canvas.Immediate
 
-    function updateCanvas(minX, maxX, minY, maxY, text) {
+    function updateCanvas(minX, maxX, minY, maxY) {
         if (available)
-            CanvasJS.paintCanvas(minX, maxX, minY, maxY, text)
+            CanvasJS.paintCanvas(minX, maxX, minY, maxY)
     }
 
-    onAvailableChanged: updateCanvas(minX, maxX, minY, maxY, "")
-    onWidthChanged: updateCanvas(minX, maxX, minY, maxY, "")
-    onHeightChanged: updateCanvas(minX, maxX, minY, maxY, "")
+    onAvailableChanged: updateCanvas(minX, maxX, minY, maxY)
+    onWidthChanged: updateCanvas(minX, maxX, minY, maxY)
+    onHeightChanged: updateCanvas(minX, maxX, minY, maxY)
 }

@@ -14,11 +14,10 @@ Rectangle {
     layer.enabled: true
     layer.samples: 256
 
-    property real minX: -10
-    property real maxX: 10
-    property real minY: -10
-    property real maxY: 10
-    property string text: ""
+    property var minX: -10
+    property var maxX: 10
+    property var minY: -10
+    property var maxY: 10
 
     property alias displayView: displayView
     property alias pointView: pointView
@@ -131,15 +130,10 @@ Rectangle {
 
     function updateCanvas() {
         window.stopAudio()
-        graphCanvas.updateCanvas(minX, maxX, minY, maxY, text)
+        graphCanvas.updateCanvas(minX, maxX, minY, maxY)
         //functionController.viewDimensionsChanged()
         displayView.updateView()
         derivativeView.updateView()
-    }
-
-    function displayText(newText) {
-        text = newText
-        updateCanvas()
     }
 
 //    BeautifyGraphRect {
