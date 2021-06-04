@@ -11,7 +11,13 @@ FunctionDisplayView::FunctionDisplayView(QQuickItem *parent)
     setFlag(ItemHasContents, true);
     m_newColor = m_color;
     m_lineWidth = 10;
+
+#ifdef Q_OS_ANDROID
     m_factor = 10;
+#else
+    m_factor = 1;
+#endif
+
     m_update = true;
 }
 

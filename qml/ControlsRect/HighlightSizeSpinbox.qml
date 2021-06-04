@@ -10,7 +10,7 @@ SpinBox {
     anchors.right: parent.right
     anchors.rightMargin: 10
     from: 5
-    to: 20
+    to: 25
     value: parameters.highlightSize
     Accessible.name: qsTr("Highlight size")
     onValueChanged: {

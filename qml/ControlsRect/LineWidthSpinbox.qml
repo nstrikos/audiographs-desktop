@@ -10,7 +10,7 @@ SpinBox {
     anchors.right: parent.right
     anchors.rightMargin: 10
     from: 1
-    to: 10
+    to: 15
     value: parameters.lineWidth
     Accessible.name: qsTr("Line width")
     onValueChanged: {
