@@ -12,7 +12,7 @@ FocusScope {
     property alias useDifferentNotesCheckBox: useDifferentNotesCheckBox
     property alias color: useDifferentNotesCheckBox.color
     activeFocusOnTab: true
-    Accessible.name: qsTr("Use different notes for negative values control plus f 10")
+    Accessible.name: qsTr("Use different notes for negative values control plus f four")
 
     Keys.onSpacePressed: useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked
     Keys.onEnterPressed: useDifferentNotesCheckBox.checked = !useDifferentNotesCheckBox.checked

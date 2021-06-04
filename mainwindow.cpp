@@ -882,7 +882,7 @@ void MainWindow::initActions()
     useNegativeNotesAction->setShortcut(Qt::Key_F4);
     connect(useNegativeNotesAction, &QAction::triggered, this, &MainWindow::useNegativeNotesActionActivated);
     connect(useNegativeNotesAction, &QAction::hovered, this, &MainWindow::sayWidget);
-    useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
+//    useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
 
     normalModeAction = new QAction(tr("&Normal mode"), this);
     normalModeAction->setShortcut(Qt::CTRL + Qt::Key_0);

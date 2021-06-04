@@ -43,8 +43,8 @@ function drawGrid(minX, maxX, minY, maxY)
         var xInterval = findInterval(xEnd - xStart)
         findVerticalGridLines(xStart, xEnd, xInterval)
 
-        ctx.lineWidth = 0.1
-        ctx.strokeStyle = "black"
+        ctx.lineWidth = 0.5
+        ctx.strokeStyle = parameters.axesColor//"black"
 
         drawVerticalLines()
 
@@ -139,7 +139,7 @@ function drawVerticalLines()
     var x = 0;
     while ( i < xGridCoords.length) {
         x = xGridCoords[i];
-        ctx.font = "10px sans-serif";
+        ctx.font = "15px sans-serif";
         ctx.fillStyle = parameters.axesColor;
         var text = +parseFloat(xGridValues[i]).toFixed(5)
         var w = ctx.measureText(text).width
