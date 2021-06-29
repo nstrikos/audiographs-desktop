@@ -101,6 +101,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->highlightSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(highlightSizeSpinBoxValueChanged(int)));
     connect(ui->axesSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(axesSizeSpinBoxValueChanged(int)));
     connect(ui->showGridCheckBox, SIGNAL(stateChanged(int)), this, SLOT(showGridCheckBoxStateChanged()));
+
+    ui->functionLineEdit->setFocus();
 }
 
 MainWindow::~MainWindow()
@@ -1419,4 +1421,19 @@ void MainWindow::on_derivativePushButton_clicked()
 {
     if (ui->derivativePushButton->isEnabled())
         emit sayDerivative();
+}
+
+void MainWindow::on_useNotesCheckBox_toggled(bool checked)
+{
+    ui->useNotesCheckBox->setFocus();
+}
+
+void MainWindow::on_selfVoiceCheckBox_toggled(bool checked)
+{
+    ui->selfVoiceCheckBox->setFocus();
+}
+
+void MainWindow::on_useNegativeNotescheckBox_stateChanged(int arg1)
+{
+    ui->useNegativeNotescheckBox->setFocus();
 }

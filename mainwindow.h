@@ -185,6 +185,12 @@ private slots:
 
     void on_derivativePushButton_clicked();
 
+    void on_useNotesCheckBox_toggled(bool checked);
+
+    void on_selfVoiceCheckBox_toggled(bool checked);
+
+    void on_useNegativeNotescheckBox_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 
