@@ -147,7 +147,7 @@ void Parameters::read()
     double rate = settings.value("rate", 0.5).toDouble();
     double pitch = settings.value("pitch", 0.5).toDouble();
 
-    int duration = settings.value("duration", 10).toInt();
+    int duration = settings.value("duration", 15).toInt();
     int minFreq = settings.value("minFreq", 200).toInt();
     int maxFreq = settings.value("maxFreq", 2000).toInt();
     bool useNotes = settings.value("useNotes", false).toBool();
@@ -242,7 +242,7 @@ void Parameters::reset()
 
 void Parameters::resetAudio()
 {
-    setDuration(10);
+    setDuration(15);
     setMinFreq(200);
     setMaxFreq(2000);
     setUseNotes(false);

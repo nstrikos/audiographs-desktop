@@ -114,6 +114,7 @@ MainWindow::~MainWindow()
     writeSettings();
 
     delete newExpressionAction;
+    delete focusExpressionAction;
     delete separatorAction;
 
     for (int i = 0; i < MaxRecentFiles; i++)
@@ -308,10 +309,10 @@ void MainWindow::initGraphControls()
     ui->maxFreqSpinBox->setValue(m_parameters->maxFreq());
     ui->useNotesCheckBox->setChecked(m_parameters->useNotes());
     ui->useNegativeNotescheckBox->setChecked(m_parameters->useNegativeNotes());
-//    if (m_parameters->useNotes())
-//        ui->useNegativeNotescheckBox->setEnabled(true);
-//    else
-//        ui->useNegativeNotescheckBox->setEnabled(false);
+    //    if (m_parameters->useNotes())
+    //        ui->useNegativeNotescheckBox->setEnabled(true);
+    //    else
+    //        ui->useNegativeNotescheckBox->setEnabled(false);
     ui->selfVoiceCheckBox->setChecked(m_parameters->selfVoice());
     ui->precisionDigitsSpinBox->setValue(m_parameters->precisionDigits());
     ui->graphWidthSpinBox->setValue(m_parameters->lineWidth());
@@ -404,6 +405,11 @@ void MainWindow::disableControls()
     canZoomDrag = false;
 }
 
+void MainWindow::focusExpression()
+{
+    ui->functionLineEdit->setFocus();
+}
+
 void MainWindow::accessText(QWidget *widget, QString text)
 {
     if (m_parameters->selfVoice())
@@ -421,11 +427,11 @@ void MainWindow::updateRecentFileActions()
 {
     QMutableStringListIterator i(recentFiles);
 
-//    while (i.hasNext())
-//    {
-//        if (!QFile::exists(i.next()))
-//            i.remove();
-//    }
+    //    while (i.hasNext())
+    //    {
+    //        if (!QFile::exists(i.next()))
+    //            i.remove();
+    //    }
 
     for (int j=0; j<MaxRecentFiles; ++j)
     {
@@ -448,11 +454,11 @@ void MainWindow::openRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-       QString expression = action->data().toString();
-       ui->functionLineEdit->clear();
-       ui->functionLineEdit->setText(expression);
-       on_functionLineEdit_textEdited("");
-       ui->functionLineEdit->setFocus();
+        QString expression = action->data().toString();
+        ui->functionLineEdit->clear();
+        ui->functionLineEdit->setText(expression);
+        on_functionLineEdit_textEdited("");
+        ui->functionLineEdit->setFocus();
     }
 }
 
@@ -798,6 +804,11 @@ void MainWindow::initActions()
     connect(newExpressionAction, &QAction::triggered, this, &MainWindow::newExpression);
     connect(newExpressionAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
+    focusExpressionAction = new QAction(tr("&Edit expression"), this);
+    focusExpressionAction->setShortcut(tr("Ctrl+E"));
+    connect(focusExpressionAction, &QAction::triggered, this, &MainWindow::focusExpression);
+    connect(focusExpressionAction, &QAction::hovered, this, &MainWindow::sayWidget);
+
     startSoundButtonAction = new QAction(tr("&Start sound"), this);
     startSoundButtonAction->setShortcut(Qt::CTRL + Qt::Key_Space);
     //startSoundButtonAction->setShortcut(tr("F2"));
@@ -884,7 +895,7 @@ void MainWindow::initActions()
     useNegativeNotesAction->setShortcut(Qt::Key_F4);
     connect(useNegativeNotesAction, &QAction::triggered, this, &MainWindow::useNegativeNotesActionActivated);
     connect(useNegativeNotesAction, &QAction::hovered, this, &MainWindow::sayWidget);
-//    useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
+    //    useNegativeNotesAction->setEnabled(ui->useNotesCheckBox->isChecked());
 
     normalModeAction = new QAction(tr("&Normal mode"), this);
     normalModeAction->setShortcut(Qt::CTRL + Qt::Key_0);
@@ -929,7 +940,7 @@ void MainWindow::initMenu()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newExpressionAction);
 
-//    separatorAction = fileMenu->addSeparator();
+    //    separatorAction = fileMenu->addSeparator();
     for (int i=0; i<MaxRecentFiles; ++i)
         fileMenu->addAction(recentFileActions[i]);
 
@@ -959,6 +970,8 @@ void MainWindow::initMenu()
     controlMenu->addAction(normalModeAction);
     controlMenu->addAction(firstDerivativeModeAction);
     controlMenu->addAction(secondDerivativeModeAction);
+    controlMenu->addAction(focusExpressionAction);
+
     ui->menubar->addMenu(controlMenu);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
@@ -1107,10 +1120,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
                 accessText(ui->functionLineEdit, m_textToSpeech->normalizeText(text));
             }
             return false;
-        } /*else if ( (key->key() == Qt::Key_F2 ) ) {
-            selfVoiceActionActivated();
+        } else if (key->key() == Qt::Key_E && key->modifiers()==Qt::ControlModifier ) {
+            focusExpression();
             return true;
-        }*/
+        }
     }
 
     if (event->type() == QEvent::FocusIn) {
@@ -1333,6 +1346,7 @@ void MainWindow::showShortcuts()
         QString text = tr("Audiographs shortcuts\n");
         text += tr("Help dialog - F1\n");
         text += tr("New expression - Ctrl + N\n");
+        text += tr("Focus expression - Ctrl + E\n");
         text += tr("Play sound - Enter\n");
         text += tr("Previous point - Page down\n");
         text += tr("Next point - Page up\n");
@@ -1373,7 +1387,7 @@ void MainWindow::showShortcuts()
         QDesktopServices::openUrl(QUrl(link));
         qDebug() << link;
     }
- }
+}
 
 void MainWindow::closeShortcuts()
 {
@@ -1425,15 +1439,21 @@ void MainWindow::on_derivativePushButton_clicked()
 
 void MainWindow::on_useNotesCheckBox_toggled(bool checked)
 {
-    ui->useNotesCheckBox->setFocus();
+    Q_UNUSED(checked);
+    if (!m_parameters->selfVoice())
+        ui->useNotesCheckBox->setFocus();
 }
 
 void MainWindow::on_selfVoiceCheckBox_toggled(bool checked)
 {
-    ui->selfVoiceCheckBox->setFocus();
+    Q_UNUSED(checked);
+    if (!m_parameters->selfVoice())
+        ui->selfVoiceCheckBox->setFocus();
 }
 
 void MainWindow::on_useNegativeNotescheckBox_stateChanged(int arg1)
 {
-    ui->useNegativeNotescheckBox->setFocus();
+    Q_UNUSED(arg1);
+    if (!m_parameters->selfVoice())
+        ui->useNegativeNotescheckBox->setFocus();
 }

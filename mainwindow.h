@@ -201,6 +201,7 @@ private:
     void initGraphControls();
     void enableControls();
     void disableControls();
+    void focusExpression();
 
     QStateMachine stateMachine;
     QState initialState, errorDisplayState, evaluateState, graphReadyState,
@@ -217,6 +218,7 @@ private:
     Parameters *m_parameters;
 
     QAction *newExpressionAction;
+    QAction *focusExpressionAction;
     QAction *startSoundButtonAction;
     QAction *nextAction;
     QAction *previousAction;
