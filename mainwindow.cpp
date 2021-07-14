@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->showGridCheckBox->installEventFilter(this);
     ui->resetGraphSettingsPushButton->installEventFilter(this);
     ui->scrollArea->installEventFilter(this);
+    ui->coordLabel->installEventFilter(this);
+    ui->coordLabel2->installEventFilter(this);
     this->installEventFilter(this);
 
     errorDisplayDialog = nullptr;
@@ -102,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->axesSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(axesSizeSpinBoxValueChanged(int)));
     connect(ui->showGridCheckBox, SIGNAL(stateChanged(int)), this, SLOT(showGridCheckBoxStateChanged()));
 
+    updateLabel();
     ui->functionLineEdit->setFocus();
 }
 
@@ -130,6 +133,8 @@ MainWindow::~MainWindow()
     delete sayDerivativeAction;
     delete decStepAction;
     delete incStepAction;
+    delete decPrecisionAction;
+    delete incPrecisionAction;
     delete previousInterestPointAction;
     delete nextInterestPointAction;
     delete nextFastAction;
@@ -410,6 +415,12 @@ void MainWindow::focusExpression()
     ui->functionLineEdit->setFocus();
 }
 
+void MainWindow::clearLabel()
+{
+    ui->coordLabel->setText("");
+    ui->coordLabel2->setText("");
+}
+
 void MainWindow::accessText(QWidget *widget, QString text)
 {
     if (m_parameters->selfVoice())
@@ -484,6 +495,7 @@ void MainWindow::initialStateActivated()
 void MainWindow::evaluateStateActivated()
 {
     qDebug() << "evaluate state";
+    clearLabel();
     disableControls();
     ui->renderArea->disableCurrentPoint();
     emit derivativeMode(0);
@@ -519,6 +531,7 @@ void MainWindow::playSoundStateActivated()
     ui->renderArea->enableCurrentPoint();
     enableControls();
     emit playSound();
+    clearLabel();
 }
 
 void MainWindow::playSoundStateDeactivated()
@@ -597,6 +610,7 @@ void MainWindow::updateGraph(Points *points, double minX, double maxX, double mi
     m_minY = minY;
     m_maxY = maxY;
     emit newgraph();
+    clearLabel();
 }
 
 void MainWindow::newInputValues(double minX, double maxX, double minY, double maxY)
@@ -627,6 +641,7 @@ void MainWindow::error(QString errorString)
 {
     qDebug() << errorString;
     ui->renderArea->clear();
+    clearLabel();
     m_errorString = errorString;
     emit functionError();
 }
@@ -640,6 +655,7 @@ void MainWindow::performZoom(int delta)
     emit derivativeMode(0);
     ui->renderArea->setDerivativeMode(0);
     emit zoom(delta);
+    clearLabel();
 }
 
 void MainWindow::mousePressed(int x, int y)
@@ -662,6 +678,7 @@ void MainWindow::mouseMove(int diffX, int diffY)
 
 
     emit drag(diffX, diffY, ui->renderArea->width(), ui->renderArea->height());
+    clearLabel();
 }
 
 void MainWindow::mouseReleased()
@@ -721,6 +738,7 @@ void MainWindow::on_graphColorPushButton_clicked()
         m_parameters->setLineColor(color);
         setButtonColors();
         ui->renderArea->update();
+        updateLabel();
     }
 }
 
@@ -763,6 +781,7 @@ void MainWindow::on_resetGraphSettingsPushButton_clicked()
     setButtonColors();
     initGraphControls();
     ui->renderArea->update();
+    updateLabel();
 }
 
 void MainWindow::on_startSoundPushButton_clicked()
@@ -777,6 +796,7 @@ void MainWindow::on_resetAudioPushButton_clicked()
     ui->minFreqSpinBox->setValue(m_parameters->minFreq());
     ui->maxFreqSpinBox->setValue(m_parameters->maxFreq());
     ui->useNotesCheckBox->setChecked(m_parameters->useNotes());
+    ui->useNegativeNotescheckBox->setChecked(m_parameters->useNegativeNotes());
     ui->precisionDigitsSpinBox->setValue(m_parameters->precisionDigits());
 }
 
@@ -790,6 +810,7 @@ void MainWindow::newExpression()
     ui->maxYLineEdit->setText("10");
 
     emit evaluate();
+    clearLabel();
 }
 
 void MainWindow::quit()
@@ -850,6 +871,16 @@ void MainWindow::initActions()
     incStepAction->setShortcut(tr("Ctrl+]"));
     connect(incStepAction, &QAction::triggered, this, &MainWindow::on_incStepPushButton_clicked);
     connect(incStepAction, &QAction::hovered, this, &MainWindow::sayWidget);
+
+    decPrecisionAction = new QAction(tr("Decrease precision"), this);
+    decPrecisionAction->setShortcut(Qt::Key_F9);
+    connect(decPrecisionAction, &QAction::triggered, this, &MainWindow::decPrecision);
+    connect(decPrecisionAction, &QAction::hovered, this, &MainWindow::sayWidget);
+
+    incPrecisionAction = new QAction(tr("Increase precision"), this);
+    incPrecisionAction->setShortcut(Qt::Key_F10);
+    connect(incPrecisionAction, &QAction::triggered, this, &MainWindow::incPrecision);
+    connect(incPrecisionAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     previousInterestPointAction = new QAction(tr("&Previous point of interest"), this);
     previousInterestPointAction->setShortcut(Qt::CTRL + Qt::Key_Left);
@@ -958,6 +989,8 @@ void MainWindow::initMenu()
     controlMenu->addAction(sayDerivativeAction);
     controlMenu->addAction(decStepAction);
     controlMenu->addAction(incStepAction);
+    controlMenu->addAction(decPrecisionAction);
+    controlMenu->addAction(incPrecisionAction);
     controlMenu->addAction(previousInterestPointAction);
     controlMenu->addAction(nextInterestPointAction);
     controlMenu->addAction(previousFastAction);
@@ -982,26 +1015,37 @@ void MainWindow::initMenu()
 
 void MainWindow::on_nextPushButton_clicked()
 {
-    if (ui->nextPushButton->isEnabled())
+    if (ui->nextPushButton->isEnabled()) {
         emit nextPoint();
+        clearLabel();
+    }
 }
 
 void MainWindow::on_previousPushButton_clicked()
 {
-    if (ui->previousPushButton->isEnabled())
+    if (ui->previousPushButton->isEnabled()) {
         emit previousPoint();
+        clearLabel();
+    }
 }
 
 void MainWindow::on_xPushButton_clicked()
 {
-    if (ui->xPushButton->isEnabled())
-        emit sayX();
+    if (ui->xPushButton->isEnabled()) {
+        if (m_parameters->selfVoice())
+            emit sayX();
+        emit getX();
+    }
 }
 
 void MainWindow::on_yPushButton_clicked()
 {
-    if(ui->yPushButton->isEnabled())
-        emit sayY();
+    if(ui->yPushButton->isEnabled()) {
+        if (m_parameters->selfVoice())
+            emit sayY();
+        else
+            emit getY();
+    }
 }
 
 void MainWindow::on_decStepPushButton_clicked()
@@ -1019,6 +1063,7 @@ void MainWindow::on_previousPointInterestPushButton_clicked()
     if (ui->previousPointInterestPushButton->isEnabled()) {
         emit previousPointInterest();
         emit externalPreviousPointInterest();
+        clearLabel();
     }
 }
 
@@ -1027,11 +1072,13 @@ void MainWindow::on_nextPointInterestPushButton_clicked()
     if (ui->nextPointInterestPushButton->isEnabled()) {
         emit nextPointInterest();
         emit externalNextPointInterest();
+        clearLabel();
     }
 }
 void MainWindow::on_previousFastPushButton_clicked()
 {
     if(ui->previousFastPushButton->isEnabled()) {
+        clearLabel();
         emit previousFast();
         emit externalPreviousFast();
     }
@@ -1040,6 +1087,7 @@ void MainWindow::on_previousFastPushButton_clicked()
 void MainWindow::on_nextFastPushButton_clicked()
 {
     if(ui->nextFastPushButton->isEnabled()) {
+        clearLabel();
         emit nextFast();
         emit externalNextFast();
     }
@@ -1047,12 +1095,38 @@ void MainWindow::on_nextFastPushButton_clicked()
 
 void MainWindow::on_firstPointPushButton_clicked()
 {
-    emit firstPoint();
+    if (firstPointAction->isEnabled()) {
+        emit firstPoint();
+        //clearLabel();
+        updateLabelText(tr("starting point"));
+    }
 }
 
 void MainWindow::on_lastPointPushButton_clicked()
 {
-    emit lastPoint();
+    if (lastPointAction->isEnabled()) {
+        emit lastPoint();
+        //clearLabel();
+        updateLabelText(tr("ending point"));
+    }
+}
+
+void MainWindow::updateLabelText(QString text)
+{
+    qDebug() << __func__ << text;
+    QString oldText = ui->coordLabel->text();
+    if (text != oldText) {
+        qDebug() << text << oldText;
+        ui->coordLabel2->setText("");
+        ui->coordLabel->setText(text);
+        if (!m_parameters->selfVoice())
+            ui->coordLabel->setFocus();
+    } else {
+        ui->coordLabel->setText("");
+        ui->coordLabel2->setText(text);
+        if (!m_parameters->selfVoice())
+            ui->coordLabel2->setFocus();
+    }
 }
 
 void MainWindow::exit()
@@ -1210,24 +1284,33 @@ void MainWindow::on_normalModePushButton_clicked()
 {
     emit derivativeMode(0);
     ui->renderArea->setDerivativeMode(0);
-    m_textToSpeech->speak(tr("Normal mode"));
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(tr("Normal mode"));
     emit newgraph();
+    //clearLabel();
+    updateLabelText(tr("normal mode"));
 }
 
 void MainWindow::on_firstDerivativePushButton_clicked()
 {
     emit derivativeMode(1);
     ui->renderArea->setDerivativeMode(1);
-    m_textToSpeech->speak(tr("First derivative mode"));
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(tr("First derivative mode"));
     emit newgraph();
+    //clearLabel();
+    updateLabelText(tr("first derivative"));
 }
 
 void MainWindow::on_secondDerivativePushButton_clicked()
 {
     emit derivativeMode(2);
     ui->renderArea->setDerivativeMode(2);
-    m_textToSpeech->speak(tr("Second derivative mode"));
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(tr("Second derivative mode"));
     emit newgraph();
+    //    clearLabel();
+    updateLabelText(tr("second derivative"));
 }
 
 void MainWindow::durationSpinBoxValueChanged(int value)
@@ -1248,10 +1331,29 @@ void MainWindow::maxFreqSpinBoxValueChanged(int value)
     accessText(ui->maxFreqSpinBox, QString::number(value) + " hertz");
 }
 
+void MainWindow::incPrecision()
+{
+    int value = ui->precisionDigitsSpinBox->value();
+    value++;
+    if (value > 5)
+        value = 5;
+    ui->precisionDigitsSpinBox->setValue(value);
+}
+
+void MainWindow::decPrecision()
+{
+    int value = ui->precisionDigitsSpinBox->value();
+    value--;
+    if (value < 0)
+        value = 0;
+    ui->precisionDigitsSpinBox->setValue(value);
+}
+
 void MainWindow::precisionDigitsSpinboxValueChanged(int value)
 {
     m_parameters->setPrecisionDigits(value);
     accessText(ui->precisionDigitsSpinBox, QString::number(value) + " digits");
+    updateLabelText(tr("Precision ") + QString::number(value) + tr(" digits"));
 }
 
 void MainWindow::selfVoiceCheckBoxStateChanged()
@@ -1292,6 +1394,7 @@ void MainWindow::graphWidthSpinBoxValueChanged(int value)
 {
     m_parameters->setLineWidth(value);
     ui->renderArea->update();
+    updateLabel();
     accessText(ui->graphWidthSpinBox, QString::number(value));
 }
 
@@ -1361,6 +1464,8 @@ void MainWindow::showShortcuts()
         text += tr("Last point - End\n");
         text += tr("Decrease step - Ctrl + [\n");
         text += tr("Increase step - Ctrl + ]\n");
+        text += tr("Decrease precision - F9\n");
+        text += tr("Increase precision - F10\n");
         text += tr("Normal mode - Ctrl + 0\n");
         text += tr("First derivative mode - Ctrl + 1\n");
         text += tr("Second derivative mode - Ctrl + 2\n");
@@ -1431,10 +1536,30 @@ void MainWindow::sayWidget()
     m_textToSpeech->speak(text);
 }
 
+void MainWindow::updateLabel()
+{
+    QFont font;
+    font.setPointSize(2 * m_parameters->lineWidth());
+
+    if (font.pointSize() < 12)
+        font.setPointSize(12);
+    QPalette palette;
+
+    //    ui->coordLabel->setAutoFillBackground(true);
+    palette.setColor(ui->coordLabel->foregroundRole(), m_parameters->lineColor());
+    ui->coordLabel->setPalette(palette);
+    ui->coordLabel->setFont(font);
+
+    ui->coordLabel2->setPalette(palette);
+    ui->coordLabel2->setFont(font);
+}
+
 void MainWindow::on_derivativePushButton_clicked()
 {
-    if (ui->derivativePushButton->isEnabled())
+    if (ui->derivativePushButton->isEnabled()) {
         emit sayDerivative();
+        emit getDerivative();
+    }
 }
 
 void MainWindow::on_useNotesCheckBox_toggled(bool checked)

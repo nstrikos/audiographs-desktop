@@ -29,7 +29,10 @@ public:
     Q_INVOKABLE void previousPoint();
     Q_INVOKABLE void sayX();
     Q_INVOKABLE void sayY();
+    Q_INVOKABLE void getX();
+    Q_INVOKABLE void getY();
     Q_INVOKABLE void sayDerivative();
+    Q_INVOKABLE void getDerivative();
     Q_INVOKABLE void decStep();
     Q_INVOKABLE void incStep();
     Q_INVOKABLE void previousPointInterest();
@@ -55,6 +58,7 @@ signals:
     void audioFinished();
     void newCurrentPoint(double x, double y);
     void interestingPointFinished();
+    void updateText(QString text);
 
 private:
     FunctionModel functionModel;

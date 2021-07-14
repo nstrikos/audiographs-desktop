@@ -41,6 +41,7 @@ public:
 
 signals:
     void finished();
+    void updateLabel(QString text);
 
 
 private slots:

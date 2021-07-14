@@ -15,7 +15,7 @@ PointsInterest::PointsInterest(FunctionModel &functionModel,
 {
     m_funcDescription = nullptr;
     m_pointInterest = 0;
-//    m_audioNotes = nullptr;
+    //    m_audioNotes = nullptr;
     m_forward = true;
     m_isUpdated = false;
     m_timer.setTimerType(Qt::PreciseTimer);
@@ -63,14 +63,13 @@ void PointsInterest::nextPointFast()
         m_isUpdated = true;
     }
 
-//    m_currentPoint = currentPoint;
-//    qDebug() << "currentPoint " << m_currentPoint->X();
-//    m_pointView = pointView;
-
     m_forward = true;
     m_pointInterest = getNextPointInterest();
-//    qDebug() << "pointInterest " << m_pointInterest << m_points[m_pointInterest].x;
     m_currentPoint.setPoint(m_points[m_pointInterest].x);
+    QString label = currentPointLabel();
+    if (m_parameters->selfVoice())
+        m_textToSpeech.speak(label);
+    emit updateLabel(label);
 }
 
 void PointsInterest::previousPointFast()
@@ -88,14 +87,13 @@ void PointsInterest::previousPointFast()
         m_isUpdated = true;
     }
 
-//    m_currentPoint = currentPoint;
-//    m_pointView = pointView;
-
-    qDebug() << "previous fast";
-
     m_forward = false;
     m_pointInterest = getNextPointInterest();
     m_currentPoint.setPoint(m_points[m_pointInterest].x);
+    QString label = currentPointLabel();
+    if (m_parameters->selfVoice())
+        m_textToSpeech.speak(label);
+    emit updateLabel(label);
 }
 
 void PointsInterest::start()
@@ -110,9 +108,9 @@ void PointsInterest::start()
         m_isUpdated = true;
     }
 
-//    m_audioNotes = audioNotes;
-//    m_currentPoint = currentPoint;
-//    m_pointView = pointView;
+    //    m_audioNotes = audioNotes;
+    //    m_currentPoint = currentPoint;
+    //    m_pointView = pointView;
 
     m_pointInterest = getNextPointInterest();
 
@@ -269,10 +267,10 @@ int PointsInterest::getNextPointInterest()
 void PointsInterest::stop()
 {
     m_timer.stop();
-//    if (m_audioNotes != nullptr)
-        m_audioNotes.stopNotes();
+    //    if (m_audioNotes != nullptr)
+    m_audioNotes.stopNotes();
     //m_isUpdated = false;
-//        qDebug() << "stop";
+    //        qDebug() << "stop";
 }
 
 void PointsInterest::setUpdated(bool updated)
@@ -282,12 +280,12 @@ void PointsInterest::setUpdated(bool updated)
 
 void PointsInterest::timerExpired()
 {
-//    if (m_pointView == nullptr)
-//        return;
-//    if (m_audioNotes == nullptr)
-//        return;
-//    if (m_model == nullptr)
-//        return;
+    //    if (m_pointView == nullptr)
+    //        return;
+    //    if (m_audioNotes == nullptr)
+    //        return;
+    //    if (m_model == nullptr)
+    //        return;
 
     Parameters *parameters = &Parameters::getInstance();
 
@@ -297,7 +295,9 @@ void PointsInterest::timerExpired()
             m_currentPoint.setPoint(m_points[m_pointInterest].x);
             m_timer.stop();
             QString label = currentPointLabel();
-            m_textToSpeech.speak(label);
+            if (m_parameters->selfVoice())
+                m_textToSpeech.speak(label);
+            emit updateLabel(label);
             emit finished();
         } else {
             m_audioNotes.setNote(m_currentPoint.point(), parameters->minFreq(), parameters->maxFreq(), parameters->useNotes(), m_derivMode, m_parameters->useNegativeNotes());
@@ -308,7 +308,9 @@ void PointsInterest::timerExpired()
             m_currentPoint.setPoint(m_points[m_pointInterest].x);
             m_timer.stop();
             QString label = currentPointLabel();
-            m_textToSpeech.speak(label);
+            if (m_parameters->selfVoice())
+                m_textToSpeech.speak(label);
+            emit updateLabel(label);
             emit finished();
         } else {
             m_audioNotes.setNote(m_currentPoint.point(), parameters->minFreq(), parameters->maxFreq(), parameters->useNotes(), m_derivMode, m_parameters->useNegativeNotes());

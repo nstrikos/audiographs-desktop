@@ -22,6 +22,7 @@ FunctionExpression::FunctionExpression(QObject *parent) : QObject(parent)
 
     m_pointsInterest = new PointsInterest(functionModel, *m_audioNotes, *m_currentPoint, *m_textToSpeech);
     connect(m_pointsInterest, &PointsInterest::finished, this, &FunctionExpression::interestingPointFinished);
+    connect(m_pointsInterest, &PointsInterest::updateLabel, this, &FunctionExpression::updateText);
 
     m_dragHandler = new DragHandler();
     connect(m_dragHandler, &DragHandler::newInputValues, this, &FunctionExpression::newInputValues);
@@ -160,8 +161,6 @@ void FunctionExpression::sayX()
 {
     double x = functionModel.x(m_currentPoint->point());
 
-    qDebug() << __func__ << m_currentPoint->point();
-
     double Pow = pow(10.0, m_parameters->precisionDigits());
     x = round (x * Pow) / Pow;
 
@@ -186,6 +185,35 @@ void FunctionExpression::sayY()
     }
 }
 
+void FunctionExpression::getX()
+{
+    double x = functionModel.x(m_currentPoint->point());
+
+    double Pow = pow(10.0, m_parameters->precisionDigits());
+    x = round (x * Pow) / Pow;
+
+    char c = 'f';
+    QString value = QString::number(x, c, m_parameters->precisionDigits());
+    //m_textToSpeech->speak(value);
+    updateText(value);
+}
+
+void FunctionExpression::getY()
+{
+    if (functionModel.isValid(m_currentPoint->point())) {
+        double y = functionModel.y(m_currentPoint->point());
+
+        double Pow = pow(10.0, m_parameters->precisionDigits());
+        y = round (y * Pow) / Pow;
+
+        char c = 'f';
+        QString value = QString::number(y, c, m_parameters->precisionDigits());
+        updateText(value);
+    } else {
+        updateText(tr("Not defined"));
+    }
+}
+
 void FunctionExpression::sayDerivative()
 {
     if (functionModel.isValid(m_currentPoint->point())) {
@@ -206,12 +234,35 @@ void FunctionExpression::sayDerivative()
     }
 }
 
+void FunctionExpression::getDerivative()
+{
+    if (functionModel.isValid(m_currentPoint->point())) {
+
+        if (m_derivativeMode == 0)
+            functionModel.refreshDerivative();
+
+        double y = functionModel.derivative(m_currentPoint->point());
+
+        double Pow = pow(10.0, m_parameters->precisionDigits());
+        y = round (y * Pow) / Pow;
+
+        char c = 'f';
+        QString value = QString::number(y, c, m_parameters->precisionDigits());
+        updateText(value);
+    } else {
+        updateText(tr("Not defined"));
+    }
+}
+
 void FunctionExpression::decStep()
 {
     m_currentPoint->decStep();
 
     double realStep = (double) m_currentPoint->step() / functionModel.size() * (functionModel.maxX() - functionModel.minX());
-    m_textToSpeech->speak(tr("Step is ") + QString::number(realStep));
+    QString text = tr("Step is ") + QString::number(realStep);
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(text);
+    updateText(text);
 }
 
 void FunctionExpression::incStep()
@@ -219,7 +270,10 @@ void FunctionExpression::incStep()
     m_currentPoint->incStep();
 
     double realStep = (double) m_currentPoint->step() / functionModel.size() * (functionModel.maxX() - functionModel.minX());
-    m_textToSpeech->speak(tr("Step is ") + QString::number(realStep));
+    QString text = tr("Step is ") + QString::number(realStep);
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(text);
+    updateText(text);
 }
 
 void FunctionExpression::previousPointInterest()
@@ -235,31 +289,27 @@ void FunctionExpression::nextPointInterest()
 void FunctionExpression::previousFast()
 {
     m_pointsInterest->previousPointFast();
-    sayX();
-    sayY();
 }
 
 void FunctionExpression::nextFast()
 {
     m_pointsInterest->nextPointFast();
-    sayX();
-    sayY();
 }
 
 void FunctionExpression::firstPoint()
 {
     stopAudio();
     m_currentPoint->reset();
-    sayX();
-    sayY();
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(tr("starting point"));
 }
 
 void FunctionExpression::lastPoint()
 {
     stopAudio();
     m_currentPoint->endPoint();
-    sayX();
-    sayY();
+    if (m_parameters->selfVoice())
+        m_textToSpeech->speak(tr("ending point"));
 }
 
 void FunctionExpression::setDerivativeMode(int mode)

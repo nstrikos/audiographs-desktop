@@ -25,7 +25,11 @@ void FunctionConnector::start(MainWindow &window, FunctionExpression &functionEx
     QObject::connect(&window, &MainWindow::previousPoint, &functionExpression, &FunctionExpression::previousPoint);
     QObject::connect(&window, &MainWindow::sayX, &functionExpression, &FunctionExpression::sayX);
     QObject::connect(&window, &MainWindow::sayY, &functionExpression, &FunctionExpression::sayY);
+    QObject::connect(&window, &MainWindow::getX, &functionExpression, &FunctionExpression::getX);
+    QObject::connect(&window, &MainWindow::getY, &functionExpression, &FunctionExpression::getY);
+    QObject::connect(&functionExpression, &FunctionExpression::updateText, &window, &MainWindow::updateLabelText);
     QObject::connect(&window, &MainWindow::sayDerivative, &functionExpression, &FunctionExpression::sayDerivative);
+    QObject::connect(&window, &MainWindow::getDerivative, &functionExpression, &FunctionExpression::getDerivative);
     QObject::connect(&window, &MainWindow::decStep, &functionExpression, &FunctionExpression::decStep);
     QObject::connect(&window, &MainWindow::incStep, &functionExpression, &FunctionExpression::incStep);
     QObject::connect(&window, &MainWindow::externalPreviousPointInterest, &functionExpression, &FunctionExpression::previousPointInterest);

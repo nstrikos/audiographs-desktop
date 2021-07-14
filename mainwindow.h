@@ -49,7 +49,10 @@ signals:
     void previousPoint();
     void sayX();
     void sayY();
+    void getX();
+    void getY();
     void sayDerivative();
+    void getDerivative();
     void decStep();
     void incStep();
     void previousPointInterest();
@@ -98,6 +101,8 @@ public slots:
     void on_firstPointPushButton_clicked();
 
     void on_lastPointPushButton_clicked();
+
+    void updateLabelText(QString text);
 
     void exit();
 
@@ -163,6 +168,8 @@ private slots:
     void durationSpinBoxValueChanged(int value);
     void minFreqSpinBoxValueChanged(int value);
     void maxFreqSpinBoxValueChanged(int value);
+    void incPrecision();
+    void decPrecision();
     void precisionDigitsSpinboxValueChanged(int value);
     void selfVoiceCheckBoxStateChanged();
     void useNotesCheckBoxStateChanged();
@@ -180,6 +187,8 @@ private slots:
     void closeAboutDialog();
 
     void sayWidget();
+
+    void updateLabel();
 
     void openRecentFile();
 
@@ -202,6 +211,7 @@ private:
     void enableControls();
     void disableControls();
     void focusExpression();
+    void clearLabel();
 
     QStateMachine stateMachine;
     QState initialState, errorDisplayState, evaluateState, graphReadyState,
@@ -227,6 +237,8 @@ private:
     QAction *sayDerivativeAction;
     QAction *incStepAction;
     QAction *decStepAction;
+    QAction *incPrecisionAction;
+    QAction *decPrecisionAction;
     QAction *previousInterestPointAction;
     QAction *nextInterestPointAction;
     QAction *nextFastAction;
