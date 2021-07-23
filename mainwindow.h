@@ -11,7 +11,6 @@
 #include <QAction>
 
 #include "errorDisplayDialog.h"
-#include "helpDialog.h"
 #include "aboutDialog.h"
 #include "texttospeech.h"
 
@@ -182,7 +181,6 @@ private slots:
     void on_derivativeColorPushButton_clicked();
 
     void showShortcuts();
-    void closeShortcuts();
     void showAboutDialog();
     void closeAboutDialog();
 
@@ -262,7 +260,6 @@ private:
     KeyReceiver *keyReceiver;
 
     ErrorDisplayDialog *errorDisplayDialog;
-    HelpDialog *helpDialog;
     AboutDialog *aboutDialog;
     QString m_errorString;
 

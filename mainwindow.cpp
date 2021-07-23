@@ -89,7 +89,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->installEventFilter(this);
 
     errorDisplayDialog = nullptr;
-    helpDialog = nullptr;
     aboutDialog = nullptr;
 
     connect(ui->durationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(durationSpinBoxValueChanged(int)));
@@ -155,9 +154,6 @@ MainWindow::~MainWindow()
 
     if (errorDisplayDialog != nullptr)
         delete errorDisplayDialog;
-
-    if (helpDialog != nullptr)
-        delete helpDialog;
 
     if (aboutDialog != nullptr)
         delete aboutDialog;
@@ -1438,66 +1434,14 @@ void MainWindow::on_derivativeColorPushButton_clicked()
 
 void MainWindow::showShortcuts()
 {
-    if (m_parameters->selfVoice()) {
+    QString filename = "C:/Program Files/Audiographs/doc/help.html";
 
-        if (helpDialog == nullptr) {
-            helpDialog = new HelpDialog();
-            connect(helpDialog, &HelpDialog::accepted, this, &MainWindow::closeShortcuts);
-            connect(helpDialog, &HelpDialog::rejected, this, &MainWindow::closeShortcuts);
-        }
-
-        QString text = tr("Audiographs shortcuts\n");
-        text += tr("Help dialog - F1\n");
-        text += tr("New expression - Ctrl + N\n");
-        text += tr("Focus expression - Ctrl + E\n");
-        text += tr("Play sound - Enter\n");
-        text += tr("Previous point - Page down\n");
-        text += tr("Next point - Page up\n");
-        text += tr("X Coordinate - Ctrl + X\n");
-        text += tr("Y Coordinate - Ctrl + Y\n");
-        text += tr("Derivative - Ctrl + D\n");
-        text += tr("Previous point of interest - Ctrl + Left\n");
-        text += tr("Next point of interest - Ctrl + Right\n");
-        text += tr("Previous point (fast) - Shift + Left\n");
-        text += tr("Next point (fast) - Shift + Right\n");
-        text += tr("First point - Home\n");
-        text += tr("Last point - End\n");
-        text += tr("Decrease step - Ctrl + [\n");
-        text += tr("Increase step - Ctrl + ]\n");
-        text += tr("Decrease precision - F9\n");
-        text += tr("Increase precision - F10\n");
-        text += tr("Normal mode - Ctrl + 0\n");
-        text += tr("First derivative mode - Ctrl + 1\n");
-        text += tr("Second derivative mode - Ctrl + 2\n");
-        text += tr("Self voice - F2\n");
-        text += tr("Use notes - F3\n");
-        text += tr("Use different notes for negative values - F4\n");
-        text += tr("Recent function expressions - Alt + 1 to 9");
-
-        helpDialog->setWindowTitle(tr("Help"));
-        helpDialog->setText(text);
-        helpDialog->setModal(true);
-        helpDialog->show();
-
-        text = text.replace("[", " left bracket ");
-        text = text.replace("]", " right bracket ");
-
-        m_textToSpeech->speak(text);
-    } else {
-        QDir temp = QDir::tempPath();
-        QString file = temp.tempPath() + "/help.html";
-        QFile qrc(":/doc/help.html");
-        QFile::copy(":/doc/help.html", file);
-        QString link = file;
-        QDesktopServices::openUrl(QUrl(link));
-        qDebug() << link;
+    if ( !QFile::exists(filename)) {
+        filename = "C:/Program Files (x86)/Audiographs/doc/help.html";
     }
-}
 
-void MainWindow::closeShortcuts()
-{
-    helpDialog->hide();
-    m_textToSpeech->stop();
+    QUrl url = QUrl::fromLocalFile(filename);
+    QDesktopServices::openUrl(url);
 }
 
 void MainWindow::showAboutDialog()
@@ -1557,7 +1501,8 @@ void MainWindow::updateLabel()
 void MainWindow::on_derivativePushButton_clicked()
 {
     if (ui->derivativePushButton->isEnabled()) {
-        emit sayDerivative();
+        if (m_parameters->selfVoice())
+            emit sayDerivative();
         emit getDerivative();
     }
 }

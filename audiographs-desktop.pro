@@ -42,7 +42,6 @@ SOURCES += \
     generator/genparameters.cpp \
     generator/genphicalculator.cpp \
     generator/gensum.cpp \
-    helpDialog.cpp \
     main.cpp \
     mainwindow.cpp \
     parameters.cpp \
@@ -80,7 +79,6 @@ HEADERS += \
     generator/genparameters.h \
     generator/genphicalculator.h \
     generator/gensum.h \
-    helpDialog.h \
     mainwindow.h \
     parameters.h \
     renderArea.h \
@@ -103,7 +101,6 @@ HEADERS +=   parsers/fparser/extrasrc/fpaux.hh \
 FORMS += \
     aboutDialog.ui \
     errorDisplayDialog.ui \
-    helpDialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -122,3 +119,5 @@ RESOURCES += \
     qml.qrc
 
 DISTFILES +=
+
+RC_ICONS = audiographs.ico

@@ -26,10 +26,7 @@ int main(int argc, char *argv[])
     if ((argc == 2) && (strcmp(argv[1], "--mobile") == 0))
         runMobile = true;
 
-
-
     if (!runMobile) {
-
         QApplication a(argc, argv);
         MainWindow w;
         w.showMaximized();
@@ -90,13 +87,6 @@ int main(int argc, char *argv[])
         FunctionDisplayView *derivativeView = static_cast<FunctionDisplayView*>(qmlDerivativeView);
         QObject::connect(&functionExpression, &FunctionExpression::updateDerivative, derivativeView, &FunctionDisplayView::draw);
         QObject::connect(&functionExpression, &FunctionExpression::error, derivativeView, &FunctionDisplayView::clear);
-
-//        QObject::connect(&functionExpression, &FunctionExpression::newCurrentPoint, pointView, &FunctionPointView::setCurrentPoint);
-
-        //            FunctionDisplayView *derivativeView = static_cast<FunctionDisplayView*>(qmlDerivativeView);
-        //            functionController.setView(displayView);
-        //            functionController.setPointView(pointView);
-        //            functionController.setDerivativeView(derivativeView);
 
         return app.exec();
     }

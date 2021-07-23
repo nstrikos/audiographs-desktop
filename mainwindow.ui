@@ -44,7 +44,7 @@
          <x>0</x>
          <y>0</y>
          <width>300</width>
-         <height>1529</height>
+         <height>1564</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -347,6 +347,25 @@
           </property>
           <property name="text">
            <string>Enter - Start sound</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="helpPushButton">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="accessibleName">
+           <string>F1 help</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>F1 help</string>
+          </property>
+          <property name="text">
+           <string>F1 - Help</string>
           </property>
          </widget>
         </item>
@@ -1664,6 +1683,7 @@ for negative values</string>
   <tabstop>minYLineEdit</tabstop>
   <tabstop>maxYLineEdit</tabstop>
   <tabstop>startSoundPushButton</tabstop>
+  <tabstop>helpPushButton</tabstop>
   <tabstop>previousPushButton</tabstop>
   <tabstop>nextPushButton</tabstop>
   <tabstop>xPushButton</tabstop>
