@@ -210,6 +210,7 @@ private:
     void disableControls();
     void focusExpression();
     void clearLabel();
+    void stopIntro();
 
     QStateMachine stateMachine;
     QState initialState, errorDisplayState, evaluateState, graphReadyState,
@@ -251,6 +252,7 @@ private:
     QAction *secondDerivativeModeAction;
     QAction *showShortcutsAction;
     QAction *aboutAction;
+    QAction *introAction;
     QMenu *helpMenu;
     QMenu *fileMenu;
     QMenu *controlMenu;

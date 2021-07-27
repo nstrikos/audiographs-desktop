@@ -161,6 +161,8 @@ void Parameters::read()
     if (!derivColor.isValid())
         derivColor = Qt::green;
 
+    bool intro = settings.value("intro", true).toBool();
+
 
     setPointColor(pointColor);
     setPointSize(pointSize);
@@ -187,6 +189,7 @@ void Parameters::read()
     setPrecisionDigits(precisionDigits);
     setSelfVoice(selfVoice);
     setDerivColor(derivColor);
+    setIntro(intro);
 }
 
 void Parameters::write()
@@ -218,6 +221,7 @@ void Parameters::write()
     settings.setValue("precisionDigits", m_precisionDigits);
     settings.setValue("selfVoice", m_selfVoice);
     settings.setValue("derivColor", m_derivColor);
+    settings.setValue("intro", m_intro);
     settings.sync();
  }
 
@@ -435,4 +439,14 @@ QColor Parameters::derivColor() const
 void Parameters::setDerivColor(const QColor &derivColor)
 {
     m_derivColor = derivColor;
+}
+
+bool Parameters::intro() const
+{
+    return m_intro;
+}
+
+void Parameters::setIntro(bool newIntro)
+{
+    m_intro = newIntro;
 }

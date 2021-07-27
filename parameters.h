@@ -36,6 +36,7 @@ class Parameters : public QObject
     Q_PROPERTY(int precisionDigits READ precisionDigits WRITE setPrecisionDigits NOTIFY precisionDigitsChanged)
     Q_PROPERTY(bool selfVoice READ selfVoice WRITE setSelfVoice NOTIFY selfVoiceChanged)
     Q_PROPERTY(QColor derivColor READ derivColor WRITE setDerivColor NOTIFY derivColorChanged)
+    Q_PROPERTY(bool intro READ intro WRITE setIntro NOTIFY introChanged)
 
 public:
     static Parameters& getInstance()
@@ -125,6 +126,9 @@ public:
     QColor derivColor() const;
     void setDerivColor(const QColor &derivColor);
 
+    bool intro() const;
+    void setIntro(bool newIntro);
+
 private:
     Parameters() {
         read();
@@ -157,6 +161,7 @@ private:
     int m_precisionDigits;
     bool m_selfVoice;
     QColor m_derivColor;
+    bool m_intro;
 
     const QString POINTCOLOR = "pointColor";
 
@@ -186,6 +191,7 @@ signals:
     void precisionDigitsChanged();
     void selfVoiceChanged();
     void derivColorChanged();
+    void introChanged();
 };
 
 #endif // PARAMETERS_H

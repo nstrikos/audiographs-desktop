@@ -105,6 +105,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateLabel();
     ui->functionLineEdit->setFocus();
+
+    if (m_parameters->intro())
+        m_textToSpeech->speak(tr("Welcome to audiographs. Press F1 to open help in your browser. Press Ctrl+F12 if you don't wish to hear this message on start-up."));
 }
 
 MainWindow::~MainWindow()
@@ -415,6 +418,12 @@ void MainWindow::clearLabel()
 {
     ui->coordLabel->setText("");
     ui->coordLabel2->setText("");
+}
+
+void MainWindow::stopIntro()
+{
+    qDebug() << "stop intro";
+    m_parameters->setIntro(false);
 }
 
 void MainWindow::accessText(QWidget *widget, QString text)
@@ -939,10 +948,15 @@ void MainWindow::initActions()
     connect(secondDerivativeModeAction, &QAction::triggered, this, &MainWindow::on_secondDerivativePushButton_clicked);
     connect(secondDerivativeModeAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
-    showShortcutsAction = new QAction(tr("&Show shortcuts"), this);
+    showShortcutsAction = new QAction(tr("&Help"), this);
     showShortcutsAction->setShortcut(Qt::Key_F1);
     connect(showShortcutsAction, &QAction::triggered, this, &MainWindow::showShortcuts);
     connect(showShortcutsAction, &QAction::hovered, this, &MainWindow::sayWidget);
+
+    introAction = new QAction(tr("&Intro audio"), this);
+    introAction->setShortcut(Qt::CTRL + Qt::Key_F12);
+    connect(introAction, &QAction::triggered, this, &MainWindow::stopIntro);
+    connect(introAction, &QAction::hovered, this, &MainWindow::sayWidget);
 
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, &QAction::triggered, this, &MainWindow::showAboutDialog);
@@ -1005,6 +1019,7 @@ void MainWindow::initMenu()
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(showShortcutsAction);
+    helpMenu->addAction(introAction);
     helpMenu->addAction(aboutAction);
     ui->menubar->addMenu(helpMenu);
 }
