@@ -1043,8 +1043,9 @@ void MainWindow::on_previousPushButton_clicked()
 void MainWindow::on_xPushButton_clicked()
 {
     if (ui->xPushButton->isEnabled()) {
-        if (m_parameters->selfVoice())
+        if (m_parameters->selfVoice()) {
             emit sayX();
+        }
         emit getX();
     }
 }
@@ -1052,10 +1053,10 @@ void MainWindow::on_xPushButton_clicked()
 void MainWindow::on_yPushButton_clicked()
 {
     if(ui->yPushButton->isEnabled()) {
-        if (m_parameters->selfVoice())
+        if (m_parameters->selfVoice()) {
             emit sayY();
-        else
-            emit getY();
+        }
+        emit getY();
     }
 }
 

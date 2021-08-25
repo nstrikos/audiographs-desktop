@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
         runMobile = true;
 
     if (!runMobile) {
+        QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
         QApplication a(argc, argv);
         MainWindow w;
         w.showMaximized();
