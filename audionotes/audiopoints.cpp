@@ -295,24 +295,32 @@ void AudioPoints::writeMoreData()
 
             //            float x_x = 1.0 * x + 0.0 * x2 + 0.0 * x3;
 
-            signed short value = static_cast<signed short>(x * 32767);
-
             if (xx == 0) {
                 std::normal_distribution<double> dist(m_mean, m_stddev);
-                value += dist(m_generator);
-                aubuffer[sample] = value;
-                aubuffer[sample + 1] = value;
-            } else {
-                aubuffer[sample] = value;
-                aubuffer[sample + 1] = value;
-                //                if (m_ratio < 0.5) {
-                //                    aubuffer[sample] = value * m_ratio * 2;
-                //                    aubuffer[sample + 1] = 0;
-                //                } else {
-                //                    aubuffer[sample] = 0;
-                //                    aubuffer[sample + 1] = (-2 * m_ratio + 2) * value ;
-                //                }
+                x = 0.0002 * dist(m_generator);
             }
+
+            signed short value = static_cast<signed short>(x * 32767);
+
+            aubuffer[sample] = value;
+            aubuffer[sample + 1] = value;
+
+            //            if (xx == 0) {
+            //                std::normal_distribution<double> dist(m_mean, m_stddev);
+            //                value = 0.001 * dist(m_generator);
+            //                aubuffer[sample] = value;
+            //                aubuffer[sample + 1] = value;
+            //            } else {
+            //                aubuffer[sample] = value;
+            //                aubuffer[sample + 1] = value;
+            //                //                if (m_ratio < 0.5) {
+            //                //                    aubuffer[sample] = value * m_ratio * 2;
+            //                //                    aubuffer[sample + 1] = 0;
+            //                //                } else {
+            //                //                    aubuffer[sample] = 0;
+            //                //                    aubuffer[sample + 1] = (-2 * m_ratio + 2) * value ;
+            //                //                }
+            //            }
         }
 
         auIObuffer->write((const char*) &aubuffer[0], periodSize);

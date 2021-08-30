@@ -431,36 +431,46 @@ void FunctionModel::calculateDerivative()
     double x_init;
     double x;
     double result;
+    int res;
+
+    double y0, y1, y2, y3;
 
     for (int i = 0; i < LINE_POINTS; i++) {
         x_init = m_points.xAt(i);
-        x = x_init + h2;
-        vals[0] = x;
-        double y0 = m_fparser.Eval(vals);
-        x = x_init + h;
-        vals[0] = x;
-        double y1 = m_fparser.Eval(vals);
-        x = x_init - h;
-        vals[0] = x;
-        double y2 = m_fparser.Eval(vals);
-        x = x_init - h2;
-        vals[0] = x;
-        double y3 = m_fparser.Eval(vals);
 
+        vals[0] = x_init;
         tmpPoint.x = x_init;
-        result = (-y0 + 8 * (y1 - y2) + y3) / (12 * h);
+        m_fparser.Eval(vals);
+        res = m_fparser.EvalError();
 
-        tmpPoint.y = result;
-
-        if (result != result)
+        if (res > 0) {
             tmpPoint.isValid = false;
-        else
-            tmpPoint.isValid = true;
+        } else {
+            x = x_init + h2;
+            vals[0] = x;
+            y0 = m_fparser.Eval(vals);
+            x = x_init + h;
+            vals[0] = x;
+            y1 = m_fparser.Eval(vals);
+            x = x_init - h;
+            vals[0] = x;
+            y2 = m_fparser.Eval(vals);
+            x = x_init - h2;
+            vals[0] = x;
+            y3 = m_fparser.Eval(vals);
+
+            result = (-y0 + 8 * (y1 - y2) + y3) / (12 * h);
+
+            tmpPoint.y = result;
+
+            if (result != result)
+                tmpPoint.isValid = false;
+            else
+                tmpPoint.isValid = true;
+        }
 
         m_derivPoints.setPoint(i, tmpPoint);
     }
-
-
 
 #endif
 
@@ -521,37 +531,47 @@ void FunctionModel::calculateSecondDerivative()
     double x_init;
     double x;
     double result;
+    double y, y0, y1, y2, y3;
+    double Pow;
+    int res;
 
     for (int i = 0; i < LINE_POINTS; i++) {
         x_init = m_points.xAt(i);
         x = x_init;
-        vals[0] = x;
-        double y = m_fparser.Eval(vals);
-        x = x_init + h2;
-        vals[0] = x;
-        double y0 = m_fparser.Eval(vals);
-        x = x_init + h;
-        vals[0] = x;
-        double y1 = m_fparser.Eval(vals);
-        x = x_init - h;
-        vals[0] = x;
-        double y2 = m_fparser.Eval(vals);
-        x = x_init - h2;
-        vals[0] = x;
-        double y3 = m_fparser.Eval(vals);
-
         tmpPoint.x = x_init;
-        result = (-y0 + 16 * (y1 + y2) - 30 * y - y3) / (12 * h * h);
 
-        double Pow = pow(10.0, 2);
-        result = round (result * Pow) / Pow;
+        vals[0] = x;
+        y = m_fparser.Eval(vals);
+        res = m_fparser.EvalError();
 
-        tmpPoint.y = result;
-
-        if (result != result)
+        if (res > 0) {
             tmpPoint.isValid = false;
-        else
-            tmpPoint.isValid = true;
+        } else {
+            x = x_init + h2;
+            vals[0] = x;
+            y0 = m_fparser.Eval(vals);
+            x = x_init + h;
+            vals[0] = x;
+            y1 = m_fparser.Eval(vals);
+            x = x_init - h;
+            vals[0] = x;
+            y2 = m_fparser.Eval(vals);
+            x = x_init - h2;
+            vals[0] = x;
+            y3 = m_fparser.Eval(vals);
+
+            result = (-y0 + 16 * (y1 + y2) - 30 * y - y3) / (12 * h * h);
+
+            Pow = pow(10.0, 2);
+            result = round (result * Pow) / Pow;
+
+            tmpPoint.y = result;
+
+            if (result != result)
+                tmpPoint.isValid = false;
+            else
+                tmpPoint.isValid = true;
+        }
 
         m_derivPoints.setPoint(i, tmpPoint);
     }

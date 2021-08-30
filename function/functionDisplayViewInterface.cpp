@@ -29,6 +29,10 @@ void FunctionDisplayViewInterface::calcCoords(int width, int height)
             tmpPoint.x = k;
             tmpPoint.y = l;
             m_coordPoints.append(tmpPoint);
+        } else {
+            tmpPoint.x = -10;
+            tmpPoint.y = -10;
+            m_coordPoints.append(tmpPoint);
         }
     }
 }

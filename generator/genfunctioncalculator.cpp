@@ -140,7 +140,7 @@ void GenFunctionCalculatorThread::run()
     double step = m_params->step();
     double *functionValues = m_params->functionValues();
     bool *validValues = m_params->validValues();
-    double result;
+    double result = 0;
     unsigned long long int i = 0;
 
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
@@ -196,20 +196,61 @@ void GenFunctionCalculatorThread::run()
     m_fparser.Parse(exp, "x");
 
     double vals[] = { 0 };
-    int res;
+    int res = 0;
 
     for (i = m_first; i < m_last; i++) {
         m_x = start + i * step;
 
         vals[0] = m_x;
-        result = m_fparser.Eval(vals);
 
-        if (m_params->mode() == 2) {
+        if (m_params->mode() == 0) {
+            result = m_fparser.Eval(vals);
+            res = m_fparser.EvalError();
+        } else if (m_params->mode() == 1) {
+
+            const double h = 0.00000001;
+            const double h2 = 2 * h;
+
+            double y0 = m_fparser.Eval(vals);
+            res = m_fparser.EvalError();
+            double x = m_x + h;
+            vals[0] = x;
+            double y1 = m_fparser.Eval(vals);
+            x = m_x - h;
+            vals[0] = x;
+            double y2 = m_fparser.Eval(vals);
+            x = m_x - h2;
+            vals[0] = x;
+            double y3 = m_fparser.Eval(vals);
+
+            result = (-y0 + 8 * (y1 - y2) + y3) / (12 * h);
+        } else if (m_params->mode() == 2) {
+
+            const double h = 0.00001;
+            const double h2 = 2 * h;
+
+            vals[0] = m_x;
+            double y = m_fparser.Eval(vals);
+            res = m_fparser.EvalError();
+
+            double x = m_x + h2;
+            vals[0] = x;
+            double y0 = m_fparser.Eval(vals);
+            x = m_x + h;
+            vals[0] = x;
+            double  y1 = m_fparser.Eval(vals);
+            x = m_x - h;
+            vals[0] = x;
+            double y2 = m_fparser.Eval(vals);
+            x = m_x - h2;
+            vals[0] = x;
+            double y3 = m_fparser.Eval(vals);
+
+            result = (-y0 + 16 * (y1 + y2) - 30 * y - y3) / (12 * h * h);
+
             double Pow = pow(10.0, 2);
             result = round (result * Pow) / Pow;
         }
-
-        res = m_fparser.EvalError();
 
         if ( (result != result) || ( res > 0) ) {
             validValues[i] = false;
