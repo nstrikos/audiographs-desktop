@@ -1,0 +1,53 @@
+ <!DOCTYPE html>
+<html>
+<body>
+
+
+<H1><b><i>Table of Contents</i></b></H1>
+<P><A href="#section1">Application shortcuts</A><BR>
+<A href="#section2">User guide</A><BR>
+<A href="#section2.1">Quick introduction</A><BR>
+
+<H2><A name="section1">Application shortcuts</A></H2>
+<p>Audiographs shortcuts</p>
+<p>Help dialog - F1</p>
+<p>New expression - Ctrl + N</p>
+<p>New expression - Ctrl + E</p>
+<p>Play sound - Enter</p>
+<p>Previous point - Page down</p>
+<p>Next point - Page up</p>
+<p>X Coordinate - Ctrl + X</p>
+<p>Y Coordinate - Ctrl + Y</p>
+<p>Derivative - Ctrl + D</p>
+<p>Previous point of interest - Ctrl + Left</p>
+<p>Next point of interest - Ctrl + Right</p>
+<p>Previous point (fast) - Shift + Left</p>
+<p>Next point (fast) - Shift + Right</p>
+<p>First point - Home</p>
+<p>Last point - End</p>
+<p>Decrease step - Ctrl + [ left bracket</p>
+<p>Increase step - Ctrl + ] right bracket</p>
+<p>Decrease precision - F9</p>
+<p>Increase precision - F10</p>
+<p>Normal mode - Ctrl + 0</p>
+<p>First derivative mode - Ctrl + 1</p>
+<p>Second derivative mode - Ctrl + 2</p>
+<p>Self voice - F2</p>
+<p>Use notes - F3</p>
+<p>Use different notes for negative values - F4</p>
+<p>Recent function expressions - Alt + 1 to 9</p>
+<H2><A name="section2">User guide</A></H2>
+
+<H3><A name="section2.1">On a more personal note</A></H3>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html> 

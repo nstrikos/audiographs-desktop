@@ -389,6 +389,35 @@ bool FunctionModel::isValid(int i)
     return m_points.validAt(i);
 }
 
+bool FunctionModel::validLimit(double x)
+{
+    typedef exprtk::parser<double>::settings_t settings_t;
+
+    std::size_t compile_options = settings_t::e_joiner            +
+            settings_t::e_commutative_check +
+            settings_t::e_strength_reduction;
+
+    parser_t parser(compile_options);
+    parser.compile(m_expression.toStdString(), parser_expression);
+
+    double h = 1e-12;
+
+    m_x = x + h;
+
+    double lim_right = parser_expression.value();
+
+    m_x = x - h;
+
+    double lim_left = parser_expression.value();
+
+    double diff = abs((lim_right - lim_left)/(lim_right));
+
+    if ( (diff < 1e-6) && (lim_right < 1e12) )
+        return true;
+    else
+        return false;
+}
+
 int FunctionModel::size()
 {
     //return m_points.size();
