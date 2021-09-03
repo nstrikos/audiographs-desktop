@@ -258,8 +258,6 @@ void FunctionModel::calculatePoints()
 
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 
-
-
     typedef exprtk::parser<double>::settings_t settings_t;
 
     std::size_t compile_options = settings_t::e_joiner            +
@@ -285,8 +283,6 @@ void FunctionModel::calculatePoints()
         //m_points.append(tmpPoint);
         m_points.setPoint(i, tmpPoint);
     }
-
-
 
 #else
     double x;
@@ -391,6 +387,12 @@ bool FunctionModel::isValid(int i)
 
 bool FunctionModel::validLimit(double x)
 {
+    double h = 1e-12;
+    double limit_right;
+    double limit_left;
+
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+
     typedef exprtk::parser<double>::settings_t settings_t;
 
     std::size_t compile_options = settings_t::e_joiner            +
@@ -400,19 +402,25 @@ bool FunctionModel::validLimit(double x)
     parser_t parser(compile_options);
     parser.compile(m_expression.toStdString(), parser_expression);
 
-    double h = 1e-12;
-
     m_x = x + h;
-
-    double lim_right = parser_expression.value();
+    limit_right = parser_expression.value();
 
     m_x = x - h;
+    limit_left = parser_expression.value();
 
-    double lim_left = parser_expression.value();
+#else
+    double vals[] = { 0 };
 
-    double diff = abs((lim_right - lim_left)/(lim_right));
+    vals[0] = x + h;
+    limit_right = m_fparser.Eval(vals);
 
-    if ( (diff < 1e-6) && (lim_right < 1e12) )
+    vals[0] = x - h;
+    limit_left = m_fparser.Eval(vals);
+#endif
+
+    double diff = abs((limit_right - limit_left)/(limit_right));
+
+    if ( (diff < 1e-6) && (limit_right < 1e12) )
         return true;
     else
         return false;

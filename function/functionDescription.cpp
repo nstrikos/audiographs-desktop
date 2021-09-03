@@ -73,7 +73,7 @@ QVector<InterestingPoint> FunctionDescription::points(FunctionModel *model)
                 }
             } else if (model->isValid(prev) && !model->isValid(next)) {
 
-                if (!model->validLimit(model->x(prev))) {
+                if (!model->validLimit(model->x(next))) {
 
                     if (model->y(i) > model->y(prev)) {
                         tmp.x = i;
@@ -86,7 +86,7 @@ QVector<InterestingPoint> FunctionDescription::points(FunctionModel *model)
                 if (model->y(i) > model->y(prev) && model->y(i) > model->y(next)) {
                     tmp.x = i;
                     tmp.y = model->y(i);
-                    tmp.label = "maximum";
+                    tmp.label = "local maximum";
                     m_points.append(tmp);
                 }
             }
@@ -115,7 +115,7 @@ QVector<InterestingPoint> FunctionDescription::points(FunctionModel *model)
                 if (model->y(i) < model->y(prev) && model->y(i) < model->y(next)) {
                     tmp.x = i;
                     tmp.y = model->y(i);
-                    tmp.label = "minimum";
+                    tmp.label = "local minimum";
                     m_points.append(tmp);
                 }
             }
