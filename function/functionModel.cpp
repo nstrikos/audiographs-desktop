@@ -418,9 +418,9 @@ bool FunctionModel::validLimit(double x)
     limit_left = m_fparser.Eval(vals);
 #endif
 
-    double diff = abs((limit_right - limit_left)/(limit_right));
+    double diff = abs((limit_right - limit_left)/limit_right);
 
-    if ( (diff < 1e-6) && (limit_right < 1e12) )
+    if ( (diff < 1e-6) && (abs(limit_right) < 1e12) )
         return true;
     else
         return false;
