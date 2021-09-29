@@ -387,7 +387,7 @@ bool FunctionModel::isValid(int i)
 
 bool FunctionModel::validLimit(double x)
 {
-    double h = 1e-12;
+    double h = 1e-5;
     double limit_right;
     double limit_left;
 
@@ -420,7 +420,7 @@ bool FunctionModel::validLimit(double x)
 
     double diff = abs((limit_right - limit_left)/limit_right);
 
-    if ( (diff < 1e-6) && (abs(limit_right) < 1e12) )
+    if ( (diff < 1e-4) && (abs(limit_right) < 1e8) )
         return true;
     else
         return false;
