@@ -1450,7 +1450,7 @@ void MainWindow::on_derivativeColorPushButton_clicked()
 
 void MainWindow::showShortcuts()
 {
-    QString filename = "C:/Program Files/Audiographs/doc/help.html";
+    QString filename = "C:/Program Files/Audiographs/doc/doc.html";
 
     if ( !QFile::exists(filename)) {
         filename = "C:/Program Files (x86)/Audiographs/doc/help.html";
